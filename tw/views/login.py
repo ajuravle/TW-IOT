@@ -6,6 +6,7 @@ import json
 from passlib.hash import sha256_crypt
 from ..models.meta import DBSession
 from ..models.user import User
+
 @view_defaults(route_name = 'login')
 class Login(object):
     def __init__(self,request):
@@ -39,3 +40,15 @@ class Login(object):
         response = HTTPFound(location = self.request.route_url('home'))
         response.set_cookie('XSRF-TOKEN', value=token)
         return response
+
+@view_config(route_name="logout", request_method="GET")
+def logout(request):
+    print("LOGOUT")
+    if 'email' in request.session.keys():
+        del request.session['email']
+    # for field in ['email', 'id_user']:
+    #     if field in request.session.keys():
+    #         del request.session[field]
+    # for i in request.session.keys():
+    #     print("LO",request.session[i])
+    return HTTPFound(location = request.route_url("login"))
