@@ -30,15 +30,6 @@ class MasinaSpalat(object):
 
         id = str(uuid.uuid4())[:6]
 
-        if 'temperatura_frigider' in request_body.keys():
-            if not verifica_interval(request_body['temperatura_frigider'], -30, 0):
-                return Response(status = 400, body = "Temperatura trebuie sa fie in intervalul [-30,0]")
-
-        if 'temperatura_congelator' in request_body.keys():
-            if not verifica_interval(request_body['temperatura_congelator'], 200, 1000):
-                return Response(status = 400, body = "Temperatura trebuie sa fie in intervalul [-50,0]")
-
-
         request_body["id_dispozitiv"]= id
         record = Frigider(**request_body)
         DBSession.add(record)

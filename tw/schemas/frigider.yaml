@@ -7,8 +7,12 @@ properties:
         type: string
     temperatura_frigider: 
         type: integer
+        minimum: -30
+        maximum: 0
     temperatura_congelator: 
         type: integer
+        minimum: -50
+        maximum: 0
     stare:
         type: integer
 
