@@ -28,6 +28,7 @@ def main(global_config, **settings):
     config.add_route("login", '/login')
     config.add_route("logout", "/logout")
     config.add_route("home", '/home')
+    config.add_route("frigider", '/api/frigider')
 
     config.add_route("masina_spalat", '/api/masina_spalat')
     config.scan()
