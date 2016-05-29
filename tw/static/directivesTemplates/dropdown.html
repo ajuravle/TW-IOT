@@ -1,0 +1,10 @@
+<div class="dropdown" ng-class="{'open': dropped}">
+  <button class="btn btn-default dropdown-toggle" type="button"  ng-click="drop()" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <% title %>
+    <span class="caret"></span>
+  </button>
+   <ul class="dropdown-menu"  aria-labelledby="dropdownMenu1">
+    <li class="dropdown-item" ng-repeat="item in list track by $index" ng-click="selectItem($index)"><% item.name %></li>
+    
+  </ul>
+</div>

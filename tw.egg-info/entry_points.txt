@@ -1,0 +1,5 @@
+      [paste.app_factory]
+      main = tw:main
+      [console_scripts]
+      initialize_tw_db = tw.scripts.initializedb:main
+      

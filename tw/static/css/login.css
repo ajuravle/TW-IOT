@@ -1,0 +1,88 @@
+.blog-panel {
+    margin-top: 700px;
+    border: 0;
+    border-left: 3px solid black;
+    margin-left: 50px;
+    max-width: 400px;
+    border-radius: 0;
+    border-left-color: #F4511E;
+    background: rgba(0,0,0,0.2);
+}
+
+.body-background {
+    background: url("background.png") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+ .panel-body {
+    padding-top: 0px
+ }
+ 
+::-webkit-input-placeholder {
+    color:    white;
+}
+:-moz-placeholder {
+    color:    white;
+}
+::-moz-placeholder {
+    color:    white;
+}
+:-ms-input-placeholder {
+    color:    white;
+}
+
+
+input {
+    display: block;
+    padding: 6px 16px;
+    border-width: 0 0 2px 0 ;
+    border-radius: 0;
+    border-style: solid;
+    border-color: #F4511E;
+    color: white;
+    background-color: rgba(0,0,0,0);
+    font-size: 16px;
+    width: 100%;
+    margin-top: 24px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #F4511E;
+}
+
+.submit-button {
+    background-color: transparent;
+    border: 0;
+    margin: 6px 0 0 0 !important;
+    outline: none;
+    font-size: 16px;
+    margin-top: 24px;
+    float:right;
+    line-height: 0px !important;
+    color: #F4511E;
+}
+
+.submit-button:hover > i {
+    color: #E53935;
+}
+
+.error {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    color: #D32F2F;
+}
+
+a {
+    color: #D32F2F;
+    font-size: 12px;
+}
+
+a:hover {
+    text-decoration: none;
+    cursor: pointer;
+    color: #E53935;
+}

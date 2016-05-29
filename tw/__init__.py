@@ -1,0 +1,32 @@
+from pyramid.config import Configurator
+from sqlalchemy import engine_from_config
+from pyramid.response import Response
+from pyramid.session import SignedCookieSessionFactory
+from pyramid_redis_sessions import session_factory_from_settings
+from .models.meta import (
+    DBSession,
+    Base,
+    )
+
+
+
+
+def main(global_config, **settings):
+    """ This function returns a Pyramid WSGI application.
+    """
+    engine = engine_from_config(settings, 'sqlalchemy.')
+    DBSession.configure(bind=engine)
+    Base.metadata.bind = engine
+    config = Configurator(settings=settings)
+    my_session_factory = session_factory_from_settings(settings)
+    
+    config.include("pyramid_jinja2")
+    config.set_session_factory(my_session_factory)
+    config.add_static_view('static', 'static')
+   
+
+    config.add_route("login", '/login')
+    config.add_route("home", '/home')
+
+    config.scan()
+    return config.make_wsgi_app()

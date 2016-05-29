@@ -1,0 +1,15 @@
+<div class="item-card">
+    <div ng-show="state == true">
+        <div class="item-card-title"><i class="fa" ng-class="icon" aria-hidden="true"></i><% title %></div>
+        <dropdown list="list" title="MasinaSpalat"></dropdown>
+        <div class="details">
+          <span>Details:</span>
+          <p><%details%></p>
+
+        </div>
+    </div>
+    <div ng-show="state == 'false'" class="off-state">
+        <i class="fa fa-frown-o fa-5x " aria-hidden="true"></i>
+        <div>Senzor off</div>
+    </div>
+</div>

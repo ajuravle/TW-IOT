@@ -1,0 +1,27 @@
+{% extends "tw:templates/login_layout.jinja2" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-primary blog-panel">
+            <div class="panel-body">
+                <form name="loginForm" action="" method="POST" novalidate>
+                    <input type="text" name="email" placeholder="Email" required>
+                    {% if email_required == True %}
+                    <span class="error">Email is required </span>
+                    {% endif %}
+                    <input type="password" name="password" placeholder="Password" required>
+                    {% if password_required == True %}
+                    <span class="error">Password is required </span>
+                    {% endif %}
+                       {% if incorrect_credentials == True %}
+                    <span class="error">Incorrect credentials</span>
+                    {% endif %}
+                    <div class="pull-right" >
+                        <button class="submit-button" ng-click="submit()">Sign in <i class="fa fa-arrow-right"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
