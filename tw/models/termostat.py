@@ -14,7 +14,7 @@ class Termostat(Base):
     denumire = Column(String(45))
     stare = Column(TINYINT(1))
     temperatura = Column(Integer)
-    status = Column(TINYINT(1))
+
 
     def as_dict(self):
         record_dict =  {item.name: getattr(self,item.name) for item in class_mapper(self.__class__).columns if item.name != 'status'}
