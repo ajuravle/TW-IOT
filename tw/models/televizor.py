@@ -3,6 +3,7 @@ from sqlalchemy import (
     Column,
     Integer,
     String,      
+    ForeignKey,
     )
 
 from sqlalchemy.dialects.mysql import TINYINT
