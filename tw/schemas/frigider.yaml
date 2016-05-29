@@ -1,0 +1,18 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: /
+type: object
+
+properties: 
+    denumire: 
+        type: string
+    temperatura_frigider: 
+        type: integer
+    temperatura_congelator: 
+        type: integer
+    stare:
+        type: integer
+
+
+additionalProperties: false
+required: 
+    - denumire

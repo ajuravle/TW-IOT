@@ -15,7 +15,6 @@ class SistemDeIluminat(Base):
     stare = Column(TINYINT(1))
     intensitate = Column(Integer)
     nr_becuri_aprinse = Column(Integer)
-    status = Column(TINYINT(1))
 
     def as_dict(self):
         record_dict =  {item.name: getattr(self,item.name) for item in class_mapper(self.__class__).columns if item.name != 'status'}

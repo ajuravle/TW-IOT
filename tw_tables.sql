@@ -16,7 +16,6 @@ DROP TABLE CAMERE;
 CREATE TABLE CAMERE(
 	id_camera VARCHAR(6),
 	denumire VARCHAR(45),
-	status TINYINT(1),
 	PRIMARY KEY (id_camera)
 	);
 
@@ -27,7 +26,6 @@ CREATE TABLE USERI(
 	prenume VARCHAR(45),
 	mail VARCHAR(45),
 	tip VARCHAR(45),
-	status TINYINT(1),
 	PRIMARY KEY (id_user)
 	);
 	
@@ -35,7 +33,6 @@ CREATE TABLE USERI_CAMERE(
 	id_uc VARCHAR(6),
 	id_user VARCHAR(6),
 	id_camera VARCHAR(6),
-	status TINYINT(1),
 	PRIMARY KEY (id_uc),
 	FOREIGN KEY (id_user) REFERENCES USERI(id_user) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (id_camera) REFERENCES CAMERE(id_camera) ON DELETE CASCADE ON UPDATE CASCADE
@@ -47,7 +44,6 @@ CREATE TABLE SISTEM_DE_ILUMINAT(
 	stare TINYINT(1),
 	intensitate INT,
 	nr_becuri_aprinse INT,
-	status TINYINT(1),
 	PRIMARY KEY (id_dispozitiv)
 	);
 	
@@ -55,7 +51,6 @@ CREATE TABLE CAFETIERA(
 	id_dispozitiv VARCHAR(6),
 	denumire VARCHAR(45),
 	stare TINYINT(1),
-	status TINYINT(1),
 	PRIMARY KEY (id_dispozitiv)
 	);
 
@@ -64,7 +59,6 @@ CREATE TABLE TERMOSTAT(
 	denumire VARCHAR(45),
 	stare TINYINT(1),
 	temperatura INT,
-	status TINYINT(1),
 	PRIMARY KEY (id_dispozitiv)
 	);
 
@@ -76,7 +70,6 @@ CREATE TABLE MASINA_DE_SPALAT(
 	nr_rotatii INT,
 	program VARCHAR(45),
 	timp_ramas INT,
-	status TINYINT(1),
 	PRIMARY KEY (id_dispozitiv)
 	);
 
@@ -86,7 +79,6 @@ CREATE TABLE FRIGIDER(
 	temperatura_frigider INT,
 	temperatura_congelator INT,
 	stare TINYINT(1),
-	status TINYINT(1),
 	PRIMARY KEY (id_dispozitiv)
 	);
 
@@ -94,7 +86,7 @@ CREATE TABLE FRIGIDER(
 CREATE TABLE CANALE(
 	id_canal VARCHAR(6),
 	denumire VARCHAR(45),
-	status TINYINT(1),
+	
 	PRIMARY KEY (id_canal)
 	);
 
@@ -105,7 +97,6 @@ CREATE TABLE TELEVIZOR(
 	volum INT,
 	luminozitate INT,
 	stare TINYINT(1),
-	status TINYINT(1),
 	PRIMARY KEY (id_dispozitiv),
 	FOREIGN KEY (id_canal) REFERENCES CANALE(id_canal) ON DELETE CASCADE ON UPDATE CASCADE
 	);
