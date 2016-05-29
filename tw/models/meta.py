@@ -13,6 +13,8 @@ Base = declarative_base()
 
 
 def verifica_interval(valoare, min, max):
+	if not valoare:
+		return False
 	if valoare < min or valoare > max:
 		return False
 	return True

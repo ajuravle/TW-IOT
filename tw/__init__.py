@@ -31,5 +31,7 @@ def main(global_config, **settings):
     config.add_route("frigider", '/api/frigider')
 
     config.add_route("masina_spalat", '/api/masina_spalat')
+    config.add_route("masina_spalat_one", "/api/masina_spalat/{id}")
+
     config.scan()
     return config.make_wsgi_app()

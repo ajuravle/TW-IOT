@@ -9,14 +9,16 @@ properties:
         type: string
     temperatura: 
         type: integer
+        minimum: 10
+        maximum: 90
     stare: 
         type: integer
     nr_rotatii:
         type: integer
+        minimum: 200
+        maximum: 1000
     timp_rams:
         type: integer
 
 
 additionalProperties: false
-required: 
-    - denumire
