@@ -1,0 +1,22 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: /
+type: object
+
+properties: 
+    denumire: 
+        type: string
+    program: 
+        type: string
+    temperatura: 
+        type: integer
+    stare: 
+        type: integer
+    nr_rotatii:
+        type: integer
+    timp_rams:
+        type: integer
+
+
+additionalProperties: false
+required: 
+    - denumire
