@@ -91,3 +91,12 @@ class MasinaSpalatOne(object):
         DBSession.query(MasinaDeSpalat).filter(MasinaDeSpalat.id_dispozitiv == id).update(update_fields)
         updated = DBSession.query(MasinaDeSpalat).filter(MasinaDeSpalat.id_dispozitiv == id).first().as_dict()
         return updated
+
+    @view_config(request_method = 'DELETE')
+    def delete(self):
+        id = self.esteIdCorect()
+        if id is None:
+            return Response(status = 404, body = "Incorrect id")
+        record = DBSession.query(MasinaDeSpalat).filter(MasinaDeSpalat.id_dispozitiv == id['id_dispozitiv']).first()
+        DBSession.delete(record)
+        return Response(status=201, body = "OK")

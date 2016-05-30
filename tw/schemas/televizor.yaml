@@ -1,0 +1,21 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: /
+type: object
+
+properties: 
+    denumire: 
+        type: string
+    id_canal: 
+        type: string
+    volum: 
+        type: integer
+        minimum: 0
+        maximum: 100
+    stare: 
+        type: integer
+    luminozitate:
+        type: integer
+        minimum: 0
+        maximum: 100
+
+additionalProperties: false

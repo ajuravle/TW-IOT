@@ -29,6 +29,10 @@ def main(global_config, **settings):
     config.add_route("logout", "/logout")
     config.add_route("home", '/home')
     config.add_route("frigider", '/api/frigider')
+
+    config.add_route("televizor", "/api/televizor")
+    config.add_route("televizor_one", "/api/televizor/{id}")
+
     config.add_route("masina_spalat", '/api/masina_spalat')
     config.add_route("masina_spalat_one", "/api/masina_spalat/{id}")
 
