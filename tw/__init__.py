@@ -42,5 +42,8 @@ def main(global_config, **settings):
     config.add_route("masina_spalat", '/api/masina_spalat')
     config.add_route("masina_spalat_one", "/api/masina_spalat/{id}")
 
+    config.add_route("termostat", "/api/termostat")
+    config.add_route("termostat_one", "/api/termostat/{id}")
+
     config.scan()
     return config.make_wsgi_app()

@@ -1,0 +1,16 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: /
+type: object
+
+properties: 
+    denumire: 
+        type: string
+    temperatura: 
+        type: integer
+        minimum: -10
+        maximum: 40
+    stare:
+        type: integer
+
+
+additionalProperties: false

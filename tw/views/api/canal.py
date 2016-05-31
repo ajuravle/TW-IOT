@@ -8,7 +8,7 @@ from sqlalchemy import update
 import uuid
 
 @view_defaults(route_name = 'canal', renderer = 'json')
-class MasinaSpalat(object):
+class CanalApi(object):
 
     def __init__(self, request):
         self.request = request
@@ -37,7 +37,7 @@ class MasinaSpalat(object):
         return new_record
 
 @view_defaults(route_name = 'canal_one', renderer = 'json')
-class MasinaSpalatOne(object):
+class CanalOneApi(object):
 
     def __init__(self, request):
         self.request = request
