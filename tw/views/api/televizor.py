@@ -61,47 +61,48 @@ class MasinaSpalatOne(object):
             return Response(status = 404, body = "Incorrect id")
         return record
 
-#     @view_config(request_method = 'PUT')
-#     def put(self):
-#         if self.esteIdCorect() is None:
-#             return Response(status = 404, body = "Incorrect id")
-#         request_body = json.loads(self.request.body.decode("utf8"))
+    @view_config(request_method = 'PUT')
+    def put(self):
+        if self.esteIdCorect() is None:
+            return Response(status = 404, body = "Incorrect id")
+        request_body = json.loads(self.request.body.decode("utf8"))
 
-#         schema = yaml.safe_load( pkgutil.get_data("tw", "schemas/masina_spalat.yaml") )
-#         try:
-#             validate(request_body, schema, format_checker = FormatChecker())
-#         except ValidationError as ex:
-#             return Response( status = 400, body = "Incorect json format" + str(ex) )
+        schema = yaml.safe_load( pkgutil.get_data("tw", "schemas/televizor.yaml") )
+        try:
+            validate(request_body, schema, format_checker = FormatChecker())
+        except ValidationError as ex:
+            return Response( status = 400, body = "Incorect json format" + str(ex) )
 
-#         update_fields = {}
-#         if 'temperatura' in request_body.keys():
-#             update_fields['temperatura'] = request_body['temperatura']
+        update_fields = {}
+        if 'id_canal' in request_body.keys():
+            canal = DBSession.query(Canal).filter(Canal.id_canal == request_body['id_canal']).first()
+            if canal is None:
+                return Response(status = 400, body = "Id canal is incorect")
+            update_fields['id_canal'] = request_body['id_canal']
 
-#         if 'denumire' in request_body.keys():
-#             update_fields['denumire'] = request_body['denumire']
+        if 'denumire' in request_body.keys():
+            update_fields['denumire'] = request_body['denumire']
 
-#         if 'stare' in request_body.keys():
-#             update_fields['stare'] = request_body['stare']
+        if 'volum' in request_body.keys():
+            update_fields['volum'] = request_body['volum']
 
-#         if 'nr_rotatii' in request_body.keys():
-#             update_fields['nr_rotatii'] = request_body['nr_rotatii']
+        if 'luminozitate' in request_body.keys():
+            update_fields['luminozitate'] = request_body['luminozitate']
 
-#         if 'program' in request_body.keys():
-#             update_fields['program'] = request_body['program']
+        if 'stare' in request_body.keys():
+            update_fields['stare'] = request_body['stare']
 
-#         if 'timp_ramas' in request_body.keys():
-#             update_fields['timp_ramas'] = request_body['timp_ramas']
 
-#         id = self.request.matchdict['id']
-#         DBSession.query(MasinaDeSpalat).filter(MasinaDeSpalat.id_dispozitiv == id).update(update_fields)
-#         updated = DBSession.query(MasinaDeSpalat).filter(MasinaDeSpalat.id_dispozitiv == id).first().as_dict()
-#         return updated
+        id = self.request.matchdict['id']
+        DBSession.query(Televizor).filter(Televizor.id_dispozitiv == id).update(update_fields)
+        updated = DBSession.query(Televizor).filter(Televizor.id_dispozitiv == id).first().as_dict()
+        return updated
 
-#     @view_config(request_method = 'DELETE')
-#     def delete(self):
-#         id = self.esteIdCorect()
-#         if id is None:
-#             return Response(status = 404, body = "Incorrect id")
-#         record = DBSession.query(MasinaDeSpalat).filter(MasinaDeSpalat.id_dispozitiv == id['id_dispozitiv']).first()
-#         DBSession.delete(record)
-#         return Response(status=201, body = "OK")
+    @view_config(request_method = 'DELETE')
+    def delete(self):
+        id = self.esteIdCorect()
+        if id is None:
+            return Response(status = 400, body = "Incorrect id")
+        record = DBSession.query(Televizor).filter(Televizor.id_dispozitiv == id['id_dispozitiv']).first()
+        DBSession.delete(record)
+        return Response(status=201, body = "OK")
