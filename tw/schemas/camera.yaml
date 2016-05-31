@@ -1,0 +1,18 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: /
+type: object
+
+properties: 
+    id_dispozitiv: 
+        type: string
+    actiune: 
+        type: string
+        enum: ["adauga", "sterge"]
+    tip:
+        type: string
+        enum: ["cafetiera", "frigider", "masina_de_spalat", "sistem_de_iluminat", "televizor", "termostat"]
+
+additionalProperties: false
+required:
+        - id_dispozitiv
+        - actiune
