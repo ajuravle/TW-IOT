@@ -54,6 +54,10 @@ def main(global_config, **settings):
 
     config.add_route("activitate_si", "/api/activitate_si/{id}")
     config.add_route("activitate_cafetiera", "/api/activitate_cafetiera/{id}")
+    config.add_route("activitate_tv", "/api/activitate_tv/{id}")
+
+    config.add_route("user", "/api/user")
+    config.add_route("user_one", "/api/user/{id}")
 
     config.scan()
     return config.make_wsgi_app()

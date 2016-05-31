@@ -14,7 +14,7 @@ class Canal(Base):
     denumire = Column(String(45))
 
     def as_dict(self):
-        record_dict =  {item.name: getattr(self,item.name) for item in class_mapper(self.__class__).columns if item.name != 'status'}
+        record_dict =  {item.name: getattr(self,item.name) for item in class_mapper(self.__class__).columns}
         return record_dict
 
    
