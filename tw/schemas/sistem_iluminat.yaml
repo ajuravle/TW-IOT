@@ -1,0 +1,22 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: /
+type: object
+
+properties: 
+    denumire: 
+        type: string
+    intensitate: 
+        type: integer
+        minimum: 0
+        maximum: 100
+    nr_becuri_aprinse: 
+        type: integer
+        minimum: 0
+        maximum: 10
+    stare:
+        type: integer
+
+
+additionalProperties: false
+required: 
+    - denumire

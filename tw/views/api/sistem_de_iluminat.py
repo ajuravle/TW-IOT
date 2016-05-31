@@ -2,7 +2,7 @@ from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPNotFound, HTTPFound
 from ...models.meta import DBSession
 from ...models.meta import verifica_interval
-from ...models.frigider import Frigider
+from ...models.sistem_de_iluminat import SistemDeIluminat
 from pyramid.response import Response
 import json
 from sqlalchemy.orm import load_only
@@ -13,8 +13,8 @@ import yaml
 import uuid
 from jsonschema import validate, FormatChecker,ValidationError
 
-@view_defaults(route_name = 'frigider', renderer = 'json')
-class Frigiderr(object):
+@view_defaults(route_name = 'sistem_de_iluminat', renderer = 'json')
+class SistemDeIluminatt(object):
 
     def __init__(self, request):
         self.request = request
@@ -22,7 +22,7 @@ class Frigiderr(object):
     @view_config(request_method = 'POST', renderer = 'json')
     def post(self):
     	request_body = json.loads(self.request.body.decode("utf8"))
-        schema = yaml.safe_load( pkgutil.get_data("tw", "schemas/frigider.yaml") )
+        schema = yaml.safe_load( pkgutil.get_data("tw", "schemas/sistem_de_iluminat.yaml") )
         try:
             validate(request_body, schema, format_checker = FormatChecker())
         except ValidationError as ex:
@@ -31,20 +31,20 @@ class Frigiderr(object):
         id = str(uuid.uuid4())[:6]
 
         request_body["id_dispozitiv"]= id
-        record = Frigider(**request_body)
+        record = SistemDeIluminat(**request_body)
         DBSession.add(record)
-        new_record = DBSession.query(Frigider).filter(Frigider.id_dispozitiv == id).first().as_dict()
+        new_record = DBSession.query(SistemDeIluminat).filter(SistemDeIluminat.id_dispozitiv == id).first().as_dict()
         return new_record
-        
-@view_defaults(route_name = 'frigider_one', renderer = 'json')
-class FrigiderOne(object):
+  
+@view_defaults(route_name = 'sistem_de_iluminat_one', renderer = 'json')
+class SistemDeIluminatOne(object):
 
     def __init__(self, request):
         self.request = request
 
     def esteIdCorect(self):
         id = self.request.matchdict['id']
-        record = DBSession.query(Frigider).filter(Frigider.id_dispozitiv == id).first()
+        record = DBSession.query(SistemDeIluminat).filter(SistemDeIluminat.id_dispozitiv == id).first()
         if record == None:
             return None
         return record.as_dict()
@@ -62,7 +62,7 @@ class FrigiderOne(object):
             return Response(status = 404, body = "Incorrect id")
         request_body = json.loads(self.request.body.decode("utf8"))
 
-        schema = yaml.safe_load( pkgutil.get_data("tw", "schemas/frigider.yaml") )
+        schema = yaml.safe_load( pkgutil.get_data("tw", "schemas/sistem_de_iluminat.yaml") )
         try:
             validate(request_body, schema, format_checker = FormatChecker())
         except ValidationError as ex:
@@ -76,15 +76,15 @@ class FrigiderOne(object):
         if 'stare' in request_body.keys():
             update_fields['stare'] = request_body['stare']
 
-        if 'temperatura_frigider' in request_body.keys():
-            update_fields['temperatura_frigider'] = request_body['temperatura_frigider']
+        if 'intensitate' in request_body.keys():
+            update_fields['intensitate'] = request_body['intensitate']
 
-        if 'temperatura_congelator' in request_body.keys():
-            update_fields['temperatura_congelator'] = request_body['temperatura_congelator']
+        if 'nr_becuri_aprinse' in request_body.keys():
+            update_fields['nr_becuri_aprinse'] = request_body['nr_becuri_aprinse']
 
         id = self.request.matchdict['id']
-        DBSession.query(Frigider).filter(Frigider.id_dispozitiv == id).update(update_fields)
-        updated = DBSession.query(Frigider).filter(Frigider.id_dispozitiv == id).first().as_dict()
+        DBSession.query(SistemDeIluminat).filter(SistemDeIluminat.id_dispozitiv == id).update(update_fields)
+        updated = DBSession.query(SistemDeIluminat).filter(SistemDeIluminat.id_dispozitiv == id).first().as_dict()
         return updated
 
     @view_config(request_method = 'DELETE')
@@ -92,6 +92,6 @@ class FrigiderOne(object):
         id = self.esteIdCorect()
         if id is None:
             return Response(status = 404, body = "Incorrect id")
-        record = DBSession.query(Frigider).filter(Frigider.id_dispozitiv == id['id_dispozitiv']).first()
+        record = DBSession.query(SistemDeIluminat).filter(SistemDeIluminats.id_dispozitiv == id['id_dispozitiv']).first()
         DBSession.delete(record)
         return Response(status=201, body = "OK")

@@ -50,6 +50,8 @@ CREATE TABLE SISTEM_DE_ILUMINAT(
 CREATE TABLE CAFETIERA(
 	id_dispozitiv VARCHAR(6),
 	denumire VARCHAR(45),
+	zahar INT,
+	tip VARCHAR(45),
 	stare TINYINT(1),
 	PRIMARY KEY (id_dispozitiv)
 	);
