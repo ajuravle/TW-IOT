@@ -14,7 +14,7 @@ class Televizor(Base):
     id_dispozitiv = Column(String(6), primary_key = True)
     denumire = Column(String(45))
     id_canal = Column(String(6), ForeignKey("CANALE.id_canal"))
-    stare = Column(TINYINT(1), default = 1)
+    stare = Column(TINYINT(1), default = 0)
     volum = Column(Integer, default = 50)
     luminozitate = Column(Integer, default = 50)
 

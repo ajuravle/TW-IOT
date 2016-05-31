@@ -41,5 +41,8 @@ def main(global_config, **settings):
     config.add_route("termostat", "/api/termostat")
     config.add_route("termostat_one", "/api/termostat/{id}")
 
+    config.add_route("cafetiera", "/api/cafetiera")
+    config.add_route("cafetiera_one", "/api/cafetiera/{id}")
+
     config.scan()
     return config.make_wsgi_app()
