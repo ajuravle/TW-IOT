@@ -9,7 +9,7 @@ import datetime
 from sqlalchemy import func,desc
 
 @view_defaults(route_name = 'activitate_si', renderer = 'json')
-class CafetieraApi(object):
+class ActivitateSII(object):
 
     def __init__(self, request):
         self.request = request
@@ -22,14 +22,14 @@ class CafetieraApi(object):
         if record == None:
             return Response(status=400,body='id incorect')
         
-        rez = DBSession.query(ActivitateSI.ora).group_by(ActivitateSI.stare).having(ActivitateSI.stare == 1).order_by(func.count(ActivitateSI.ora).desc()).first()
+        rez = DBSession.query(ActivitateSI.ora).filter(ActivitateSI.stare == 1).group_by(ActivitateSI.ora).order_by(func.count(ActivitateSI.ora).desc()).first()
         result = {}
         if not rez is None:
             result["ora_start"] = rez[0]
         else:
              result["ora_start"] = "null"
 
-        rez = DBSession.query(ActivitateSI.ora).group_by(ActivitateSI.stare).having(ActivitateSI.stare == 0).order_by(func.count(ActivitateSI.ora).desc()).first()
+        rez = DBSession.query(ActivitateSI.ora).filter(ActivitateSI.stare == 0).group_by(ActivitateSI.ora).order_by(func.count(ActivitateSI.ora).desc()).first()
         if not rez is None:
             result["ora_stop"] = rez[0]
         else:
