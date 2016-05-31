@@ -75,7 +75,6 @@ class TermostatOneApi(object):
         if 'stare' in request_body.keys():
             update_fields['stare'] = request_body['stare']
 
-
         id = self.request.matchdict['id']
         DBSession.query(Termostat).filter(Termostat.id_dispozitiv == id).update(update_fields)
         updated = DBSession.query(Termostat).filter(Termostat.id_dispozitiv == id).first().as_dict()

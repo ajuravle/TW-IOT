@@ -2,6 +2,7 @@ from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPNotFound, HTTPFound
 from ...models.meta import DBSession
 from ...models.cafetiera import Cafetiera
+from ...models.activitate_cafetiera import ActivitateCafetiera
 from pyramid.response import Response
 import json
 from sqlalchemy.orm import load_only
@@ -9,6 +10,7 @@ from sqlalchemy import update
 import pkgutil
 import yaml
 import uuid
+import datetime
 from jsonschema import validate, FormatChecker,ValidationError
 
 @view_defaults(route_name = 'cafetiera', renderer = 'json')
@@ -83,6 +85,15 @@ class CafetieraOneApi(object):
         id = self.request.matchdict['id']
         DBSession.query(Cafetiera).filter(Cafetiera.id_dispozitiv == id).update(update_fields)
         updated = DBSession.query(Cafetiera).filter(Cafetiera.id_dispozitiv == id).first().as_dict()
+
+        update_fields['id_dispozitiv'] = id
+        update_fields['id_activitate'] = str(uuid.uuid4())[:6]
+        if 'denumire' in update_fields.keys():
+            del update_fields['denumire']
+        update_fields['ora'] = datetime.datetime.now().hour
+        activitate = ActivitateCafetiera(**update_fields)
+        DBSession.add(activitate)
+
         return updated
 
     @view_config(request_method = 'DELETE')

@@ -3,7 +3,7 @@ from sqlalchemy import (
     Column,
     String,
     Integer,
-    ForeignKey      
+    ForeignKey,   
     )
 
 from sqlalchemy.dialects.mysql import TINYINT
@@ -12,10 +12,11 @@ from sqlalchemy.orm import class_mapper
 class ActivitateCafetiera(Base):
     __tablename__ = 'ACTIVITATE_CAFETIERA'
     id_activitate = Column(String(6), primary_key = True)
-    id_dispozitiv = Column(String(6), ForeignKey("TELEVIZOR.id_dispozitiv"))
+    id_dispozitiv = Column(String(6), ForeignKey("CAFETIERA.id_dispozitiv"))
     ora = Column(Integer)
     zahar = Column(Integer)
     tip = Column(String(45))
+    stare = Column(TINYINT(1))
 
     def as_dict(self):
         record_dict =  {item.name: getattr(self,item.name) for item in class_mapper(self.__class__).columns if item.name != 'status'}

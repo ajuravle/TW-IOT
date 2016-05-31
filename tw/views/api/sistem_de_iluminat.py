@@ -3,6 +3,7 @@ from pyramid.httpexceptions import HTTPNotFound, HTTPFound
 from ...models.meta import DBSession
 from ...models.meta import verifica_interval
 from ...models.sistem_de_iluminat import SistemDeIluminat
+from ...models.activitate_si import ActivitateSI
 from pyramid.response import Response
 import json
 from sqlalchemy.orm import load_only
@@ -11,6 +12,7 @@ from sqlalchemy import and_
 import pkgutil
 import yaml
 import uuid
+import datetime
 from jsonschema import validate, FormatChecker,ValidationError
 
 @view_defaults(route_name = 'sistem_de_iluminat', renderer = 'json')
@@ -85,6 +87,15 @@ class SistemDeIluminatOne(object):
         id = self.request.matchdict['id']
         DBSession.query(SistemDeIluminat).filter(SistemDeIluminat.id_dispozitiv == id).update(update_fields)
         updated = DBSession.query(SistemDeIluminat).filter(SistemDeIluminat.id_dispozitiv == id).first().as_dict()
+
+        update_fields['id_dispozitiv'] = id
+        update_fields['id_activitate'] = str(uuid.uuid4())[:6]
+        if 'denumire' in update_fields.keys():
+            del update_fields['denumire']
+        update_fields['ora'] = datetime.datetime.now().hour
+        activitate = ActivitateSI(**update_fields)
+        DBSession.add(activitate)
+        
         return updated
 
     @view_config(request_method = 'DELETE')
