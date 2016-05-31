@@ -12,8 +12,8 @@ class Termostat(Base):
     __tablename__ = 'TERMOSTAT'
     id_dispozitiv = Column(String(6), primary_key = True)
     denumire = Column(String(45))
-    stare = Column(TINYINT(1))
-    temperatura = Column(Integer)
+    stare = Column(TINYINT(1), default = 1)
+    temperatura = Column(Integer, default = 20)
 
 
     def as_dict(self):

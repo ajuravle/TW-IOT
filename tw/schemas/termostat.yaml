@@ -5,14 +5,10 @@ type: object
 properties: 
     denumire: 
         type: string
-    temperatura_frigider: 
+    temperatura: 
         type: integer
-        minimum: -30
-        maximum: 0
-    temperatura_congelator: 
-        type: integer
-        minimum: -50
-        maximum: 0
+        minimum: -10
+        maximum: 40
     stare:
         type: integer
 

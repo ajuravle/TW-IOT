@@ -1,21 +1,18 @@
 from pyramid.view import view_config, view_defaults
-from pyramid.httpexceptions import HTTPNotFound, HTTPFound
 from ...models.meta import DBSession
 from ...models.meta import verifica_interval
-from ...models.televizor import Televizor
-from ...models.canal import Canal
+from ...models.termostat import Termostat
 from pyramid.response import Response
 import json
 from sqlalchemy.orm import load_only
 from sqlalchemy import update
-from sqlalchemy import and_
 import pkgutil
 import yaml
 import uuid
 from jsonschema import validate, FormatChecker,ValidationError
 
-@view_defaults(route_name = 'televizor', renderer = 'json')
-class TelevizorApi(object):
+@view_defaults(route_name = 'termostat', renderer = 'json')
+class TermostatApi(object):
 
     def __init__(self, request):
         self.request = request
@@ -23,33 +20,28 @@ class TelevizorApi(object):
     @view_config(request_method = 'POST')
     def post(self):
         request_body = json.loads(self.request.body.decode("utf8"))
-        schema = yaml.safe_load( pkgutil.get_data("tw", "schemas/televizor.yaml") )
+        schema = yaml.safe_load( pkgutil.get_data("tw", "schemas/termostat.yaml") )
         try:
             validate(request_body, schema, format_checker = FormatChecker())
         except ValidationError as ex:
             return Response( status = 400, body = "Incorect json format" + str(ex) )
 
         id = str(uuid.uuid4())[:6]
-
-        request_body["id_dispozitiv"]= id
-        if 'id_canal' in request_body.keys():
-            canal = DBSession.query(Canal).filter(Canal.id_canal == request_body['id_canal']).first()
-            if canal is None:
-                return Response(status = 400, body = "Id canal is incorect")
-        record = Televizor(**request_body)
+        request_body["id_dispozitiv"] = id
+        record = Termostat(**request_body)
         DBSession.add(record)
-        new_record = DBSession.query(Televizor).filter(Televizor.id_dispozitiv == id).first().as_dict()
-        return new_record
+        new_record = DBSession.query(Termostat).filter(Termostat.id_dispozitiv == id).first()
+        return new_record.as_dict()
 
-@view_defaults(route_name = 'televizor_one', renderer = 'json')
-class TelevizorOneApi(object):
+@view_defaults(route_name = 'termostat_one', renderer = 'json')
+class TermostatOneApi(object):
 
     def __init__(self, request):
         self.request = request
 
     def esteIdCorect(self):
         id = self.request.matchdict['id']
-        record = DBSession.query(Televizor).filter(Televizor.id_dispozitiv == id).first()
+        record = DBSession.query(Termostat).filter(Termostat.id_dispozitiv == id).first()
         if record == None:
             return None
         return record.as_dict()
@@ -67,35 +59,26 @@ class TelevizorOneApi(object):
             return Response(status = 404, body = "Incorrect id")
         request_body = json.loads(self.request.body.decode("utf8"))
 
-        schema = yaml.safe_load( pkgutil.get_data("tw", "schemas/televizor.yaml") )
+        schema = yaml.safe_load( pkgutil.get_data("tw", "schemas/termostat.yaml") )
         try:
             validate(request_body, schema, format_checker = FormatChecker())
         except ValidationError as ex:
             return Response( status = 400, body = "Incorect json format" + str(ex) )
 
         update_fields = {}
-        if 'id_canal' in request_body.keys():
-            canal = DBSession.query(Canal).filter(Canal.id_canal == request_body['id_canal']).first()
-            if canal is None:
-                return Response(status = 400, body = "Id canal is incorect")
-            update_fields['id_canal'] = request_body['id_canal']
-
         if 'denumire' in request_body.keys():
             update_fields['denumire'] = request_body['denumire']
 
-        if 'volum' in request_body.keys():
-            update_fields['volum'] = request_body['volum']
-
-        if 'luminozitate' in request_body.keys():
-            update_fields['luminozitate'] = request_body['luminozitate']
+        if 'temperatura' in request_body.keys():
+            update_fields['temperatura'] = request_body['temperatura']
 
         if 'stare' in request_body.keys():
             update_fields['stare'] = request_body['stare']
 
 
         id = self.request.matchdict['id']
-        DBSession.query(Televizor).filter(Televizor.id_dispozitiv == id).update(update_fields)
-        updated = DBSession.query(Televizor).filter(Televizor.id_dispozitiv == id).first().as_dict()
+        DBSession.query(Termostat).filter(Termostat.id_dispozitiv == id).update(update_fields)
+        updated = DBSession.query(Termostat).filter(Termostat.id_dispozitiv == id).first().as_dict()
         return updated
 
     @view_config(request_method = 'DELETE')
@@ -103,6 +86,6 @@ class TelevizorOneApi(object):
         id = self.esteIdCorect()
         if id is None:
             return Response(status = 400, body = "Incorrect id")
-        record = DBSession.query(Televizor).filter(Televizor.id_dispozitiv == id['id_dispozitiv']).first()
+        record = DBSession.query(Termostat).filter(Termostat.id_dispozitiv == id['id_dispozitiv']).first()
         DBSession.delete(record)
         return Response(status=201, body = "OK")
