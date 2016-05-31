@@ -3,6 +3,7 @@ from pyramid.httpexceptions import HTTPNotFound, HTTPFound
 from ...models.meta import DBSession
 from ...models.meta import verifica_interval
 from ...models.televizor import Televizor
+from ...models.activitate_tv import ActivitateTV
 from ...models.canal import Canal
 from pyramid.response import Response
 import json
@@ -13,6 +14,7 @@ import pkgutil
 import yaml
 import uuid
 from jsonschema import validate, FormatChecker,ValidationError
+import datetime
 
 @view_defaults(route_name = 'televizor', renderer = 'json')
 class TelevizorApi(object):
@@ -96,6 +98,17 @@ class TelevizorOneApi(object):
         id = self.request.matchdict['id']
         DBSession.query(Televizor).filter(Televizor.id_dispozitiv == id).update(update_fields)
         updated = DBSession.query(Televizor).filter(Televizor.id_dispozitiv == id).first().as_dict()
+
+        update_fields['id_dispozitiv'] = id
+        update_fields['id_activitate'] = str(uuid.uuid4())[:6]
+        if 'denumire' in request_body.keys():
+            del update_fields['denumire']
+        if 'luminozitate' in request_body.keys():
+            del update_fields['luminozitate']
+        update_fields['ora'] = datetime.datetime.now().hour
+        activitate = ActivitateTV(**update_fields)
+        DBSession.add(activitate)
+
         return updated
 
     @view_config(request_method = 'DELETE')

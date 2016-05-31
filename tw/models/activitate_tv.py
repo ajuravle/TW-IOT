@@ -16,6 +16,7 @@ class ActivitateTV(Base):
     id_canal = Column(String(6), ForeignKey("CANALE.id_canal"))
     ora = Column(Integer)
     volum = Column(Integer)
+    stare = Column(TINYINT(1))
     
     def as_dict(self):
         record_dict =  {item.name: getattr(self,item.name) for item in class_mapper(self.__class__).columns if item.name != 'status'}
