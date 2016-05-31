@@ -3,6 +3,7 @@ from pyramid.httpexceptions import HTTPNotFound, HTTPFound
 from ...models.meta import DBSession
 from ...models.meta import verifica_interval
 from ...models.user import User
+from ...models.camera import Camera
 from ...models.user_camera import UserCamera
 from pyramid.response import Response
 import json
@@ -70,7 +71,12 @@ class UserOne(object):
         list_rooms = []
 
         for room in rooms:
-            list_rooms.append(room.as_dict())
+            rec = room.as_dict()
+            del rec["id_user"]
+            del rec["id_uc"]
+            room_name = DBSession.query(Camera.denumire).filter(Camera.id_camera == rec["id_camera"]).first()
+            rec["denumire"]=room_name[0]
+            list_rooms.append(rec)
 
         record["camere"] = list_rooms;
         
