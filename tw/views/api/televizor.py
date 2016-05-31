@@ -15,7 +15,7 @@ import uuid
 from jsonschema import validate, FormatChecker,ValidationError
 
 @view_defaults(route_name = 'televizor', renderer = 'json')
-class MasinaSpalat(object):
+class Televizor(object):
 
     def __init__(self, request):
         self.request = request
@@ -42,7 +42,7 @@ class MasinaSpalat(object):
         return new_record
 
 @view_defaults(route_name = 'televizor_one', renderer = 'json')
-class MasinaSpalatOne(object):
+class Televizor(object):
 
     def __init__(self, request):
         self.request = request

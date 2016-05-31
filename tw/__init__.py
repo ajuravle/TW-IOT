@@ -32,6 +32,8 @@ def main(global_config, **settings):
 
     config.add_route("televizor", "/api/televizor")
     config.add_route("televizor_one", "/api/televizor/{id}")
+    config.add_route("canal", "/api/canal")
+    config.add_route("canal_one", "/api/canal/{id}")
 
     config.add_route("masina_spalat", '/api/masina_spalat')
     config.add_route("masina_spalat_one", "/api/masina_spalat/{id}")
