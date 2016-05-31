@@ -1,0 +1,23 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: /
+type: object
+
+properties: 
+    nume: 
+        type: string
+    prenume: 
+        type: string
+    parola: 
+        type: string
+    mail: 
+        type: string
+    tip: 
+        type: string
+
+
+additionalProperties: false
+required:
+    - nume
+    - prenume
+    - parola
+    - mail

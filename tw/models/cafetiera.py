@@ -17,7 +17,7 @@ class Cafetiera(Base):
     stare = Column(TINYINT(1), default = 0)
 
     def as_dict(self):
-        record_dict =  {item.name: getattr(self,item.name) for item in class_mapper(self.__class__).columns if item.name != 'status'}
+        record_dict =  {item.name: getattr(self,item.name) for item in class_mapper(self.__class__).columns}
         return record_dict
 
    

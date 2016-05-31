@@ -28,6 +28,7 @@ def main(global_config, **settings):
     config.add_route("login", '/login')
     config.add_route("logout", "/logout")
     config.add_route("home", '/home')
+
     config.add_route("frigider", '/api/frigider')
     config.add_route("frigider_one", '/api/frigider/{id}')
 
@@ -50,6 +51,10 @@ def main(global_config, **settings):
 
     config.add_route("activitate_si", "/api/activitate_si/{id}")
     config.add_route("activitate_cafetiera", "/api/activitate_cafetiera/{id}")
+    config.add_route("activitate_tv", "/api/activitate_tv/{id}")
+
+    config.add_route("user", "/api/user")
+    config.add_route("user_one", "/api/user/{id}")
 
     config.scan()
     return config.make_wsgi_app()
