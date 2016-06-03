@@ -46,6 +46,7 @@ directiveModule.directive('temperature', function() {
     };
 });
 
+
 directiveModule.directive('rotations', function() {
     var controller = function($scope, $timeout) {
        // console.log($scope);
@@ -156,20 +157,33 @@ directiveModule.directive('dropdown', function() {
 
 directiveModule.directive('clock', function() {
     var controller = function($scope, $timeout) {
-        console.log($scope);
+        //console.log($scope);
+        $scope.clicked = false;
+        $scope.editClock = function() {
+            $scope.clicked = true;
+            $scope.success = false;
+            $scope.feedback = "Success";
+
+            $timeout(function() {
+                $scope.clicked = false;
+
+            },1000);
+        };
     };
 
     return {
         restrict: 'E',
         scope: {
-            value: '@',
-            state: '@',
-            id: '@',
+            state: '=',
+            list: '=',
             title: '@',
-            rangeText: '@',
+            id: '@',
+            details: '@',
+            icon: '@',
             edit: '&'
         },
         templateUrl: '/static/directivesTemplates/clock.html',
+        controller: controller
     };
 });
 
@@ -191,6 +205,10 @@ directiveModule.directive('textDetails', function() {
         templateUrl: '/static/directivesTemplates/text.html',
     };
 });
+
+
+
+/* directive pentru tv*/
 
 directiveModule.directive('volume', function() {
     var controller = function($scope, $timeout) {
@@ -349,3 +367,94 @@ directiveModule.directive('channel', function() {
 });
 
 
+/* directive pentru tv*/
+
+directiveModule.directive('nrBulbs', function() {
+    var controller = function($scope, $timeout) {
+        console.log("clume");
+        $scope.clicked = false;
+        $scope.editNrBulbs = function() {
+            $scope.clicked = true;
+            $scope.success = false;
+            $scope.feedback = "Success";
+
+            $timeout(function() {
+                $scope.clicked = false;
+
+            },1000);
+        };
+
+        $scope.editStateLights = function() {
+            $scope.clicked = true;
+            $scope.state = !$scope.state;
+            $scope.feedback = "Set on";
+
+            $timeout(function() {
+                $scope.clicked = false;
+            },1000);
+        };
+    };
+
+    return {
+        restrict: 'E',
+        scope: {
+            value: '@',
+            state: '@',
+            id: '@',
+            title: '@',
+            rangeText: '@',
+            edit: '&'
+        },
+        templateUrl: '/static/directivesTemplates/bulbs.html',
+        controller: controller
+    };
+});
+
+directiveModule.directive('lightIntensity', function() {
+    var controller = function($scope, $timeout) {
+       // console.log($scope);
+         $scope.clicked = false;
+        $scope.editIntensity = function() {
+            $scope.clicked = true;
+            $scope.success = false;
+            $scope.feedback = "Success";
+
+            $timeout(function() {
+                $scope.clicked = false;
+
+            },1000);
+        };
+    };
+
+    return {
+        restrict: 'E',
+        scope: {
+            value: '@',
+            state: '@',
+            id: '@',
+            title: '@',
+            rangeText: '@',
+            edit: '&'
+        },
+        templateUrl: '/static/directivesTemplates/lightIntensity.html',
+        controller: controller
+    };
+});
+
+directiveModule.directive('textLightsDetails', function() {
+    var controller = function($scope, $timeout) {
+        console.log($scope);
+    };
+    return {
+        restrict: 'E',
+        scope: {
+            value: '@',
+            state: '@',
+            id: '@',
+            title: '@',
+            rangeText: '@',
+            edit: '&'
+        },
+        templateUrl: '/static/directivesTemplates/textLights.html',
+    };
+});

@@ -68,5 +68,7 @@ def main(global_config, **settings):
     config.add_route("user", "/api/user")
     config.add_route("user_one", "/api/user/{id}")
 
+    config.add_route("lights", '/lights')
+
     config.scan()
     return config.make_wsgi_app()
