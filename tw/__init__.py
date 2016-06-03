@@ -29,6 +29,7 @@ def main(global_config, **settings):
     config.add_route("logout", "/logout")
     config.add_route("home", '/home')
     config.add_route("washing_machine", '/washing_machine')
+    config.add_route("tv", '/tv')
     config.add_route("register", '/register')
     config.add_route("profile", '/profile')
 

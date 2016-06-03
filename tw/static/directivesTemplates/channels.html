@@ -1,0 +1,21 @@
+<div class="channel-tv">
+    <div ng-show="state == true">
+        <div class="channel-tv-title"><i class="fa" ng-class="icon" aria-hidden="true"></i><% title %></div>
+        <dropdown list="list" title="Choose a channel"></dropdown>
+        <div class="channel-details">
+          <!--<span>Program details:</span>-->
+          <p><%details%></p>
+        </div>
+    </div>
+
+     <div class="channel-tv-icons">
+            <div ng-show="clicked" class="animate-show">
+                <i class="fa" ng-class="{'fa-thumbs-up':success, 'fa-thumbs-down':!success}" aria-hidden="true"></i>
+                <span><% feedback %></span>
+            </div>
+             <div class="channel-icons">
+                <i class="fa fa-check  fa-lg" aria-hidden="true" ng-click="editChannel()" ng-show="state"></i>
+             </div>
+           </div>
+</div>
+

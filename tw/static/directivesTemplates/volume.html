@@ -1,0 +1,28 @@
+<div class="col-md-6 volume-card">
+    <div ng-show="state">
+        <div class="volume-card-title"><% title %></div>
+        <div class="volume-slider">
+            <input type="range" name="points" min="0" max="100" ng-model="value">
+            <div>
+                <span class="volume-label"><% rangeText %></span>
+                <input type="number" string-to-number name="temp-input" ng-model="value" >
+            </div>
+        </div>
+    </div>
+   
+    <div ng-show="!state" class="off-state">
+        <i class="fa fa-frown-o fa-5x " aria-hidden="true"></i>
+        <div>Senzor off</div>
+    </div>
+        
+        <div class="volume-card-icons">
+            <div ng-show="clicked" class="animate-show">
+                <i class="fa" ng-class="{'fa-thumbs-up':success, 'fa-thumbs-down':!success}" aria-hidden="true"></i>
+                <span><% feedback %></span>
+            </div>
+            <div class="volume-icons">
+                <i class="fa fa-power-off fa-lg" ng-class="state" aria-hidden="true"  ng-click="editStateTV()"></i>
+                <i class="fa fa-check  fa-lg" aria-hidden="true" ng-click="editVolume()" ng-show="state"></i>
+            </div>
+        </div>
+</div>

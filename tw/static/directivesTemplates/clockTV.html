@@ -1,0 +1,14 @@
+<div class="col-md-6 clock-tv">
+    <div ng-show="state == true">
+        <div class="clock-tv-title"><% title %></div>  
+    </div>
+     <div class="clock-tv-icons">
+            <div ng-show="clicked" class="animate-show">
+                <i class="fa" ng-class="{'fa-thumbs-up':success, 'fa-thumbs-down':!success}" aria-hidden="true"></i>
+                <span><% feedback %></span>
+            </div>
+             <div class="clockTV-icons">
+                <i class="fa fa-check  fa-lg" aria-hidden="true" ng-click="editClockTV()" ng-show="state"></i>
+             </div>
+     </div>
+</div>
