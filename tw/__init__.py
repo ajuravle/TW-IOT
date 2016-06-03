@@ -29,6 +29,8 @@ def main(global_config, **settings):
     config.add_route("logout", "/logout")
     config.add_route("home", '/home')
     config.add_route("washing_machine", '/washing_machine')
+    config.add_route("register", '/register')
+    config.add_route("profile", '/profile')
 
     config.add_route("camera", "/api/camera")
     config.add_route("camera_one", "/api/camera/{id}")
