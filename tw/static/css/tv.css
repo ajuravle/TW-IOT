@@ -1,5 +1,5 @@
 .volume-card {
-    background-color: #336666;
+    background-color: #009966;
     min-height: 300px;
     min-width: 100%;
     color: white;
@@ -85,7 +85,7 @@ input[type="range"]::-webkit-slider-thumb {
     text-align: left;
     padding: 12px 0px 6px 12px;
     display: block;
-    background: rgba(153, 102, 153, 0.5);
+    background: rgba(102, 204, 255, 0.5);
 }
 
 .volume-slider  input[type="number"]{
@@ -96,7 +96,7 @@ input[type="range"]::-webkit-slider-thumb {
     text-align: center;
     border: none;
     box-shadow: none;
-    background: rgba(153, 102, 153, 0.5);   
+    background: rgba(102, 204, 255, 0.5);   
 }
 .volume-slider  input[type="number"]:focus {
     outline: none;
@@ -181,7 +181,7 @@ input[type="range"]::-webkit-slider-thumb {
 /*-------------------------------------------------------------------*/
 
 .channel-tv {
-    background-color: #3399FF;
+    background-color: #0099CC;
     min-height: 300px;
     min-width: 100%;
     color: white;
@@ -210,7 +210,7 @@ input[type="range"]::-webkit-slider-thumb {
     display: block;
     height: 60% !important;
     width: 100%;
-    background-color: #33CCFF;
+    background-color: #3366CC;
 }
 
  .channel-tv-icons {

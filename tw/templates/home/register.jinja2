@@ -5,17 +5,17 @@
 <body>
 <div class="main">
       <h2>REGISTER</h2>
-        <form>
+        <form method="POST" action="">
            <div class="lable">
-                <div class="col_1_of_2 span_1_of_2">    <input type="text" class="text" value="First Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'First Name';}></div>
+                <div class="col_1_of_2 span_1_of_2">    <input type="text" name="nume" class="text" value="First Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'First Name';}></div>
                 
-                <div class="col_1_of_2 span_1_of_2"><input type="text" class="text" value="Last Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Last Name';}"></div>
+                <div class="col_1_of_2 span_1_of_2"><input type="text" name="prenume" class="text" value="Last Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Last Name';}"></div>
                 <div class="clear"> </div>
            </div>
 
            <div class="lable-2">
-                <input type="text" class="text" value="your@email.com " onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'your@email.com ';}">
-                <input type="password" class="text" placeholder="Password " onfocus="this.value = '';" onblur="if (this.value == '') {this.placeholder = 'Password ';}">
+                <input type="text" name="email" class="text" value="your@email.com " onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'your@email.com ';}">
+                <input type="password" name="parola" class="text" placeholder="Password " onfocus="this.value = '';" onblur="if (this.value == '') {this.placeholder = 'Password ';}">
                 <input type="password" class="text" placeholder="Re-type your password " onfocus="this.value = '';" onblur="if (this.value == '') {this.placeholder = 'Re-type your password ';}">
            </div>
            <div class="submit">
