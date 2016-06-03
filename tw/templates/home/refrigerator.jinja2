@@ -1,0 +1,31 @@
+{% extends "tw:templates/home/layout.jinja2" %}
+{% block content %}
+
+<div class="row" ng-controller="pag">
+    
+    <div class="col-md-8">
+     <section>  
+        <div class="row" ng-controller="pag">
+        
+            <div class="col-md-12">
+               <temperature value="-10" id="buna" state="true" title="Refrigerator temperature" range-text="Temperature: -30 to 0" min=-30 max=0></temperature>
+            </div>
+    
+        </div> 
+
+        <div class="row" ng-controller="pag">
+        
+            <div class="col-md-12">
+               <temperature value="-30" id="buna" state="true" title="Freezer temperature" range-text="Temperature: -50 to 0" min=-30 max=0></temperature>
+            </div>
+    
+        </div> 
+
+     </section>
+    </div>
+   
+    <div class="col-md-4">
+        <text-details value="100" id="bu" state="true" title="Refrigerator machine details"</text-details>
+    </div>
+</div>
+{% endblock %}
