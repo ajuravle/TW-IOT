@@ -101,10 +101,11 @@ ul {
 .temperature-card {
     background-color: #5E35B1;
     min-height: 300px;
+    min-width: 100%;
     color: white;
     font-family: 'Roboto', sans-serif;
     position: relative;
-
+    
 }
 
 .temperature-card-title {
@@ -176,9 +177,9 @@ input[type="range"]::-webkit-slider-thumb {
     margin-left: 20%;
 
 }
-.slider .label {
+.slider .temperature-label {
     
-    font-size: 14px;
+    font-size: 12px;
     font-family: 'Roboto', sans-serif;
     text-align: left;
     padding: 12px 0px 6px 12px;
@@ -199,28 +200,63 @@ input[type="range"]::-webkit-slider-thumb {
     outline: none;
 }
 
-
 /*-------------------------------------------------------------------*/
 
 .item-card {
-    background-color: #4DB6AC;
+    background-color: #3399FF;
     min-height: 300px;
-    min-width: 200px;
+    min-width: 100%;
     color: white;
     font-family: 'Roboto', sans-serif;
-    position: relative;
+    position: relative;s
     margin: auto;
+    text-align: left;
 }
 
 .item-card-title {
-    text-align: center;
-    font-size: 16px;
-    padding: 24px 0px 24px 0px;
+    font-size: 20px;
+    padding: 24px;
+    padding-left: 10%;
 }
 
 .item-card-title i {
     margin-right: 6px;
 }
+
+.details {
+    position: absolute;
+    top:40%;
+    font-size: 16px;
+    padding: 24px;
+    padding-left: 10%;
+    display: block;
+    height: 60% !important;
+    width: 100%;
+    background-color: #33CCFF;
+}
+
+ .program-card-icons {
+    color: white;
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+}
+
+.program-card-icons .program-icons {
+    border-top:1px solid white;
+    padding-left: 60px !important;
+    padding-top: 6px;
+}
+
+.program-card-icons .fa-check {
+    padding-left: 12px !important;
+}
+
+.program-card-icons .fa-check:hover{
+    color: #E53935;
+    cursor: pointer;
+}
+
 
 .dropdown {
     position: absolute;
@@ -230,8 +266,9 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .dropdown .btn-default {
+    white-space: normal;
     width: 100%;
-    color: white !important;
+    color: #333399  !important;
     border:0 !important;
     border-radius: 0 !important;
     background: transparent !important;
@@ -242,24 +279,18 @@ input[type="range"]::-webkit-slider-thumb {
     color:black;
 }
 
+
 .dropdown-item {
+    min-width: 250px;
     color: black;
     padding: 6px 12px 6px 12px;
 }
 
 .dropdown-item:hover {
+    white-space: normal;
+    min-width: 261px;
     cursor: pointer;
     background: #EEEEEE;
-}
-
-.details {
-    position: absolute;
-    top:40%;
-    padding: 12px 6px 12px 12px;
-    display: block;
-    height: 60% !important;
-    width: 100%;
-    background-color: #26A69A;
 }
 
 
@@ -273,3 +304,4 @@ input[type="range"]::-webkit-slider-thumb {
     box-shadow: 2px 2px 2px 2px #E0E0E0;
     padding: 24px;
 }
+

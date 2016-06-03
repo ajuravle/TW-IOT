@@ -76,20 +76,53 @@ directiveModule.directive('temperature', function() {
     };
 });
 
-directiveModule.directive('itemCard', function() {
+
+directiveModule.directive('rotations', function() {
     var controller = function($scope, $timeout) {
-        
-        console.log($scope);
-        /*$scope.clicked = false;
-        $scope.editTemperature = function() {
+       // console.log($scope);
+         $scope.clicked = false;
+        $scope.editRotations = function() {
             $scope.clicked = true;
             $scope.success = false;
             $scope.feedback = "Success";
 
             $timeout(function() {
                 $scope.clicked = false;
-            },1000)
-        };*/
+
+            },1000);
+        };
+    };
+
+    return {
+        restrict: 'E',
+        scope: {
+            value: '@',
+            state: '@',
+            id: '@',
+            title: '@',
+            rangeText: '@',
+            edit: '&'
+        },
+        templateUrl: '/static/directivesTemplates/rotations.html',
+        controller: controller
+    };
+});
+
+directiveModule.directive('itemCard', function() {
+    var controller = function($scope, $timeout) {
+        
+        //console.log($scope);
+        $scope.clicked = false;
+        $scope.editProgram = function() {
+            $scope.clicked = true;
+            $scope.success = false;
+            $scope.feedback = "Success";
+
+            $timeout(function() {
+                $scope.clicked = false;
+
+            },1000);
+        };
     };
 
     return {
@@ -107,6 +140,9 @@ directiveModule.directive('itemCard', function() {
         controller: controller
     };
 });
+
+
+
 
 
 directiveModule.directive('stringToNumber', function() {
@@ -132,6 +168,7 @@ directiveModule.directive('dropdown', function() {
         title: '@'
     },
     controller: function($scope) {
+        console.log("drop aici");
         $scope.dropped = false;
         $scope.selectItem = function(index) {
             console.log(index);
@@ -147,3 +184,42 @@ directiveModule.directive('dropdown', function() {
     templateUrl: '/static/directivesTemplates/dropdown.html'
   };
 });
+
+directiveModule.directive('clock', function() {
+    var controller = function($scope, $timeout) {
+        console.log($scope);
+    };
+
+    return {
+        restrict: 'E',
+        scope: {
+            value: '@',
+            state: '@',
+            id: '@',
+            title: '@',
+            rangeText: '@',
+            edit: '&'
+        },
+        templateUrl: '/static/directivesTemplates/clock.html',
+    };
+});
+
+
+directiveModule.directive('textDetails', function() {
+    var controller = function($scope, $timeout) {
+        console.log($scope);
+    };
+    return {
+        restrict: 'E',
+        scope: {
+            value: '@',
+            state: '@',
+            id: '@',
+            title: '@',
+            rangeText: '@',
+            edit: '&'
+        },
+        templateUrl: '/static/directivesTemplates/text.html',
+    };
+});
+
