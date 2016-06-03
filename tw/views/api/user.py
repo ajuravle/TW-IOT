@@ -112,9 +112,26 @@ class UserOne(object):
             update_fields['tip'] = request_body['tip']
 
         id = self.request.matchdict['id']
-        DBSession.query(User).filter(User.id_user == id).update(update_fields)
-        updated = DBSession.query(User).filter(User.id_user == id).first().as_dict()
-        return updated
+
+        if not 'actiune' in request_body.keys():
+            DBSession.query(User).filter(User.id_user == id).update(update_fields)
+            updated = DBSession.query(User).filter(User.id_user == id).first().as_dict()
+        
+        if 'actiune' in request_body.keys():
+            if request_body['actiune'] == "adauga":
+                new_uc = UserCamera()
+                new_uc.id_camera = request_body["id_camera"]
+                new_uc.id_uc = str(uuid.uuid4())[:6]
+                new_uc.id_user = id
+                DBSession.add(new_uc)
+
+            if request_body['actiune'] == 'sterge':
+                id_correct = DBSession.query(UserCamera).filter(UserCamera.id_user == id, UserCamera.id_camera == request_body["id_camera"]).first()
+                if id_correct is None:
+                    return Response(status = 404, body = "Incorrect id_camera")
+                DBSession.delete(id_correct)
+
+        return self.get()
 
     @view_config(request_method = 'DELETE')
     def delete(self):

@@ -13,7 +13,7 @@ properties:
         type: string
     tip: 
         type: string
-
+        enum: ["admin", "user"]
 
 additionalProperties: false
 required:
