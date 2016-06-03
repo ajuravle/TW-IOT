@@ -1,12 +1,15 @@
-<script type="text/javascript" src="{{ request.static_url('tw:static/js/moreskins.js') }}"></script>
-<script type="text/javascript" src="{{ request.static_url('tw:static/js/coolclock.js') }}"></script>
-<script type="text/javascript" src="{{ request.static_url('tw:static/js/excanvas.js') }}"></script>
-
-
 <div class="col-md-6 clock-card">
-    <div ng-show="state">
+    <div ng-show="state == true">
         <div class="clock-card-title"><% title %></div>  
     </div>
-    <body onload="CoolClock.findAndCreateClocks()">
-    <canvas id="s06" class="CoolClock:Disc" width="170" height="170" style="width: 170px; height: 170px;"></canvas>  
+            
+    <div class="clock-card-icons">
+        <div ng-show="clicked" class="animate-show">
+                <i class="fa" ng-class="{'fa-thumbs-up':success, 'fa-thumbs-down':!success}" aria-hidden="true"></i>
+                <span><% feedback %></span>
+        </div>
+        <div class="clock-icons">
+                <i class="fa fa-check  fa-lg" aria-hidden="true" ng-click="editClock()" ng-show="state"></i>
+        </div>
+    </div>
 </div>

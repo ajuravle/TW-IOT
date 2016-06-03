@@ -62,6 +62,7 @@ app.controller('pag', ['$scope', function($scope) {
     $scope.list = [{name:"1", value:"1"}, {name:"2", value:"2"}, {name:"3", value:"3"}, {name:"4", value:"4"}];
 }]);
 
+<<<<<<< HEAD
 app.controller('washing-machine',['$scope', '$location', 'WashingMachine', function($scope, $location, WashingMachine) {
     var id = $location.absUrl().split('/')[4];
     $scope.data = {}
@@ -80,4 +81,14 @@ app.controller('washing-machine',['$scope', '$location', 'WashingMachine', funct
     }
     //console.log()
 }])
+=======
+var directiveModule = angular.module('directives',[]);
+
+directiveModule.config(['$interpolateProvider', function($interpolateProvider){
+    $interpolateProvider.startSymbol('<%');
+    $interpolateProvider.endSymbol('%>');
+}]);
+
+
+>>>>>>> 2e42a4aadb601b391b9a348b6fe037e95c59e711
 
