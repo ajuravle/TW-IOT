@@ -13,6 +13,12 @@ properties:
         type: string
     tip: 
         type: string
+        enum: ["admin", "user"]
+    actiune: 
+        type: string
+        enum: ["adauga", "sterge"]
+    id_camera: 
+        type: string
 
 
 additionalProperties: false

@@ -4,14 +4,17 @@
         <div class="col-md-6">
             <temperature value="-10" id="buna" state="true" title="Temperatura" range-text="Temperature range: -40 to 0"></temperature>
         </div>
-        <div class="col-md-1"> 
-            <item-card rotations='10' title="Program" id='id' state='true' edit='edit()' list="list" programMenu="ProgramMasinaSpalat" icon="fa-bars" details="buna"></item-card>
-        </div>
-        </div>
+
+        <script type="text/javascript" src="{{ request.static_url('tw:static/js/moreskins.js') }}"></script>
+        <script type="text/javascript" src="{{ request.static_url('tw:static/js/coolclock.js') }}"></script>
+        <script type="text/javascript" src="{{ request.static_url('tw:static/js/excanvas.js') }}"></script>
+      <div class="col-md-3">
+      <div class="ceva">
+       <div class="ceva-title"><% title %></div> 
+        <body onload="CoolClock.findAndCreateClocks()">
+        <canvas id="s06" class="CoolClock:Disc" width="170" height="170" style="width: 170px; height: 170px;"></canvas> </div>    
+      </div>
+    
+
     </div> 
-    {# <div class="row" >
-        <div class="col-md-2 profile-background">
-            dfdfd
-        </div>
-    </div> #}
 {% endblock %}

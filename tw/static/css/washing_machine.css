@@ -1,0 +1,123 @@
+
+.rotations-card{
+    background-color: #4DB6AC;
+    min-height: 300px;
+    min-width: 100%;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    margin: auto;
+}
+
+.rotations-card-title {
+    font-size: 20px;
+    padding: 24px;
+    padding-left: 10%;
+}
+
+.rotations-card-icons {
+    color: white;
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+}
+
+.rotations-card-icons .rotations-icons {
+    border-top:1px solid white;
+    padding-left: 60px !important;
+    padding-top: 6px;
+}
+
+.rotations-card-icons .fa-check {
+    padding-left: 12px !important;
+}
+
+.rotations-card-icons .fa-check:hover{
+    color: #E53935;
+    cursor: pointer;
+}
+.rotations-slider > input[type="range"] {
+    display: block;
+    margin: auto;
+}
+
+
+.rotations-slider div {
+    position: absolute;
+    width: 50%;
+    margin-top: 30px;
+    margin-left: 20%;
+}
+.rotations-slider .rotations-label {
+    
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    text-align: left;
+    padding: 12px 0px 6px 12px;
+    display: block;
+    background: rgba(26,35,126, 0.5);
+}
+
+.rotations-slider  input[type="number"]{
+    font-size: 50px;
+    display: block;
+    width: 100%;
+    height: 94px;
+    text-align: center;
+    border: none;
+    background: rgba(26,35,126, 0.5);   
+}
+.rotations-slider  input[type="number"]:focus {
+    outline: none;
+}
+/*-------------------------------------------------------------------*/
+
+.clock-card {
+    background-color: #9933FF;
+    min-height: 300px;
+    min-width: 100%;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    margin: auto;
+    text-align: left;
+}
+
+.clock-card-title {
+    font-size: 20px;
+    padding: 24px;
+    padding-left: 10%;
+}
+
+.text-card {
+    background-color: #66CCFF;
+    min-height: 610px;
+    min-width: 100%;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    margin: auto;
+    text-align: left;
+    top:5px;
+}
+
+.text-card-title {
+    font-size: 20px;
+    padding: 24px;
+    padding-left: 10%;
+}
+
+section {
+    width:650px;
+    float:left;
+}
+
+section .row{
+    width: 700px;
+    padding: 5px;
+}
+
+.row{
+    width: 1050px;
+}
+
