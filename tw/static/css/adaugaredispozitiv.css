@@ -1,0 +1,64 @@
+body{
+	/*background: url("background.png") no-repeat center center fixed;*/
+	font-family: 'Oxygen', sans-serif;
+}
+
+span.term a{
+	color: #1888A8;
+	font-weight: bold;
+}
+span.term a:hover{
+	color:#fff;
+}
+.lable input[type="text"] {
+	padding: 15px;
+	font-size: 1.1em;
+	margin: 18px 0px;
+	color: #666666;
+	width:94%;
+	cursor: pointer;
+	font-family: 'Oxygen', sans-serif;
+	outline: none;
+	font-weight: 600;
+	margin-left: 3px;
+	background: #FFFFFF;
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	-ms-transition: all 0.3s ease-out;
+	-o-transition: all 0.3s ease-out;
+	border-left: 6px solid #fff;
+	border-bottom: none;
+	border-right: none;
+	border-top: none;
+}
+.lable input[type="text"]:hover,.lable-2 input[type="text"]:hover,#active {
+	color:#DCDCDC;
+	border-left:6px solid#F4511E;
+}
+.submit{
+	padding:1px 4px;
+	text-align: center;
+}
+input[type=submit] {
+	padding: 14px ;
+	color: #fff;
+	float: right;
+	font-family: 'Oxygen', sans-serif;
+	background: #F4511E;
+	border: 1px solid #F4511E;
+	cursor: pointer;
+	font-size: 18px;
+	transition: all 0.3s ease-out;
+    -webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	-ms-transition: all 0.3s ease-out;
+	-o-transition: all 0.3s ease-out;
+	outline:none;
+	width:106%;
+	-webkit-appearance: none;
+}
+.submit input[type=submit]:hover {
+	 background:#F4511E;
+	 border:1px solid #F4511E;
+}
+
