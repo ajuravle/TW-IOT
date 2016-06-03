@@ -13,6 +13,7 @@ from sqlalchemy import and_
 import pkgutil
 import yaml
 import uuid
+from passlib.hash import sha256_crypt
 from jsonschema import validate, FormatChecker,ValidationError
 
 @view_defaults(route_name = 'user', renderer = 'json')
@@ -33,6 +34,7 @@ class Userr(object):
         id = str(uuid.uuid4())[:6]
 
         request_body["id_user"]= id
+        request_body["parola"] = sha256_crypt.encrypt(request_body["parola"]);
         record = User(**request_body)
         DBSession.add(record)
         new_record = DBSession.query(User).filter(User.id_user == id).first().as_dict()
