@@ -2,7 +2,7 @@
     <div ng-show="state">
         <div class="temperature-card-title"><% title %></div>
         <div class="slider">
-            <input type="range" name="points" min="20" max="90" ng-model="value">
+            <input type="range" name="points" min="<%min%>" max="<%max%>" ng-model="value">
             <div>
                 <span class="temperature-label"><% rangeText %></span>
                 <input type="number" string-to-number name="temp-input" ng-model="value" >

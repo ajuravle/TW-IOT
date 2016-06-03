@@ -39,6 +39,8 @@ directiveModule.directive('temperature', function() {
             id: '@',
             title: '@',
             rangeText: '@',
+            min: '@',
+            max: '@',
             edit: '&'
         },
         templateUrl: '/static/directivesTemplates/temperature.html',
