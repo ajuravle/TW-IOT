@@ -346,7 +346,6 @@ padding-bottom: 100%;
 .text {
 color: #fff;
 font-size: 30px;
-font-weight: bold;
 margin-top: -50px;
 position: absolute;
 top: 50%;
@@ -355,7 +354,7 @@ text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
 width: 100%;
 }
 .text .val {
-font-size: 50px;
+font-size: 20px;
 }
 .text .type-time {
 font-size: 20px;
