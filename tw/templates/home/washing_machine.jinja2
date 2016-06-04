@@ -1,6 +1,5 @@
 {% extends "tw:templates/home/layout.jinja2" %}
 {% block content %}
-<body onload="CoolClock.findAndCreateClocks()">
 <div class="row" ng-controller="washing-machine">
     
     <div class="col-md-8">
@@ -8,7 +7,8 @@
         <div class="row" >
         
             <div class="col-md-6">
-               <temperature value="<% data.temperatura %>" id="buna" state="stare" title="Temperature" range-text="Temperature: 20 to 90" edit="change()"></temperature>
+               <temperature value="<% data.temperatura %>" id="buna" state="stare" title="Temperature" 
+               min="20" max="90" range-text="Temperature: 20 to 90" edit="change()"></temperature>
             </div>
 
             <div class="col-md-6"> 

@@ -1,15 +1,26 @@
 <div class="col-md-6 clock-card">
     <div ng-show="state == true">
-        <div class="clock-card-title"><% title %></div>  
-    </div>
-            
+        <div class="clock-card-title"><% title %></div> 
+            <div class="clock-item clock-minutes countdown-time-value col-sm-6 col-md-3">
+                <div class="wrap">
+                    <div class="inner">
+                        <div id="canvas_minutes" class="clock-canvas"></div>
+                            <div class="text">
+                                <p class="val">0</p>
+                                <p class="type-minutes type-time">MINUTES</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>     
     <div class="clock-card-icons">
         <div ng-show="clicked" class="animate-show">
-                <i class="fa" ng-class="{'fa-thumbs-up':success, 'fa-thumbs-down':!success}" aria-hidden="true"></i>
-                <span><% feedback %></span>
+            <i class="fa" ng-class="{'fa-thumbs-up':success, 'fa-thumbs-down':!success}" aria-hidden="true"></i>
+            <span><% feedback %></span>
         </div>
         <div class="clock-icons">
-                <i class="fa fa-check  fa-lg" aria-hidden="true" ng-click="editClock()" ng-show="state"></i>
+            <i class="fa fa-check  fa-lg" aria-hidden="true" ng-click="editClock()" ng-show="state"></i>
         </div>
     </div>
 </div>

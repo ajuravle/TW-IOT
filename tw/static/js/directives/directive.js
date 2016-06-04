@@ -319,6 +319,7 @@ directiveModule.directive('textDetails', function() {
 
 
 
+
 /* directive pentru tv*/
 
 directiveModule.directive('volume', function() {
