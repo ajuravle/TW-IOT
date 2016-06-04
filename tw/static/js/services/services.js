@@ -93,3 +93,31 @@ servicesModule.service('Thermostat',['$http', function($http) {
         return $http.put('/api/termostat/' + id, body);
     }
 }]);
+
+servicesModule.service('UserInfo',['$http', function($http) {
+
+    this.getIdUser = function() {
+        return $http.get('/user_id');
+    }
+}]);
+
+servicesModule.service('ActivitateCafetiera',['$http', function($http) {
+
+    this.getInfo = function(id) {
+        return $http.get('/api/activitate_cafetiera/'+id+"?ora=true");
+    }
+}]);
+
+servicesModule.service('ActivitateTV',['$http', function($http) {
+
+    this.getInfo = function(id) {
+        return $http.get('/api/activitate_tv/'+id+"?ora=true");
+    }
+}]);
+
+servicesModule.service('ActivitateSI',['$http', function($http) {
+
+    this.getInfo = function(id) {
+        return $http.get('/api/activitate_si/'+id+"?ora=true");
+    }
+}]);

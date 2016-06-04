@@ -35,6 +35,9 @@ class Login(object):
             return render_to_response('templates/login.jinja2', error, request = self.request)
         
         self.request.session['email'] = user['email']
+        self.request.session['tip'] = credentials_db['tip']
+        self.request.session['nume'] = credentials_db['nume']
+        self.request.session['prenume'] = credentials_db['prenume']
         self.request.session['id_user'] = credentials_db['id_user']
         token = sha256_crypt.encrypt(self.request.session.get_csrf_token())
         response = HTTPFound(location = self.request.route_url('home'))

@@ -10,7 +10,7 @@ app.config(['$interpolateProvider', function($interpolateProvider){
     $interpolateProvider.endSymbol('%>');
 }]);
 
-app.controller('left-menu', ['$scope', '$window', 'Camere', function($scope, $window, Camere) {
+app.controller('left-menu', ['$scope', '$window', 'Camere','UserInfo', function($scope, $window, Camere, UserInfo) {
 
     console.log("menuu");
     $scope.submenu = false;
@@ -37,6 +37,16 @@ app.controller('left-menu', ['$scope', '$window', 'Camere', function($scope, $wi
     .error(function(error) {
         console.log(error);
     });
+
+    UserInfo.getIdUser()
+    .success(function(result) {
+        $scope.nume = result['nume'];
+        $scope.prenume = result['prenume'];
+    })
+    .error(function(error) {
+        console.log(error);
+    });
+    
 
     $scope.click = function(index) {
         $scope.menu_items[index]["show"] = !$scope.menu_items[index]["show"];
