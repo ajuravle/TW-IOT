@@ -163,8 +163,6 @@ directiveModule.directive('itemCard', function() {
     };
 });
 
-<<<<<<< HEAD
-=======
 directiveModule.directive('itemCard2', function() {
     var controller = function($scope, $timeout) {
         
@@ -231,8 +229,6 @@ directiveModule.directive('itemCard3', function() {
     };
 });
 
-
->>>>>>> 89c029fbcafd95f498d2893149c9f6dc006e7ee8
 directiveModule.directive('stringToNumber', function() {
   return {
     require: 'ngModel',

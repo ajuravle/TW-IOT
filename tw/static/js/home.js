@@ -87,8 +87,6 @@ app.controller('washing-machine',['$scope', '$location', 'WashingMachine', funct
     }
     //console.log()
 }])
-<<<<<<< HEAD
-=======
 
 app.controller('add-device',['$scope', function($scope) {
    $scope.list=[{name:'Refrigerator',value:'device1'}, {name:'TV',value:'device1'}];
@@ -101,5 +99,4 @@ app.controller('add-device-room',['$scope', function($scope) {
 }])
 
 
->>>>>>> 89c029fbcafd95f498d2893149c9f6dc006e7ee8
 

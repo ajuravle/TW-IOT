@@ -9,8 +9,8 @@ properties:
         type: string
     temperatura: 
         type: integer
-        minimum: 10
-        maximum: 90
+        minimum: 0
+        maximum: 100
     stare: 
         type: integer
     nr_rotatii:
