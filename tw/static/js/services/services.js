@@ -36,3 +36,20 @@ servicesModule.service('Lights',['$http', function($http) {
         return $http.put('/api/sistem_de_iluminat/' + id, body);
     }
 }]);
+
+servicesModule.service('TV',['$http', function($http) {
+
+    this.get_one = function(id) {
+        return $http.get('/api/televizor/' + id);
+    }
+    this.put = function(id, body) {
+        return $http.put('/api/televizor/' + id, body);
+    }
+    this.get_channels = function() {
+        return $http.get('/api/canal');
+    }
+
+    this.get_channel = function(id) {
+        return $http.get('/api/canal/'+id);
+    }
+}]);
