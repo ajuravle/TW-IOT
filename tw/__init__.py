@@ -76,6 +76,5 @@ def main(global_config, **settings):
     config.add_route("coffee_maker", '/coffee_maker')
     config.add_route("thermostat", '/thermostat/{id}')
 
-
     config.scan()
     return config.make_wsgi_app()
