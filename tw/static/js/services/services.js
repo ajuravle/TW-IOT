@@ -26,3 +26,13 @@ servicesModule.service('Refrigerator',['$http', function($http) {
         return $http.put('/api/frigider/' + id, body);
     }
 }]);
+
+servicesModule.service('Lights',['$http', function($http) {
+
+    this.get_one = function(id) {
+        return $http.get('/api/sistem_de_iluminat/' + id);
+    }
+    this.put = function(id, body) {
+        return $http.put('/api/sistem_de_iluminat/' + id, body);
+    }
+}]);

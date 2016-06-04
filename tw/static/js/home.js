@@ -53,6 +53,8 @@ app.controller('left-menu', ['$scope', '$window', 'Camere', function($scope, $wi
         switch (tip) {
             case 'masina_de_spalat': $window.location.href = "http://" + $window.location.host + "/washing_machine/" + id; break;
             case 'frigider': $window.location.href = "http://" + $window.location.host + "/refrigerator/" + id; break;
+            case 'sistem_de_iluminat': $window.location.href = "http://" + $window.location.host + "/lights/" + id; break;
+
         }
     }
 }]);
@@ -135,6 +137,35 @@ app.controller('refrigerator',['$scope', '$location', '$interval', 'Refrigerator
     $scope.changeFreezer = function() {
         return {tip:"frigider", id:id, field:'con'};
     }
+    //console.log()
+}])
+
+app.controller('lights',['$scope', '$location', '$interval', 'Lights', function($scope, $location, $interval, Lights) {
+    var id = $location.absUrl().split('/')[4];
+    $scope.data = {}
+    $scope.stare = true;
+    var getData = function() {
+        console.log("da");    
+        Lights.get_one(id)
+        .success(function(result) {
+            $scope.data = result;
+            if(result['stare'] == 0)
+                $scope.stare = false;
+            else
+                $scope.stare = true;
+            console.log($scope.data);
+        })
+        .error(function(error) {
+            console.log(error);
+        })
+    };
+    getData()
+    $interval(getData,5000);
+
+    $scope.changeLights = function() {
+        return {tip:"sistem_de_iluminat", id:id};
+    }
+    
     //console.log()
 }])
 

@@ -493,13 +493,21 @@ directiveModule.directive('channel', function() {
 /* directive pentru tv*/
 
 directiveModule.directive('nrBulbs', function() {
-    var controller = function($scope, $timeout) {
-        console.log("clume");
+    var controller = function($scope, $timeout,Lights) {
         $scope.clicked = false;
         $scope.editNrBulbs = function() {
             $scope.clicked = true;
             $scope.success = false;
-            $scope.feedback = "Success";
+            details=$scope.edit();
+            Lights.put(details['id'],{nr_becuri_aprinse:parseInt($scope.value,10)})
+            .success(function(){
+                $scope.success=true;
+                $scope.feedback="Success";
+            })
+            .error(function(){
+                $scope.success=false;
+                $scope.feedback="Api error";
+            })
 
             $timeout(function() {
                 $scope.clicked = false;
@@ -510,7 +518,20 @@ directiveModule.directive('nrBulbs', function() {
         $scope.editStateLights = function() {
             $scope.clicked = true;
             $scope.state = !$scope.state;
-            $scope.feedback = "Set on";
+            
+            details=$scope.edit();
+            Lights.put(details['id'],{stare:$scope.state?1:0})
+            .success(function(){
+                $scope.success=true;
+                if ($scope.state==true)
+                    $scope.feedback = "Set on";
+                else
+                    $scope.feedback = "Set off";
+            })
+            .error(function(){
+                $scope.success=false;
+                $scope.feedback="Api error";
+            })
 
             $timeout(function() {
                 $scope.clicked = false;
@@ -522,7 +543,7 @@ directiveModule.directive('nrBulbs', function() {
         restrict: 'E',
         scope: {
             value: '@',
-            state: '@',
+            state: '=',
             id: '@',
             title: '@',
             rangeText: '@',
@@ -534,13 +555,22 @@ directiveModule.directive('nrBulbs', function() {
 });
 
 directiveModule.directive('lightIntensity', function() {
-    var controller = function($scope, $timeout) {
+    var controller = function($scope, $timeout,Lights) {
        // console.log($scope);
          $scope.clicked = false;
         $scope.editIntensity = function() {
             $scope.clicked = true;
             $scope.success = false;
-            $scope.feedback = "Success";
+            details=$scope.edit();
+            Lights.put(details['id'],{intensitate:parseInt($scope.value,10)})
+            .success(function(){
+                $scope.success=true;
+                $scope.feedback="Success";
+            })
+            .error(function(){
+                $scope.success=false;
+                $scope.feedback="Api error";
+            })
 
             $timeout(function() {
                 $scope.clicked = false;
@@ -553,7 +583,7 @@ directiveModule.directive('lightIntensity', function() {
         restrict: 'E',
         scope: {
             value: '@',
-            state: '@',
+            state: '=',
             id: '@',
             title: '@',
             rangeText: '@',
