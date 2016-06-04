@@ -21,7 +21,7 @@
                 <span><% feedback %></span>
             </div>
             <div class="icons">
-                <i class="fa fa-power-off fa-lg" ng-class="state" aria-hidden="true"  ng-click="editState()"></i>
+                <i class="fa fa-power-off fa-lg" ng-class="state" aria-hidden="true" ng-hide="changeState"  ng-click="editState()"></i>
                 <i class="fa fa-check  fa-lg" aria-hidden="true" ng-click="editTemperature()" ng-show="state"></i>
             </div>
         </div>

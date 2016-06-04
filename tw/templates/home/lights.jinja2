@@ -1,22 +1,22 @@
 {% extends "tw:templates/home/layout.jinja2" %}
 {% block content %}
 
-<div class="row" ng-controller="pag">
+<div class="row" ng-controller='lights'>
 
                
     <div class="col-md-7">
      <section class="sec"> 
 
 
-        <div class="row" ng-controller="pag">
+        <div class="row">
             <div class="col-md-12">
-               <nr-bulbs value="0" id="nna" state="true" title="Number of bulbs" range-text="Bulbs range: 0 to 50"></nr-bulbs>
+               <nr-bulbs value="<%data.nr_becuri_aprinse%>" edit="changeLights()" id="nna" state="data.stare" title="Number of bulbs" range-text="Bulbs range: 0 to 10"></nr-bulbs>
             </div>       
         </div> 
     
-        <div class="row" ng-controller="pag">
+        <div class="row" >
              <div class="col-md-12"> 
-               <light-intensity value="0" id="naia" state="true" title="Light intensity" range-text="Intensity: 0 to 100"></light-intensity>
+               <light-intensity value="<%data.intensitate%>" edit="changeLights()" id="naia" state="data.stare" title="Light intensity" range-text="Intensity: 0 to 100"></light-intensity>
             </div>
         </div> 
      

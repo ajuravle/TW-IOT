@@ -52,6 +52,8 @@ app.controller('left-menu', ['$scope', '$window', 'Camere', function($scope, $wi
         var id = $scope.camere_dispozitive[indexParent]['dispozitive'][index]['id_dispozitiv'];
         switch (tip) {
             case 'masina_de_spalat': $window.location.href = "http://" + $window.location.host + "/washing_machine/" + id; break;
+            case 'frigider': $window.location.href = "http://" + $window.location.host + "/refrigerator/" + id; break;
+            case 'sistem_de_iluminat': $window.location.href = "http://" + $window.location.host + "/lights/" + id; break;
 
         }
     }
@@ -63,34 +65,109 @@ app.controller('pag', ['$scope', function($scope) {
 }]);
 
 
-app.controller('washing-machine',['$scope', '$location', 'WashingMachine', function($scope, $location, WashingMachine) {
+app.controller('washing-machine',['$scope', '$location', '$interval', 'WashingMachine', function($scope, $location, $interval, WashingMachine) {
     var id = $location.absUrl().split('/')[4];
+    /*var getDiferences = function(result) {
+        console.log($scope.data,result)
+        if($scope.data.length == 0) {
+            $scope.data =  result;
+        }
+        if($scope.data['nr_rotatii'] != result['nr_rotatii']){
+            $scope.data['nr_rotatii'] = result['nr_rotatii'];
+        }
+
+        if($scope.data['temperatura'] != result['temperatura']){
+            $scope.data['temperatura'] = result['temperatura'];
+        }
+        if($scope.data['program'] != result['program']){
+            $scope.data['program'] = result['program'];
+        }
+    }*/
     $scope.data = {}
     $scope.stare = true;
     $scope.list = [{name:'normal', value:'normal'},{name:'matase', value:'matase'}];
-    WashingMachine.get_one(id)
-    .success(function(result) {
-        
-        $scope.data = result;
-        if(result['stare'] == 0)
-            $scope.stare = false;
-        else
-            $scope.stare = true;
-        console.log(result['stare']);
-    })
-    .error(function(error) {
-        console.log(error);
-    });
+    var getData = function () {
+        WashingMachine.get_one(id)
+        .success(function(result) {
+            $scope.data = result;
+            if(result['stare'] == 0)
+                $scope.stare = false;
+            else
+                $scope.stare = true;
+            console.log(result['stare']);
+        })
+        .error(function(error) {
+            console.log(error);
+        });
+    }
+    getData();
+    $interval(getData,5000);
 
     $scope.change = function() {
         return {tip:"masina_spalat", id:id};
     }
     //console.log()
+}]);
+
+app.controller('refrigerator',['$scope', '$location', '$interval', 'Refrigerator', function($scope, $location, $interval, Refrigerator) {
+    var id = $location.absUrl().split('/')[4];
+    $scope.data = {}
+    $scope.stare = true;
+    var getData = function() {
+        console.log("da");    
+        Refrigerator.get_one(id)
+        .success(function(result) {
+            $scope.data = result;
+            if(result['stare'] == 0)
+                $scope.stare = false;
+            else
+                $scope.stare = true;
+            console.log($scope.data);
+        })
+        .error(function(error) {
+            console.log(error);
+        })
+    };
+    getData()
+    $interval(getData,5000);
+
+    $scope.changeRefrigerator = function() {
+        return {tip:"frigider", id:id, field:'refrigerator'};
+    }
+    $scope.changeFreezer = function() {
+        return {tip:"frigider", id:id, field:'con'};
+    }
+    //console.log()
 }])
 
+app.controller('lights',['$scope', '$location', '$interval', 'Lights', function($scope, $location, $interval, Lights) {
+    var id = $location.absUrl().split('/')[4];
+    $scope.data = {}
+    $scope.stare = true;
+    var getData = function() {
+        console.log("da");    
+        Lights.get_one(id)
+        .success(function(result) {
+            $scope.data = result;
+            if(result['stare'] == 0)
+                $scope.stare = false;
+            else
+                $scope.stare = true;
+            console.log($scope.data);
+        })
+        .error(function(error) {
+            console.log(error);
+        })
+    };
+    getData()
+    $interval(getData,5000);
 
-var directiveModule = angular.module('directives',[]);
-
+    $scope.changeLights = function() {
+        return {tip:"sistem_de_iluminat", id:id};
+    }
+    
+    //console.log()
+}])
 
 app.controller('add-device',['$scope', function($scope) {
    $scope.list=[{name:'Refrigerator',value:'device1'}, {name:'TV',value:'device1'}];

@@ -11,6 +11,11 @@
         </div>
     </div>
     
+    <div ng-show="!state" class="off-state">
+        <i class="fa fa-frown-o fa-5x " aria-hidden="true"></i>
+        <div>Senzor off</div>
+    </div>
+
     <div class="lightsI-card-icons">
             <div ng-show="clicked" class="animate-show">
                 <i class="fa" ng-class="{'fa-thumbs-up':success, 'fa-thumbs-down':!success}" aria-hidden="true"></i>
