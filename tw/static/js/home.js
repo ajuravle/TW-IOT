@@ -56,6 +56,7 @@ app.controller('left-menu', ['$scope', '$window', 'Camere', function($scope, $wi
             case 'sistem_de_iluminat': $window.location.href = "http://" + $window.location.host + "/lights/" + id; break;
             case 'televizor': $window.location.href = "http://" + $window.location.host + "/tv/" + id; break;
             case 'cafetiera': $window.location.href = "http://" + $window.location.host + "/coffee_maker/" + id; break;
+            case 'termostat': $window.location.href = "http://" + $window.location.host + "/thermostat/" + id; break;
 
         }
     }
@@ -205,6 +206,65 @@ app.controller('tv',['$scope', '$location', '$interval', 'TV', function($scope, 
     
     $scope.changeTV = function() {
         return {tip:"televizor", id:id};
+    }
+    
+    //console.log()
+}])
+
+app.controller('coffee-maker',['$scope', '$location', '$interval', 'CoffeeMaker', function($scope, $location, $interval, CoffeeMaker) {
+    var id = $location.absUrl().split('/')[4];
+    $scope.data = {}
+    $scope.stare = true;
+    $scope.list = [{name:'normal', value:'normal'},{name:'cappuccino', value:'cappuccino'}];
+    var getData = function() {
+        console.log("da");    
+        CoffeeMaker.get_one(id)
+        .success(function(result) {
+            $scope.data = result;
+            if(result['stare'] == 0)
+                $scope.stare = false;
+            else
+                $scope.stare = true;
+            console.log($scope.data);
+        })
+        .error(function(error) {
+            console.log(error);
+        })
+    };
+    getData()
+    $interval(getData,5000);
+
+    $scope.changeCoffeeMaker = function() {
+        return {tip:"cafetiera", id:id, field:'coffee_maker'};
+    }
+    
+    //console.log()
+}])
+
+app.controller('thermostat',['$scope', '$location', '$interval', 'Thermostat', function($scope, $location, $interval, Thermostat) {
+    var id = $location.absUrl().split('/')[4];
+    $scope.data = {}
+    $scope.stare = true;
+    var getData = function() {
+        console.log("da");    
+        Thermostat.get_one(id)
+        .success(function(result) {
+            $scope.data = result;
+            if(result['stare'] == 0)
+                $scope.stare = false;
+            else
+                $scope.stare = true;
+            console.log($scope.data);
+        })
+        .error(function(error) {
+            console.log(error);
+        })
+    };
+    getData()
+    $interval(getData,5000);
+
+    $scope.changeThermostat = function() {
+        return {tip:"termostat", id:id, field:'thermostat'};
     }
     
     //console.log()

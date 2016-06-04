@@ -53,3 +53,23 @@ servicesModule.service('TV',['$http', function($http) {
         return $http.get('/api/canal/'+id);
     }
 }]);
+
+servicesModule.service('CoffeeMaker',['$http', function($http) {
+
+    this.get_one = function(id) {
+        return $http.get('/api/cafetiera/' + id);
+    }
+    this.put = function(id, body) {
+        return $http.put('/api/cafetiera/' + id, body);
+    }
+}]);
+
+servicesModule.service('Thermostat',['$http', function($http) {
+
+    this.get_one = function(id) {
+        return $http.get('/api/termostat/' + id);
+    }
+    this.put = function(id, body) {
+        return $http.put('/api/termostat/' + id, body);
+    }
+}]);
