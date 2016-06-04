@@ -151,7 +151,7 @@ directiveModule.directive('itemCard', function() {
         scope: {
             state: '=',
             list: '=',
-            title: '=',
+            title: '@',
             id: '@',
             details: '@',
             icon: '@',
@@ -218,7 +218,7 @@ directiveModule.directive('itemCard3', function() {
         scope: {
             state: '=',
             list: '=',
-            title: '=',
+            title: '@',
             id: '@',
             icon: '@',
             item: '=',
