@@ -8,17 +8,17 @@
         <div class="row" >
         
             <div class="col-md-6">
-               <temperature value="<% data.temperatura %>" id="buna" state="true" title="Temperature" range-text="Temperature: 20 to 90" edit="change()"></temperature>
+               <temperature value="<% data.temperatura %>" id="buna" state="stare" title="Temperature" range-text="Temperature: 20 to 90" edit="change()"></temperature>
             </div>
 
             <div class="col-md-6"> 
-               <rotations value="<% data.nr_rotatii %>" id="bunaa" state="true" title="Rotations" range-text="Rotations: 600 to 1600 rpm" edit="change()"></rotations>
+               <rotations value="<% data.nr_rotatii %>" id="bunaa" state="stare" title="Rotations" range-text="Rotations: 600 to 1600 rpm" edit="change()"></rotations>
             </div>
         </div> 
     
         <div class="row" >
             <div class="col-md-6"> 
-               <item-card  title="Program" id='id' state='true' edit='edit()' list="list" item = " data.program " icon="fa-bars"></item-card>
+               <item-card  title="Program" id='id' state='stare' edit='change()' list="list" item = " data.program " icon="fa-bars"></item-card>
             </div>
             
             <div class="col-md-6">

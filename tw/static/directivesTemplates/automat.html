@@ -1,0 +1,21 @@
+<div class="col-md-12 automat-card">
+    <div class="automat-card-title"><% title %></div>
+    <div ng-show="state">
+        <div class="automat-slider">
+            <span class="automat-label"><% rangeText %></span>
+        </div>
+    </div>
+   
+    <div ng-show="!state" class="offf-state">
+        <div class="ceva">Automat settings are now activated</div>
+    </div>
+        
+        <div class="automat-card-icons">
+            <div ng-show="clicked" class="animate-show">
+                <i class="fa" aria-hidden="true"></i>
+            </div>
+            <div class="automat-icons">
+                <i class="fa fa-power-off fa-lg" ng-class="state" aria-hidden="true"  ng-click="editStAutomat()"></i>
+            </div>
+        </div>
+</div>
