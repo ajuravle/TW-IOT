@@ -330,44 +330,37 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 /*---ceas---*/
+div.box span.clock-labeel {
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    text-align: left;
+    padding: 0px 0px 10px 0px;
+    display: block;
+    
+}
+div.box{
+    width:200px;
+    height: 150px;
+    box-shadow: none;
+    position: relative;
+    display: block;
+    padding-left: 10%;
+    
+}
 
-.clock-item .inner {
-height: 0px;
-padding-bottom: 100%;
-position: relative;
-width: 100%;
+div.box  input[type="hour"],input[type="minutes"]{
+    box-shadow: none;
+    font-size: 20px;
+    display: inline;
+    width: 30%;
+    height: 40px;
+    text-align: center;
+    top: 30px;
+    border: none;
+    background: rgba(211,197,200,0.5);   
 }
-.clock-canvas {
-background-color: rgba(255, 255, 255, .1);
-border-radius: 50%;
-height: 0px;
-padding-bottom: 100%;
-}
-.text {
-color: #fff;
-font-size: 30px;
-margin-top: -50px;
-position: absolute;
-top: 50%;
-text-align: center;
-text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
-width: 100%;
-}
-.text .val {
-font-size: 20px;
-}
-.text .type-time {
-font-size: 20px;
-}
- @media (min-width: 768px) and (max-width: 991px) {
-.clock-item {
-margin-bottom: 30px;
-}
-}
- @media (max-width: 767px) {
-.clock-item {
-margin: 0px 30px 30px 30px;
-}
+div.box  input[type="hour"]:focus, input[type="minutes"]:focus{
+    outline: none;
 }
 /*---------------------------------------------------------*/
 
