@@ -7,7 +7,7 @@ directiveModule.config(['$interpolateProvider', function($interpolateProvider){
 
 
 directiveModule.directive('temperature', function() {
-    var controller = function($scope, $timeout, WashingMachine, Refrigerator) {
+    var controller = function($scope, $timeout, WashingMachine, Refrigerator,CoffeeMaker) {
         $scope.clicked = false;
         $scope.editTemperature = function() {
             $scope.clicked = true;
@@ -24,6 +24,9 @@ directiveModule.directive('temperature', function() {
                     } else {
                         result = Refrigerator.put(aux["id"],{temperatura_congelator:parseInt($scope.value, 10)})
                     }
+                    break;
+                case 'cafetiera': 
+                    result = CoffeeMaker.put(aux["id"],{zahar:parseInt($scope.value, 10)})
                     break;
             };
             result.
@@ -53,6 +56,9 @@ directiveModule.directive('temperature', function() {
                     break;
                 case 'frigider':
                     result = Refrigerator.put(aux["id"],{stare:$scope.state? 1 : 0})
+                    break;
+                case 'cafetiera':
+                    result = CoffeeMaker.put(aux["id"],{stare:$scope.state? 1 : 0})
                     break;
             }
             result .success(function() {
@@ -132,7 +138,7 @@ directiveModule.directive('rotations', function() {
 });
 
 directiveModule.directive('itemCard', function() {
-    var controller = function($scope, $timeout, WashingMachine) {
+    var controller = function($scope, $timeout, WashingMachine,CoffeeMaker) {
         
         $scope.clicked = false;
         $scope.editProgram = function() {
@@ -142,6 +148,18 @@ directiveModule.directive('itemCard', function() {
                 case 'masina_spalat':
                     console.log($scope);
                     WashingMachine.put(aux["id"],{program:$scope.item})
+                    .success(function() {
+                        $scope.success = true;
+                        $scope.feedback = "Success";
+                    })
+                    .error(function(){
+                        $scope.success = false;
+                        $scope.feedback = "Api error";
+
+                    }); break;
+                case 'cafetiera':
+                    console.log($scope);
+                    CoffeeMaker.put(aux["id"],{tip:$scope.item})
                     .success(function() {
                         $scope.success = true;
                         $scope.feedback = "Success";
@@ -303,6 +321,9 @@ directiveModule.directive('clock', function() {
             state: '=',
             list: '=',
             title: '@',
+            rangeText: '@',
+            hour: '@',
+            minn: '@',
             id: '@',
             details: '@',
             icon: '@',
@@ -669,13 +690,25 @@ directiveModule.directive('textLightsDetails', function() {
 /* directive pentru thermostat*/
 
 directiveModule.directive('temp', function() {
-    var controller = function($scope, $timeout) {
+    var controller = function($scope, $timeout,Thermostat) {
         console.log("clume");
         $scope.clicked = false;
         $scope.editThermostat = function() {
             $scope.clicked = true;
             $scope.success = false;
-            $scope.feedback = "Success";
+
+            details=$scope.edit();
+            Thermostat.put(details['id'],{temperatura:parseInt($scope.value,10)})
+            .success(function(){
+                $scope.success=true;
+                $scope.feedback="Success";
+            })
+            .error(function(){
+                $scope.success=false;
+                $scope.feedback="Api error";
+            })
+
+
 
             $timeout(function() {
                 $scope.clicked = false;
@@ -688,6 +721,17 @@ directiveModule.directive('temp', function() {
             $scope.state = !$scope.state;
             $scope.feedback = "Set on";
 
+            details=$scope.edit();
+            Thermostat.put(details['id'],{stare:$scope.state?1:0})
+            .success(function(){
+                $scope.success=true;
+                $scope.feedback="Success";
+            })
+            .error(function(){
+                $scope.success=false;
+                $scope.feedback="Api error";
+            })
+
             $timeout(function() {
                 $scope.clicked = false;
             },1000);
@@ -698,7 +742,7 @@ directiveModule.directive('temp', function() {
         restrict: 'E',
         scope: {
             value: '@',
-            state: '@',
+            state: '=',
             id: '@',
             title: '@',
             rangeText: '@',
