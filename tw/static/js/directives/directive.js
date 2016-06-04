@@ -880,9 +880,6 @@ directiveModule.directive('adminTable', function() {
             }
         });
 
-       
-
-
     };
     return {
         restrict: 'E',
@@ -896,5 +893,43 @@ directiveModule.directive('adminTable', function() {
         },
         templateUrl: '/static/directivesTemplates/adminTables.html',
         controller: controller
+    };
+});
+
+directiveModule.directive('textRefrigeratorDetails', function() {
+    var controller = function($scope, $timeout) {
+        console.log($scope);
+
+    };
+    return {
+        restrict: 'E',
+        scope: {
+            value: '@',
+            state: '@',
+            id: '@',
+            title: '@',
+            rangeText: '@',
+            edit: '&'
+        },
+        templateUrl: '/static/directivesTemplates/textRefrigerator.html',
+    };
+});
+
+directiveModule.directive('textCoffeeDetails', function() {
+    var controller = function($scope, $timeout,ActivitateCafetiera) {
+        ActivitateCafetiera.getInfo()
+        console.log(result,"<-----");
+    };
+    return {
+        restrict: 'E',
+        scope: {
+            value: '@',
+            state: '@',
+            id: '@',
+            title: '@',
+            rangeText: '@',
+            edit: '&'
+        },
+        templateUrl: '/static/directivesTemplates/textCoffee.html',
     };
 });

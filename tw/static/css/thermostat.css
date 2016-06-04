@@ -215,3 +215,39 @@ input[type="range"]::-webkit-slider-thumb {
 .row{
     width: 1050px;
 }
+
+.text-refrigerator {
+    background-color: #4DB6AC;
+    min-height: 610px;
+    min-width: 100%;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    margin: auto;
+    text-align: left;
+    top:5px;
+}
+
+.text-refrigerator-title {
+    font-size: 20px;
+    padding: 24px;
+    padding-left: 10%;
+}
+
+.text-coffee {
+    background-color: #4DB6AC;
+    min-height: 610px;
+    min-width: 100%;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    margin: auto;
+    text-align: left;
+    top:5px;
+}
+
+.text-coffee-title {
+    font-size: 20px;
+    padding: 24px;
+    padding-left: 10%;
+}
