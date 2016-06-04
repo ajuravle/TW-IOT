@@ -1,0 +1,224 @@
+.animate-show {
+  opacity: 1;
+}
+
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+  transition: all linear 0.5s;
+}
+
+.animate-show.ng-hide {
+  opacity: 0;
+}
+
+.lights-card {
+    background-color: #5E35B1;
+    min-height: 300px;
+    min-width: 100%;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    
+}
+
+.lights-card-title {
+    font-size: 20px;
+    padding: 24px;
+    padding-left: 10%;
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+    background-color: white;
+    width: 80%;
+    height:1px;
+}
+input[type=range]:focus {
+  outline: none; 
+}
+
+input[type=range]:hover {
+    height: 3px;
+    -webkit-appearance: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background-color: white;
+    width: 16px;
+    height: 16px;
+    border-radius: 20px;
+}
+
+.lights-card-icons {
+    color: white;
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+}
+
+.lights-card-icons .lights-icons {
+    border-top:1px solid white;
+    padding-left: 60px !important;
+    padding-top: 6px;
+}
+
+.lights-card-icons .fa-check {
+    padding-left: 12px !important;
+}
+
+.off-state {
+    position: absolute;
+    top: 35%;
+    left: 40%;
+}
+
+.lights-card-icons .fa-check:hover,  .lights-card-icons .fa-power-off:hover{
+    color: #99CCFF;
+    cursor: pointer;
+}
+
+.lights-slider > input[type="range"] {
+    box-shadow: none;
+    display: block;
+    margin: auto;
+}
+
+
+.lights-slider div {
+    position: absolute;
+    width: 50%;
+    margin-top: 30px;
+    margin-left: 20%;
+
+}
+.lights-slider .lights-label {
+    
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    text-align: left;
+    padding: 12px 0px 6px 12px;
+    display: block;
+    background: rgba(26,35,126, 0.5);
+}
+
+.lights-slider  input[type="number"]{
+    font-size: 50px;
+    display: block;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    border: none;
+    box-shadow: none;
+    background: rgba(26,35,126, 0.5);   
+}
+.lights-slider  input[type="number"]:focus {
+    outline: none;
+}
+
+/*-------------------------------------------------------------------*/
+
+.lightsI-card{
+    background-color: #4DB6AC;
+    min-height: 300px;
+    min-width: 100%;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    margin: auto;
+}
+
+.lightsI-card-title {
+    font-size: 20px;
+    padding: 24px;
+    padding-left: 10%;
+}
+
+.lightsI-card-icons {
+    color: white;
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+}
+
+.lightsI-card-icons .lightsI-icons {
+    border-top:1px solid white;
+    padding-left: 60px !important;
+    padding-top: 6px;
+}
+
+.lightsI-card-icons .fa-check {
+    padding-left: 12px !important;
+}
+
+.lightsI-card-icons .fa-check:hover{
+    color: #E53935;
+    cursor: pointer;
+}
+.lightsI-slider > input[type="range"] {
+    box-shadow: none;
+    display: block;
+    margin: auto;
+}
+
+
+.lightsI-slider div {
+    box-shadow: none;
+    position: absolute;
+    width: 50%;
+    margin-top: 30px;
+    margin-left: 20%;
+}
+.lightsI-slider .lightsI-label {
+    
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    text-align: left;
+    padding: 12px 0px 6px 12px;
+    display: block;
+    background: rgba(26,35,126, 0.5);
+}
+
+.lightsI-slider  input[type="number"]{
+    box-shadow: none;
+    font-size: 50px;
+    display: block;
+    width: 100%;
+    height: 94px;
+    text-align: center;
+    border: none;
+    background: rgba(26,35,126, 0.5);   
+}
+.lightsI-slider  input[type="number"]:focus {
+    outline: none;
+}
+/*-------------------------------------------------------------------*/
+.text-lights {
+    background-color: #66CCFF;
+    min-height: 610px;
+    min-width: 100%;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    margin: auto;
+    text-align: left;
+    top:5px;
+}
+
+.text-lights-title {
+    font-size: 20px;
+    padding: 24px;
+    padding-left: 10%;
+}
+
+.sec {
+    width:600px;
+    float:left;
+}
+
+.sec .row{
+    width: 615px;
+    padding: 5px;
+}
+
+.row{
+    width: 1050px;
+}

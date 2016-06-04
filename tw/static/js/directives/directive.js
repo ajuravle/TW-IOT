@@ -1,4 +1,4 @@
-var directiveModule = angular.module('directives',[]);
+var directiveModule = angular.module('directives',['services']);
 
 directiveModule.config(['$interpolateProvider', function($interpolateProvider){
     $interpolateProvider.startSymbol('<%');
@@ -7,12 +7,25 @@ directiveModule.config(['$interpolateProvider', function($interpolateProvider){
 
 
 directiveModule.directive('temperature', function() {
-    var controller = function($scope, $timeout) {
+    var controller = function($scope, $timeout, WashingMachine) {
         $scope.clicked = false;
         $scope.editTemperature = function() {
             $scope.clicked = true;
-            $scope.success = false;
-            $scope.feedback = "Success";
+
+            aux = $scope.edit();
+            switch (aux["tip"]) {
+                case 'masina_spalat': 
+                    WashingMachine.put(aux["id"],{temperatura:parseInt($scope.value, 10)})
+                    .success(function() {
+                        $scope.success = true;
+                        $scope.feedback = "Success";
+                    })
+                    .error(function(){
+                        $scope.success = false;
+                        $scope.feedback = "Api error";
+
+                    }); break;
+            }
 
             $timeout(function() {
                 $scope.clicked = false;
@@ -48,15 +61,27 @@ directiveModule.directive('temperature', function() {
     };
 });
 
+
 directiveModule.directive('rotations', function() {
-    var controller = function($scope, $timeout) {
+    var controller = function($scope, $timeout, WashingMachine) {
        // console.log($scope);
          $scope.clicked = false;
         $scope.editRotations = function() {
             $scope.clicked = true;
-            $scope.success = false;
-            $scope.feedback = "Success";
+            aux = $scope.edit();
+            switch (aux["tip"]) {
+                case 'masina_spalat': 
+                    WashingMachine.put(aux["id"],{nr_rotatii:parseInt($scope.value, 10)})
+                    .success(function() {
+                        $scope.success = true;
+                        $scope.feedback = "Success";
+                    })
+                    .error(function(){
+                        $scope.success = false;
+                        $scope.feedback = "Api error";
 
+                    }); break;
+            }
             $timeout(function() {
                 $scope.clicked = false;
 
@@ -82,7 +107,7 @@ directiveModule.directive('rotations', function() {
 directiveModule.directive('itemCard', function() {
     var controller = function($scope, $timeout) {
         
-        //console.log($scope);
+        console.log("itemcard",$scope, $scope.item);
         $scope.clicked = false;
         $scope.editProgram = function() {
             $scope.clicked = true;
@@ -101,10 +126,11 @@ directiveModule.directive('itemCard', function() {
         scope: {
             state: '=',
             list: '=',
-            title: '@',
+            title: '=',
             id: '@',
             details: '@',
             icon: '@',
+            item: '=',
             edit: '&'
         },
         templateUrl: '/static/directivesTemplates/itemcarddropdown.html',
@@ -136,10 +162,10 @@ directiveModule.directive('dropdown', function() {
     require: 'ngModel',
     scope: {
         list: '=',
-        title: '@'
+        title: '='
     },
     controller: function($scope) {
-        console.log("drop aici");
+        console.log('drop',$scope);
         $scope.dropped = false;
         $scope.selectItem = function(index) {
             console.log(index);
@@ -158,20 +184,33 @@ directiveModule.directive('dropdown', function() {
 
 directiveModule.directive('clock', function() {
     var controller = function($scope, $timeout) {
-        console.log($scope);
+        //console.log($scope);
+        $scope.clicked = false;
+        $scope.editClock = function() {
+            $scope.clicked = true;
+            $scope.success = false;
+            $scope.feedback = "Success";
+
+            $timeout(function() {
+                $scope.clicked = false;
+
+            },1000);
+        };
     };
 
     return {
         restrict: 'E',
         scope: {
-            value: '@',
-            state: '@',
-            id: '@',
+            state: '=',
+            list: '=',
             title: '@',
-            rangeText: '@',
+            id: '@',
+            details: '@',
+            icon: '@',
             edit: '&'
         },
         templateUrl: '/static/directivesTemplates/clock.html',
+        controller: controller
     };
 });
 
@@ -193,6 +232,10 @@ directiveModule.directive('textDetails', function() {
         templateUrl: '/static/directivesTemplates/text.html',
     };
 });
+
+
+
+/* directive pentru tv*/
 
 directiveModule.directive('volume', function() {
     var controller = function($scope, $timeout) {
@@ -351,3 +394,94 @@ directiveModule.directive('channel', function() {
 });
 
 
+/* directive pentru tv*/
+
+directiveModule.directive('nrBulbs', function() {
+    var controller = function($scope, $timeout) {
+        console.log("clume");
+        $scope.clicked = false;
+        $scope.editNrBulbs = function() {
+            $scope.clicked = true;
+            $scope.success = false;
+            $scope.feedback = "Success";
+
+            $timeout(function() {
+                $scope.clicked = false;
+
+            },1000);
+        };
+
+        $scope.editStateLights = function() {
+            $scope.clicked = true;
+            $scope.state = !$scope.state;
+            $scope.feedback = "Set on";
+
+            $timeout(function() {
+                $scope.clicked = false;
+            },1000);
+        };
+    };
+
+    return {
+        restrict: 'E',
+        scope: {
+            value: '@',
+            state: '@',
+            id: '@',
+            title: '@',
+            rangeText: '@',
+            edit: '&'
+        },
+        templateUrl: '/static/directivesTemplates/bulbs.html',
+        controller: controller
+    };
+});
+
+directiveModule.directive('lightIntensity', function() {
+    var controller = function($scope, $timeout) {
+       // console.log($scope);
+         $scope.clicked = false;
+        $scope.editIntensity = function() {
+            $scope.clicked = true;
+            $scope.success = false;
+            $scope.feedback = "Success";
+
+            $timeout(function() {
+                $scope.clicked = false;
+
+            },1000);
+        };
+    };
+
+    return {
+        restrict: 'E',
+        scope: {
+            value: '@',
+            state: '@',
+            id: '@',
+            title: '@',
+            rangeText: '@',
+            edit: '&'
+        },
+        templateUrl: '/static/directivesTemplates/lightIntensity.html',
+        controller: controller
+    };
+});
+
+directiveModule.directive('textLightsDetails', function() {
+    var controller = function($scope, $timeout) {
+        console.log($scope);
+    };
+    return {
+        restrict: 'E',
+        scope: {
+            value: '@',
+            state: '@',
+            id: '@',
+            title: '@',
+            rangeText: '@',
+            edit: '&'
+        },
+        templateUrl: '/static/directivesTemplates/textLights.html',
+    };
+});

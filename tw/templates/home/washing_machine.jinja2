@@ -1,24 +1,24 @@
 {% extends "tw:templates/home/layout.jinja2" %}
 {% block content %}
 <body onload="CoolClock.findAndCreateClocks()">
-<div class="row" ng-controller="pag">
+<div class="row" ng-controller="washing-machine">
     
     <div class="col-md-8">
      <section>  
-        <div class="row" ng-controller="pag">
+        <div class="row" >
         
             <div class="col-md-6">
-               <temperature value="20" id="buna" state="true" title="Temperature" range-text="Temperature: 20 to 90"></temperature>
+               <temperature value="<% data.temperatura %>" id="buna" state="true" title="Temperature" range-text="Temperature: 20 to 90" edit="change()"></temperature>
             </div>
 
             <div class="col-md-6"> 
-               <rotations value="600" id="bunaa" state="true" title="Rotations" range-text="Rotations: 600 to 1600 rpm"></rotations>
+               <rotations value="<% data.nr_rotatii %>" id="bunaa" state="true" title="Rotations" range-text="Rotations: 600 to 1600 rpm" edit="change()"></rotations>
             </div>
         </div> 
     
-        <div class="row" ng-controller="pag">
+        <div class="row" >
             <div class="col-md-6"> 
-               <item-card rotations='10' title="Program" id='id' state='true' edit='edit()' list="list" programMenu="ProgramMasinaSpalat" icon="fa-bars"></item-card>
+               <item-card  title="Program" id='id' state='true' edit='edit()' list="list" item = " data.program " icon="fa-bars"></item-card>
             </div>
             
             <div class="col-md-6">

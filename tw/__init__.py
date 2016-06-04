@@ -28,7 +28,7 @@ def main(global_config, **settings):
     config.add_route("login", '/login')
     config.add_route("logout", "/logout")
     config.add_route("home", '/home')
-    config.add_route("washing_machine", '/washing_machine')
+    config.add_route("washing_machine", '/washing_machine/{}')
 
     config.add_route("tv", '/tv')
 
@@ -69,6 +69,7 @@ def main(global_config, **settings):
     config.add_route("user_one", "/api/user/{id}")
 
     config.add_route("refrigerator", '/refrigerator')
+    config.add_route("lights", '/lights')
     config.add_route("coffee_maker", '/coffee_maker')
 
     config.scan()
