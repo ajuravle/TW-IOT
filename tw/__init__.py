@@ -69,6 +69,7 @@ def main(global_config, **settings):
     config.add_route("user_one", "/api/user/{id}")
 
     config.add_route("refrigerator", '/refrigerator')
+    config.add_route("coffee_maker", '/coffee_maker')
 
     config.scan()
     return config.make_wsgi_app()
