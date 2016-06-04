@@ -194,6 +194,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 .dropdown-menu {
     color:black;
+    width: 100% !important;
 }
 
 
@@ -205,9 +206,9 @@ input[type="range"]::-webkit-slider-thumb {
 
 .dropdown-item:hover {
     white-space: normal;
-    min-width: 261px;
     cursor: pointer;
     background: #EEEEEE;
+    width: 100%;
 }
 
 

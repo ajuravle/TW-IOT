@@ -8,15 +8,15 @@
         <div class="row" ng-controller="pag">
         
             <div class="col-md-12">
-               <temperature value="-10" id="buna" state="true" title="Refrigerator temperature" range-text="Temperature: -30 to 0" min=-30 max=0></temperature>
+               <temperature value="5" id="buna" state="true" title="Sugar" range-text="Sugar: 0 to 10" min=0 max=10></temperature>
             </div>
     
         </div> 
 
         <div class="row" ng-controller="pag">
         
-            <div class="col-md-12">
-               <temperature value="-30" id="buna" state="true" title="Freezer temperature" range-text="Temperature: -50 to 0" min=-30 max=0></temperature>
+            <div class="col-md-12"> 
+               <item-card rotations='10' title="Coffee type" id='id' state='true' edit='edit()' list="list" programMenu="TipuriCafea" icon="fa-bars"></item-card>
             </div>
     
         </div> 
@@ -25,7 +25,7 @@
     </div>
    
     <div class="col-md-4">
-        <text-details value="100" id="bu" state="true" title="Refrigerator details"</text-details>
+        <text-details value="100" id="bu" state="true" title="Coffee maker details"</text-details>
     </div>
 </div>
 {% endblock %}
