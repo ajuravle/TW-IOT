@@ -126,7 +126,7 @@ directiveModule.directive('itemCard', function() {
         scope: {
             state: '=',
             list: '=',
-            title: '=',
+            title: '@',
             id: '@',
             details: '@',
             icon: '@',
@@ -162,7 +162,7 @@ directiveModule.directive('dropdown', function() {
     require: 'ngModel',
     scope: {
         list: '=',
-        title: '='
+        title: '@'
     },
     controller: function($scope) {
         console.log('drop',$scope);
