@@ -1,22 +1,22 @@
 {% extends "tw:templates/home/layout.jinja2" %}
 {% block content %}
  <link href="{{ request.static_url('tw:static/css/thermostat.css') }}" rel="stylesheet">
-<div class="row" ng-controller="pag">
+<div class="row" ng-controller="thermostat">
 
                
     <div class="col-md-7">
      <section class="sec"> 
 
 
-        <div class="row" ng-controller="pag">
+        <div class="row">
             <div class="col-md-12">
-               <temp value="20" id="nnaa" state="true" title="Temperature" range-text="Temperature: 10 to 35"></temp>
+               <temp value="<%data.temperatura%>" id="nnaa" state="stare" edit="changeThermostat()" title="Temperature" range-text="Temperature: 10 to 35"></temp>
             </div>       
         </div> 
     
-        <div class="row" ng-controller="pag">
+        <div class="row">
              <div class="col-md-12"> 
-               <automat value="20" id="caa" state="true" title="Automat settings" range-text="The automat settings are dezactivated"></automat>
+               <automat id="caa" state="<%stare%>" title="Automat settings" range-text="The automat settings are dezactivated"></automat>
             </div>
         </div> 
      

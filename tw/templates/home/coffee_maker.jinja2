@@ -1,22 +1,22 @@
 {% extends "tw:templates/home/layout.jinja2" %}
 {% block content %}
 <link href="{{ request.static_url('tw:static/css/washing_machine.css') }}" rel="stylesheet">
-<div class="row" ng-controller="pag">
+<div class="row" ng-controller="coffee-maker">
     
     <div class="col-md-8">
      <section>  
-        <div class="row" ng-controller="pag">
+        <div class="row">
         
             <div class="col-md-12">
-               <temperature value="5" id="buna" state="true" title="Sugar" range-text="Sugar: 0 to 10" min=0 max=10></temperature>
+               <temperature value="<%data.zahar%>" id="buna" state="stare" edit="changeCoffeeMaker()" title="Sugar" range-text="Sugar: 0 to 10" min=0 max=10></temperature>
             </div>
     
         </div> 
 
-        <div class="row" ng-controller="pag">
+        <div class="row">
         
             <div class="col-md-12"> 
-               <item-card rotations='10' title="Coffee type" id='id' state='true' edit='edit()' list="list" programMenu="TipuriCafea" icon="fa-bars"></item-card>
+               <item-card title="Coffee type" id='id' state='stare' edit="changeCoffeeMaker()" item = "<%data.tip %> "list="list" programMenu="TipuriCafea" icon="fa-bars"></item-card>
             </div>
     
         </div> 
