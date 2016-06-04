@@ -1,0 +1,30 @@
+{% extends "tw:templates/home/layout.jinja2" %}
+{% block content %}
+
+<div class="row" ng-controller="pag">
+
+               
+    <div class="col-md-7">
+     <section class="sec"> 
+
+
+        <div class="row" ng-controller="pag">
+            <div class="col-md-12">
+               <temp value="20" id="nnaa" state="true" title="Temperature" range-text="Temperature: 10 to 35"></temp>
+            </div>       
+        </div> 
+    
+        <div class="row" ng-controller="pag">
+             <div class="col-md-12"> 
+               <automat value="20" id="caa" state="true" title="Automat settings" range-text="The automat settings are dezactivated"></automat>
+            </div>
+        </div> 
+     
+     </section>
+    </div>
+   
+    <div class="col-md-5">
+        <text-therm-details value="111" id="rruu" state="true" title="Thermostat details"</text-therm-details>
+    </div>
+</div>
+{% endblock %}

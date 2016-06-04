@@ -72,6 +72,7 @@ def main(global_config, **settings):
 
     config.add_route("refrigerator", '/refrigerator')
     config.add_route("lights", '/lights')
+    config.add_route("thermostat", '/thermostat')
 
 
     config.scan()

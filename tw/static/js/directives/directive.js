@@ -460,3 +460,105 @@ directiveModule.directive('textLightsDetails', function() {
         templateUrl: '/static/directivesTemplates/textLights.html',
     };
 });
+
+/* directive pentru thermostat*/
+
+directiveModule.directive('temp', function() {
+    var controller = function($scope, $timeout) {
+        console.log("clume");
+        $scope.clicked = false;
+        $scope.editThermostat = function() {
+            $scope.clicked = true;
+            $scope.success = false;
+            $scope.feedback = "Success";
+
+            $timeout(function() {
+                $scope.clicked = false;
+
+            },1000);
+        };
+
+        $scope.editStateTherm = function() {
+            $scope.clicked = true;
+            $scope.state = !$scope.state;
+            $scope.feedback = "Set on";
+
+            $timeout(function() {
+                $scope.clicked = false;
+            },1000);
+        };
+    };
+
+    return {
+        restrict: 'E',
+        scope: {
+            value: '@',
+            state: '@',
+            id: '@',
+            title: '@',
+            rangeText: '@',
+            edit: '&'
+        },
+        templateUrl: '/static/directivesTemplates/tempTherm.html',
+        controller: controller
+    };
+});
+
+directiveModule.directive('automat', function() {
+    var controller = function($scope, $timeout) {
+
+       /* $scope.clicked = false;
+        $scope.editThermostat = function() {
+            $scope.clicked = true;
+            $scope.success = false;
+            $scope.feedback = "Success";
+
+            $timeout(function() {
+                $scope.clicked = false;
+
+            },1000);
+        };*/
+
+        $scope.editStAutomat = function() {
+            $scope.clicked = true;
+            $scope.state = !$scope.state;
+            $scope.feedback = "Set on";
+
+            $timeout(function() {
+                $scope.clicked = false;
+            },1000);
+        };
+    };
+
+    return {
+        restrict: 'E',
+        scope: {
+            value: '@',
+            state: '@',
+            id: '@',
+            title: '@',
+            rangeText: '@',
+            edit: '&'
+        },
+        templateUrl: '/static/directivesTemplates/automat.html',
+        controller: controller
+    };
+});
+
+directiveModule.directive('textThermDetails', function() {
+    var controller = function($scope, $timeout) {
+        console.log($scope);
+    };
+    return {
+        restrict: 'E',
+        scope: {
+            value: '@',
+            state: '@',
+            id: '@',
+            title: '@',
+            rangeText: '@',
+            edit: '&'
+        },
+        templateUrl: '/static/directivesTemplates/textTherm.html',
+    };
+});
