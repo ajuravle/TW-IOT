@@ -12,7 +12,7 @@ app.config(['$interpolateProvider', function($interpolateProvider){
 
 app.controller('left-menu', ['$scope', '$window', 'Camere', function($scope, $window, Camere) {
 
-
+    console.log("menuu");
     $scope.submenu = false;
     var getDispozitive = function(dispozitive) {
         var list = []
@@ -62,7 +62,7 @@ app.controller('pag', ['$scope', function($scope) {
     $scope.list = [{name:"1", value:"1"}, {name:"2", value:"2"}, {name:"3", value:"3"}, {name:"4", value:"4"}];
 }]);
 
-<<<<<<< HEAD
+
 app.controller('washing-machine',['$scope', '$location', 'WashingMachine', function($scope, $location, WashingMachine) {
     var id = $location.absUrl().split('/')[4];
     $scope.data = {}
@@ -81,14 +81,16 @@ app.controller('washing-machine',['$scope', '$location', 'WashingMachine', funct
     }
     //console.log()
 }])
-=======
-var directiveModule = angular.module('directives',[]);
 
-directiveModule.config(['$interpolateProvider', function($interpolateProvider){
-    $interpolateProvider.startSymbol('<%');
-    $interpolateProvider.endSymbol('%>');
-}]);
+app.controller('add-device',['$scope', function($scope) {
+   $scope.list=[{name:'Refrigerator',value:'device1'}, {name:'TV',value:'device1'}];
+    //console.log()
+}])
+
+app.controller('add-device-room',['$scope', function($scope) {
+   $scope.list=[{name:'Kitchen',value:'device1'}, {name:'Bedroom',value:'device1'}];
+    //console.log()
+}])
 
 
->>>>>>> 2e42a4aadb601b391b9a348b6fe037e95c59e711
 
