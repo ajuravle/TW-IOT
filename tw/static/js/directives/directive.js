@@ -7,26 +7,34 @@ directiveModule.config(['$interpolateProvider', function($interpolateProvider){
 
 
 directiveModule.directive('temperature', function() {
-    var controller = function($scope, $timeout, WashingMachine) {
+    var controller = function($scope, $timeout, WashingMachine, Refrigerator) {
         $scope.clicked = false;
-        console.log("temp",$scope);
         $scope.editTemperature = function() {
             $scope.clicked = true;
-
+            var result;
             aux = $scope.edit();
             switch (aux["tip"]) {
                 case 'masina_spalat': 
-                    WashingMachine.put(aux["id"],{temperatura:parseInt($scope.value, 10)})
-                    .success(function() {
-                        $scope.success = true;
-                        $scope.feedback = "Success";
-                    })
-                    .error(function(){
-                        $scope.success = false;
-                        $scope.feedback = "Api error";
-                    }); break;
-            }
+                    result = WashingMachine.put(aux["id"],{temperatura:parseInt($scope.value, 10)})
+                    break;
 
+                case 'frigider': 
+                    if(aux['field']=='refrigerator') {
+                        result = Refrigerator.put(aux["id"],{temperatura_frigider:parseInt($scope.value, 10)})
+                    } else {
+                        result = Refrigerator.put(aux["id"],{temperatura_congelator:parseInt($scope.value, 10)})
+                    }
+                    break;
+            };
+            result.
+            success(function() {
+                $scope.success = true;
+                $scope.feedback = "Success";
+            })
+            .error(function(){
+                $scope.success = false;
+                $scope.feedback = "Api error";
+            });
             $timeout(function() {
                 $scope.clicked = false;
 
@@ -38,19 +46,23 @@ directiveModule.directive('temperature', function() {
             $scope.state = !$scope.state;
             $scope.success = $scope.state;
             aux = $scope.edit();
+            var result;
             switch (aux["tip"]) {
                 case 'masina_spalat':
-
-                    WashingMachine.put(aux["id"],{stare:$scope.state? 1 : 0})
-                    .success(function() {
+                    result = WashingMachine.put(aux["id"],{stare:$scope.state? 1 : 0})
+                    break;
+                case 'frigider':
+                    result = Refrigerator.put(aux["id"],{stare:$scope.state? 1 : 0})
+                    break;
+            }
+            result .success(function() {
                         $scope.success = true;
                         $scope.feedback = "Success";
                     })
                     .error(function(){
                         $scope.success = false;
                         $scope.feedback = "Api error";
-                    }); break;
-            }
+                    });
 
             $timeout(function() {
                 $scope.clicked = false;
@@ -68,6 +80,7 @@ directiveModule.directive('temperature', function() {
             rangeText: '@',
             min: '@',
             max: '@',
+            changeState: '@',
             edit: '&'
         },
         templateUrl: '/static/directivesTemplates/temperature.html',
@@ -126,7 +139,8 @@ directiveModule.directive('itemCard', function() {
             $scope.clicked = true;
             aux = $scope.edit();
             switch (aux["tip"]) {
-                case 'masina_spalat': 
+                case 'masina_spalat':
+                    console.log($scope);
                     WashingMachine.put(aux["id"],{program:$scope.item})
                     .success(function() {
                         $scope.success = true;
@@ -155,7 +169,7 @@ directiveModule.directive('itemCard', function() {
             id: '@',
             details: '@',
             icon: '@',
-            item: '=',
+            item: '@',
             edit: '&'
         },
         templateUrl: '/static/directivesTemplates/itemcarddropdown.html',
@@ -249,7 +263,7 @@ directiveModule.directive('dropdown', function() {
     require: 'ngModel',
     scope: {
         list: '=',
-        title: '@'
+        title: '='
     },
     controller: function($scope) {
         $scope.dropped = false;
