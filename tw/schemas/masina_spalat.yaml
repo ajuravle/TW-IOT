@@ -16,7 +16,7 @@ properties:
     nr_rotatii:
         type: integer
         minimum: 200
-        maximum: 1000
+        maximum: 2000
     timp_rams:
         type: integer
 

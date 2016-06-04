@@ -9,6 +9,7 @@ directiveModule.config(['$interpolateProvider', function($interpolateProvider){
 directiveModule.directive('temperature', function() {
     var controller = function($scope, $timeout, WashingMachine) {
         $scope.clicked = false;
+        console.log("temp",$scope);
         $scope.editTemperature = function() {
             $scope.clicked = true;
 
@@ -23,7 +24,6 @@ directiveModule.directive('temperature', function() {
                     .error(function(){
                         $scope.success = false;
                         $scope.feedback = "Api error";
-
                     }); break;
             }
 
@@ -36,7 +36,21 @@ directiveModule.directive('temperature', function() {
         $scope.editState = function() {
             $scope.clicked = true;
             $scope.state = !$scope.state;
-            $scope.feedback = "Set on";
+            $scope.success = $scope.state;
+            aux = $scope.edit();
+            switch (aux["tip"]) {
+                case 'masina_spalat':
+
+                    WashingMachine.put(aux["id"],{stare:$scope.state? 1 : 0})
+                    .success(function() {
+                        $scope.success = true;
+                        $scope.feedback = "Success";
+                    })
+                    .error(function(){
+                        $scope.success = false;
+                        $scope.feedback = "Api error";
+                    }); break;
+            }
 
             $timeout(function() {
                 $scope.clicked = false;
@@ -48,7 +62,7 @@ directiveModule.directive('temperature', function() {
         restrict: 'E',
         scope: {
             value: '@',
-            state: '@',
+            state: '=',
             id: '@',
             title: '@',
             rangeText: '@',
@@ -93,7 +107,7 @@ directiveModule.directive('rotations', function() {
         restrict: 'E',
         scope: {
             value: '@',
-            state: '@',
+            state: '=',
             id: '@',
             title: '@',
             rangeText: '@',
@@ -105,14 +119,25 @@ directiveModule.directive('rotations', function() {
 });
 
 directiveModule.directive('itemCard', function() {
-    var controller = function($scope, $timeout) {
+    var controller = function($scope, $timeout, WashingMachine) {
         
-        console.log("itemcard",$scope, $scope.item);
         $scope.clicked = false;
         $scope.editProgram = function() {
             $scope.clicked = true;
-            $scope.success = false;
-            $scope.feedback = "Success";
+            aux = $scope.edit();
+            switch (aux["tip"]) {
+                case 'masina_spalat': 
+                    WashingMachine.put(aux["id"],{program:$scope.item})
+                    .success(function() {
+                        $scope.success = true;
+                        $scope.feedback = "Success";
+                    })
+                    .error(function(){
+                        $scope.success = false;
+                        $scope.feedback = "Api error";
+
+                    }); break;
+            }
 
             $timeout(function() {
                 $scope.clicked = false;
@@ -138,10 +163,6 @@ directiveModule.directive('itemCard', function() {
     };
 });
 
-
-
-
-
 directiveModule.directive('stringToNumber', function() {
   return {
     require: 'ngModel',
@@ -165,7 +186,6 @@ directiveModule.directive('dropdown', function() {
         title: '='
     },
     controller: function($scope) {
-        console.log('drop',$scope);
         $scope.dropped = false;
         $scope.selectItem = function(index) {
             console.log(index);
@@ -184,7 +204,6 @@ directiveModule.directive('dropdown', function() {
 
 directiveModule.directive('clock', function() {
     var controller = function($scope, $timeout) {
-        //console.log($scope);
         $scope.clicked = false;
         $scope.editClock = function() {
             $scope.clicked = true;
@@ -217,7 +236,6 @@ directiveModule.directive('clock', function() {
 
 directiveModule.directive('textDetails', function() {
     var controller = function($scope, $timeout) {
-        console.log($scope);
     };
     return {
         restrict: 'E',
@@ -239,7 +257,6 @@ directiveModule.directive('textDetails', function() {
 
 directiveModule.directive('volume', function() {
     var controller = function($scope, $timeout) {
-        console.log("clume");
         $scope.clicked = false;
         $scope.editVolume = function() {
             $scope.clicked = true;
@@ -344,7 +361,6 @@ directiveModule.directive('clockTv', function() {
 
 directiveModule.directive('textTvDetails', function() {
     var controller = function($scope, $timeout) {
-        console.log($scope);
     };
     return {
         restrict: 'E',
