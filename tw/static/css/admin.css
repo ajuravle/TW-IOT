@@ -201,8 +201,41 @@ section .row{
     width: 1050px;
 }
 
+/*---------------------------------------*/
 
+table {
+    border:0;
+    text-align: center;
+}
 
+.up {
+    padding: 12px 6px 12px 6px;
+    color:black;
+    border:0;
+    text-align: center;
+    border-bottom: 2px solid #E0E0E0;
+}
 
+.left {
+    padding: 12px 6px 12px 6px;
+    color:black;
+    border:0;
+    text-align: center;
+    border-right: 2px solid #E0E0E0;   
+}
+td {
+    color:black;
+    border:0;
+    border-top: 2px solid #E0E0E0; 
+}
+
+input[type="checkbox"] {
+    display: inline-block;
+    margin:0;
+    padding: 0;
+    width: 18px;
+    height: 18px;
+    box-shadow: 0;
+}
 
 

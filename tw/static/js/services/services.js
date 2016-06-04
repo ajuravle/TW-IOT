@@ -53,3 +53,14 @@ servicesModule.service('TV',['$http', function($http) {
         return $http.get('/api/canal/'+id);
     }
 }]);
+
+servicesModule.service('Admin',['$http', function($http) {
+
+    this.get_useri = function() {
+        return $http.get('/api/user');
+    }
+    this.get_camere = function() {
+        return $http.get('/api/camera');
+    }
+    
+}]);

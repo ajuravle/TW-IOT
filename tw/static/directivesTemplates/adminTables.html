@@ -1,1 +1,14 @@
-ss
+<section>
+    <table border="1" style="width:300px">
+    <tbody>
+        <tr>
+            <th class="up"></th>
+            <th class="up" ng-repeat="camera in camere"><%camera.denumire%></th>
+        </tr>
+        <tr ng-repeat="user in useri">
+            <th class="left"><%user.nume%> &nbsp <% user.prenume %></th>
+            <td ng-repeat="i in camere"><input type="checkbox" ng-model="drepturi[$parent][$index]" /><%drepturi[$parent][$index]%></td>
+        </tr>
+    <tbody>
+    </table>
+</section>

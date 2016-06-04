@@ -8,6 +8,7 @@ from ...models.cafetiera import Cafetiera
 from ...models.frigider import Frigider
 from ...models.masina_de_spalat import MasinaDeSpalat
 from ...models.sistem_de_iluminat import SistemDeIluminat
+from ...models.user_camera import UserCamera
 from ...models.televizor import Televizor
 from ...models.termostat import Termostat
 from pyramid.response import Response
@@ -66,10 +67,14 @@ class CameraApi(object):
 
     @view_config(request_method = 'GET')
     def get(self):
+        id = self.request.session['id_user']
         records = DBSession.query(Camera).all()
         list_records = []
         for record in records:
             dis = record.as_dict()
+            my = DBSession.query(UserCamera).filter(UserCamera.id_user == id, UserCamera.id_camera == dis['id_camera']).first()
+            if not my:
+                continue
             dis['dispozitive'] = cauta_dis(dis['id_camera'])
             list_records.append(dis)
         return list_records

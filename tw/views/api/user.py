@@ -44,8 +44,21 @@ class Userr(object):
     def get(self):
         records = DBSession.query(User).all()
         list_records = []
-        for record in records:
-            list_records.append(record.as_dict())
+        for i in records:
+            record = i.as_dict()
+            rooms = DBSession.query(UserCamera).filter(UserCamera.id_user == record["id_user"])
+            list_rooms = []
+
+            for room in rooms:
+                print("-------------------")
+                rec = room.as_dict()
+                del rec["id_user"]
+                del rec["id_uc"]
+                room_name = DBSession.query(Camera.denumire).filter(Camera.id_camera == rec["id_camera"]).first()
+                rec["denumire"]=room_name[0]
+                list_rooms.append(rec)
+            record['camere'] = list_rooms
+            list_records.append(record)
         return list_records
 
 
