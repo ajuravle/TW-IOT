@@ -1,0 +1,36 @@
+{% extends "tw:templates/home/layout.jinja2" %}
+{% block content %}
+<link href="{{ request.static_url('tw:static/css/adaugaredispozitiv.css') }}" rel="stylesheet">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href='http://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+
+<body>
+<div class="main" >
+      <h2>Add a Device</h2>
+		<form>
+		   <div class="lable">
+		        <div class="col_1_of_2 span_1_of_2"><input type="text" class="text" value="Device name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Device name';}" ></div></div>
+				
+	
+           <div class="row" ng-controller='add-device'>
+            <div class="col-md-6"> 
+               <item-card2  title="DeviceType" id='id' state='true' edit='edit()' list="list" item = "Buna" icon="fa-bars"></item-card>
+            </div></div><p></p>
+
+           <div class="row" ng-controller='add-device-room'>
+            <div class="col-md-6"> 
+               <item-card3  title="DeviceRoom" id='id' state='true' edit='edit()' list="list" item = "Buna" icon="fa-bars"></item-card>
+            </div></div><p></p>
+
+
+		   <div class="submit">
+			  <input type="submit" onclick="myFunction()" value="Add Device" >
+		   </div>
+		   <div class="clear"> </div>
+		</form>
+</div>
+
+</body>
+{% endblock %}

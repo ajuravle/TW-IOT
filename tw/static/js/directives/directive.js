@@ -163,6 +163,76 @@ directiveModule.directive('itemCard', function() {
     };
 });
 
+<<<<<<< HEAD
+=======
+directiveModule.directive('itemCard2', function() {
+    var controller = function($scope, $timeout) {
+        
+        console.log("itemcard2",$scope, $scope.item);
+        $scope.clicked = false;
+        $scope.editProgram = function() {
+            $scope.clicked = true;
+            $scope.success = false;
+            $scope.feedback = "Success";
+
+            $timeout(function() {
+                $scope.clicked = false;
+
+            },1000);
+        };
+    };
+
+    return {
+        restrict: 'E',
+        scope: {
+            state: '=',
+            list: '=',
+            title: '=',
+            id: '@',
+            icon: '@',
+            item: '=',
+            edit: '&'
+        },
+        templateUrl: '/static/directivesTemplates/addDeviceDropDown.html',
+        controller: controller
+    };
+});
+
+directiveModule.directive('itemCard3', function() {
+    var controller = function($scope, $timeout) {
+        
+        console.log("itemcard3",$scope, $scope.item);
+        $scope.clicked = false;
+        $scope.editProgram = function() {
+            $scope.clicked = true;
+            $scope.success = false;
+            $scope.feedback = "Success";
+
+            $timeout(function() {
+                $scope.clicked = false;
+
+            },1000);
+        };
+    };
+
+    return {
+        restrict: 'E',
+        scope: {
+            state: '=',
+            list: '=',
+            title: '=',
+            id: '@',
+            icon: '@',
+            item: '=',
+            edit: '&'
+        },
+        templateUrl: '/static/directivesTemplates/addDeviceDropDown.html',
+        controller: controller
+    };
+});
+
+
+>>>>>>> 89c029fbcafd95f498d2893149c9f6dc006e7ee8
 directiveModule.directive('stringToNumber', function() {
   return {
     require: 'ngModel',

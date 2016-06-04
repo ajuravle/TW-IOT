@@ -12,7 +12,7 @@ app.config(['$interpolateProvider', function($interpolateProvider){
 
 app.controller('left-menu', ['$scope', '$window', 'Camere', function($scope, $window, Camere) {
 
-
+    console.log("menuu");
     $scope.submenu = false;
     var getDispozitive = function(dispozitive) {
         var list = []
@@ -87,4 +87,19 @@ app.controller('washing-machine',['$scope', '$location', 'WashingMachine', funct
     }
     //console.log()
 }])
+<<<<<<< HEAD
+=======
+
+app.controller('add-device',['$scope', function($scope) {
+   $scope.list=[{name:'Refrigerator',value:'device1'}, {name:'TV',value:'device1'}];
+    //console.log()
+}])
+
+app.controller('add-device-room',['$scope', function($scope) {
+   $scope.list=[{name:'Kitchen',value:'device1'}, {name:'Bedroom',value:'device1'}];
+    //console.log()
+}])
+
+
+>>>>>>> 89c029fbcafd95f498d2893149c9f6dc006e7ee8
 
