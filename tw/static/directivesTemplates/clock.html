@@ -1,3 +1,29 @@
+<script type="text/javascript">
+$('.countdown').final_countdown({
+start: '1362139200',
+end: '1388461320',
+now: '1387461319'
+});
+
+$(document).ready(function() {
+$('.countdown').final_countdown({
+start: '1362139200',
+end: '1388461320',
+now: '1387461319',
+selectors: {
+    value_minutes: '.clock-minutes .val',
+    canvas_minutes: 'canvas_minutes',
+},
+minutes: {
+    borderColor: '#ACC742',
+    borderWidth: '6'
+}, function() {
+// Finish callback
+});
+});
+</script>
+
+
 <div class="col-md-6 clock-card">
     <div ng-show="state == true">
         <div class="clock-card-title"><% title %></div> 
@@ -7,7 +33,7 @@
                         <div id="canvas_minutes" class="clock-canvas"></div>
                             <div class="text">
                                 <p class="val">0</p>
-                                <p class="type-minutes type-time">MINUTES</p>
+                                <p class="type-minutes type-time">Minutes</p>
                             </div>
                         </div>
                     </div>

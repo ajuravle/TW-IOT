@@ -6,8 +6,8 @@ import json
 from . import session_validation
 from passlib.hash import sha256_crypt
 
-@view_config(request_method = 'GET', route_name = 'adaugaredispozitiv')
+@view_config(request_method = 'GET', route_name = 'admin')
 @session_validation
 def getLoginPage(request):
-    response = render_to_response('templates/home/adaugaredispozitiv.jinja2',{}, request = request)
+    response = render_to_response('templates/home/admin.jinja2',{}, request = request)
     return response

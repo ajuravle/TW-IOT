@@ -35,7 +35,7 @@ def main(global_config, **settings):
     config.add_route("register_one", "/register/{id}")
     config.add_route("register", '/register')
 
-    config.add_route("adaugaredispozitiv", '/adaugaredispozitiv')
+    config.add_route("admin", '/admin')
 
     config.add_route("send_mail_register", "/send_mail_register")
     config.add_route("profile", '/profile')

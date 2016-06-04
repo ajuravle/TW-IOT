@@ -99,6 +99,17 @@ input[type="range"]::-webkit-slider-thumb {
     border-radius: 20px;
 }
 
+.details {
+    position: absolute;
+    top:40%;
+    font-size: 16px;
+    padding: 24px;
+    padding-left: 10%;
+    display: block;
+    height: 60% !important;
+    width: 100%;
+    background-color: #33CCFF;
+}
 .item-card {
     background-color: #3399FF;
     min-height: 120px;
@@ -119,41 +130,6 @@ input[type="range"]::-webkit-slider-thumb {
 .item-card-title i {
     margin-right: 6px;
 }
-
-.details {
-    position: absolute;
-    top:40%;
-    font-size: 16px;
-    padding: 24px;
-    padding-left: 10%;
-    display: block;
-    height: 60% !important;
-    width: 100%;
-    background-color: #33CCFF;
-}
-
- .program-card-icons {
-    color: white;
-    position: absolute;
-    bottom: 12px;
-    right: 12px;
-}
-
-.program-card-icons .program-icons {
-    border-top:1px solid white;
-    padding-left: 60px !important;
-    padding-top: 6px;
-}
-
-.program-card-icons .fa-check {
-    padding-left: 12px !important;
-}
-
-.program-card-icons .fa-check:hover{
-    color: #E53935;
-    cursor: pointer;
-}
-
 
 .dropdown {
     position: absolute;

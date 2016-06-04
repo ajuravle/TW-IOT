@@ -1,5 +1,7 @@
 {% extends "tw:templates/home/layout.jinja2" %}
 {% block content %}
+<link href="{{ request.static_url('tw:static/css/tv.css') }}" rel="stylesheet">
+<link href="{{ request.static_url('tw:static/css/washing_machine.css') }}" rel="stylesheet">
 
 <div class="row" ng-controller="tv">
 
@@ -11,11 +13,19 @@
         <div class="row">
 
             <div class="col-md-6">
+
                <volume value="<%data.volum%>" id="na" state="stare" title="Volume" range-text="Volume: 0 to 100" edit="changeTV()"></volume>
             </div>
 
             <div class="col-md-6"> 
                <brightness value="<%data.luminozitate%>" id="naa" state="stare" title="Brightness" range-text="Brightness: 0 to 100" edit="changeTV()"></brightness>
+
+               <volume value="0" id="na" min="0" max="100" state="true" title="Volume" range-text="Volume: 0 to 100"></volume>
+            </div>
+
+            <div class="col-md-6"> 
+               <brightness value="0" id="naa" min="0" max="100" state="true" title="Brightness" range-text="Brightness: 0 to 100"></brightness>
+
             </div>
         </div> 
     
