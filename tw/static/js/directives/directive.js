@@ -97,7 +97,6 @@ directiveModule.directive('temperature', function() {
 
 directiveModule.directive('rotations', function() {
     var controller = function($scope, $timeout, WashingMachine) {
-       // console.log($scope);
          $scope.clicked = false;
         $scope.editRotations = function() {
             $scope.clicked = true;
@@ -146,7 +145,6 @@ directiveModule.directive('itemCard', function() {
             aux = $scope.edit();
             switch (aux["tip"]) {
                 case 'masina_spalat':
-                    console.log($scope);
                     WashingMachine.put(aux["id"],{program:$scope.item})
                     .success(function() {
                         $scope.success = true;
@@ -158,7 +156,6 @@ directiveModule.directive('itemCard', function() {
 
                     }); break;
                 case 'cafetiera':
-                    console.log($scope);
                     CoffeeMaker.put(aux["id"],{tip:$scope.item})
                     .success(function() {
                         $scope.success = true;
@@ -198,7 +195,6 @@ directiveModule.directive('itemCard', function() {
 directiveModule.directive('itemCard2', function() {
     var controller = function($scope, $timeout) {
         
-        console.log("itemcard2",$scope, $scope.item);
         $scope.clicked = false;
         $scope.editProgram = function() {
             $scope.clicked = true;
@@ -231,7 +227,6 @@ directiveModule.directive('itemCard2', function() {
 directiveModule.directive('itemCard3', function() {
     var controller = function($scope, $timeout) {
         
-        console.log("itemcard3",$scope, $scope.item);
         $scope.clicked = false;
         $scope.editProgram = function() {
             $scope.clicked = true;
@@ -286,13 +281,11 @@ directiveModule.directive('dropdown', function() {
     controller: function($scope) {
         $scope.dropped = false;
         $scope.selectItem = function(index) {
-            console.log(index);
             $scope.title = $scope.list[index].name;
             $scope.dropped = false;
         };
 
         $scope.drop = function() {
-            console.log("dropped");
             $scope.dropped = !$scope.dropped;
         };
     },
@@ -389,7 +382,6 @@ directiveModule.directive('volume', function() {
 
             TV.put(details['id'],{stare:$scope.state?1:0})
             .success(function(res){
-                console.log(res);
                 $scope.success=true;
                 $scope.feedback="Success";
             })
@@ -422,7 +414,6 @@ directiveModule.directive('volume', function() {
 
 directiveModule.directive('brightness', function() {
     var controller = function($scope, $timeout,TV) {
-       // console.log($scope);
          $scope.clicked = false;
         $scope.editBrightness = function() {
             $scope.clicked = true;
@@ -463,8 +454,7 @@ directiveModule.directive('brightness', function() {
 
 directiveModule.directive('clockTv', function() {
     var controller = function($scope, $timeout) {
-       // console.log($scope);
-            $scope.clicked = false;
+        $scope.clicked = false;
         $scope.editClockTV = function() {
             $scope.clicked = true;
             $scope.success = false;
@@ -521,7 +511,6 @@ directiveModule.directive('channel', function() {
         }
     }
 
-        //console.log($scope);
         $scope.clicked = false;
         $scope.editChannel = function() {
             $scope.clicked = true;
@@ -631,7 +620,6 @@ directiveModule.directive('nrBulbs', function() {
 
 directiveModule.directive('lightIntensity', function() {
     var controller = function($scope, $timeout,Lights) {
-       // console.log($scope);
          $scope.clicked = false;
         $scope.editIntensity = function() {
             $scope.clicked = true;
@@ -691,7 +679,6 @@ directiveModule.directive('textLightsDetails', function() {
 
 directiveModule.directive('temp', function() {
     var controller = function($scope, $timeout,Thermostat) {
-        console.log("clume");
         $scope.clicked = false;
         $scope.editThermostat = function() {
             $scope.clicked = true;
@@ -796,7 +783,6 @@ directiveModule.directive('automat', function() {
 
 directiveModule.directive('textThermDetails', function() {
     var controller = function($scope, $timeout) {
-        console.log($scope);
     };
     return {
         restrict: 'E',
@@ -825,14 +811,13 @@ directiveModule.directive('adminTable', function() {
             if(camere.length == 0) {
                 return list_pozitii;
             }
-            for( i = 0; i < camere.length; i++) {
+            for( u = 0; u < camere.length; u++) {
                 for( j = 0; j < $scope.camere.length; j++) {
-                    if(camere[i]['id_camera'] == $scope.camere[j]['id_camera']) {
+                    if(camere[u]['id_camera'] == $scope.camere[j]['id_camera']) {
                         list_pozitii.push(j);
                     }
                 }
             }
-            console.log("list: ",list_pozitii);
             return list_pozitii;
         }
         var initDrepturi = function(){
@@ -843,14 +828,12 @@ directiveModule.directive('adminTable', function() {
                 }
                 $scope.drepturi.push(item);
             }
-
-            for( i = 0; i < $scope.useri.length; i++) {
+            for( i = 0; i < $scope.useri.length; i++ ) {
                 list_poz = getPozitiiCamere($scope.useri[i].camere);
                 for( j = 0; j < list_poz.length;j++) {
                     $scope.drepturi[i][list_poz[j]] = true
                 }
             }
-            console.log($scope.drepturi);
         }
 
         Admin.get_useri()
@@ -860,7 +843,6 @@ directiveModule.directive('adminTable', function() {
                 delete result[i]['tip']
             }
             $scope.useri = result
-            console.log("useri",result);
             done++;
             if(done == 2) {
                 initDrepturi();
@@ -873,16 +855,144 @@ directiveModule.directive('adminTable', function() {
                 delete result[i]['dispozitive']
             }
             $scope.camere = result
-            console.log("camere",result);
+            done++;
+            if(done == 2) {
+                initDrepturi();
+            }
+        });
+        $scope.updated = []
+        $scope.test = function(ind,p){
+            item_update = {}
+            item_update['id_user'] = $scope.useri[p]['id_user'];
+            item_update['id_camera'] = $scope.camere[ind]['id_camera'];
+            if($scope.drepturi[p][ind]) {
+                item_update['actiune'] = 'adauga';
+            } else {
+                item_update['actiune'] = 'sterge';
+            }
+            for( i = 0; i < $scope.updated.length; i++) {
+                if( ($scope.updated[i]['id_user'] == item_update['id_user']) && ($scope.updated[i]['id_camera'] == item_update['id_camera']) ) {
+                    $scope.updated.splice(i,1);
+                    i--;
+                }
+            }
+            $scope.updated.push(item_update);
+        }
+        $scope.save = function() {
+            for( i = 0; i < $scope.updated.length; i++) {
+                ac = {}
+                ac['actiune'] = $scope.updated[i]['actiune'];
+                ac['id_camera'] = $scope.updated[i]['id_camera']
+                Admin.put($scope.updated[i]['id_user'],ac)
+                .success(function(res) {
+                })
+                .error(function(res) {
+                    console.log(res);
+                });
+            }
+            $scope.updated =[]
+        }
+
+
+    };
+    return {
+        restrict: 'E',
+        templateUrl: '/static/directivesTemplates/adminTables.html',
+        controller: controller
+    };
+});
+
+directiveModule.directive('adminTableDispozitive', function() {
+    var controller = function($scope, $timeout, Admin) {
+        $scope.dis = []
+        $scope.drepturi = [];
+        $scope.camere = [];
+        var done = 0;
+
+         //initalizare drepturi
+        var getPozitiiCamere = function(dispozitive_camera) {
+            list_pozitii = []
+            if(dispozitive_camera.length == 0) {
+                return list_pozitii;
+            }
+            for(u = 0; u < dispozitive_camera.length; u++) {
+                for( j = 0; j < $scope.dis.length; j++) {
+                    if(dispozitive_camera[u]['id_dispozitiv'] == $scope.dis[j]['id_dispozitiv']) {
+                        list_pozitii.push(j);
+                    }
+                }
+            }
+
+            return list_pozitii;
+        }
+        var initDrepturi = function(){
+            for( i = 0; i < $scope.dis.length; i++) {
+                var item = [];
+                for( j = 0; j < $scope.camere.length; j++){
+                    item[j] = false;
+                }
+                $scope.drepturi.push(item);
+            }
+            for( i = 0; i < $scope.camere.length; i++ ) {
+                list_poz = getPozitiiCamere($scope.camere[i].dispozitive);
+                for( j = 0; j < list_poz.length; j++) {
+                    $scope.drepturi[list_poz[j]][i] = true;
+                }
+            }
+        }
+
+        Admin.get_dispozitive()
+        .success(function(result) {
+            for(i=0; i<result.length;i++){
+                delete result[i]['stare']
+            }
+            $scope.dis = result
             done++;
             if(done == 2) {
                 initDrepturi();
             }
         });
 
-       
+        Admin.get_camere()
+        .success(function(result) {
+            for(i=0; i<result.length;i++){
+            }
+            $scope.camere = result
+            done++;
+            if(done == 2) {
+                initDrepturi();
+            }
+        });
+        $scope.updated = []
+        $scope.test = function(ind,p){
+            item_update = {}
+            item_update['id_dispozitiv'] = $scope.dis[p]['id_dispozitiv'];
+            item_update['id_camera'] = $scope.camere[ind]['id_camera'];
+            item_update['tip'] = $scope.dis[p]['tip']
+            if($scope.drepturi[p][ind]) {
+                item_update['actiune'] = 'adauga';
+            } else {
+                item_update['actiune'] = 'sterge';
+            }
+            for( i = 0; i < $scope.updated.length; i++) {
+                if( ($scope.updated[i]['id_dispozitiv'] == item_update['id_dispozitiv']) && ($scope.updated[i]['id_camera'] == item_update['id_camera']) ) {
+                    $scope.updated.splice(i,1);
+                    i--;
+                }
+            }
+            $scope.updated.push(item_update);
+        }
+        $scope.save = function() {
+            for( i = 0; i < $scope.updated.length; i++) {
+                ac = {}
+                ac['actiune'] = $scope.updated[i]['actiune'];
+                ac['id_dispozitiv'] = $scope.updated[i]['id_dispozitiv']
+                ac['tip'] = $scope.updated[i]['tip'];
+                Admin.put_camere($scope.updated[i]['id_camera'],ac)
 
-
+            }
+            $scope.updated = [];
+        }
     };
     return {
         restrict: 'E',
@@ -894,7 +1004,7 @@ directiveModule.directive('adminTable', function() {
             rangeText: '@',
             edit: '&'
         },
-        templateUrl: '/static/directivesTemplates/adminTables.html',
+        templateUrl: '/static/directivesTemplates/adminTableDispozitive.html',
         controller: controller
     };
 });

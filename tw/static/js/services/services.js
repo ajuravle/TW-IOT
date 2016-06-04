@@ -62,6 +62,15 @@ servicesModule.service('Admin',['$http', function($http) {
     this.get_camere = function() {
         return $http.get('/api/camera');
     }
+    this.get_dispozitive = function() {
+        return $http.get('/api/dispozitive');
+    };
+    this.put = function(id, body) {
+        return $http.put('/api/user/' + id, body);
+    }
+    this.put_camere = function(id, body) {
+    return $http.put('/api/camera/' + id, body);
+    }
     
 }]);
 

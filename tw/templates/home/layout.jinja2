@@ -11,14 +11,12 @@
    
     <link href="{{ request.static_url('tw:static/css/home.css') }}" rel="stylesheet">
     <link href="{{ request.static_url('tw:static/css/profile.css') }}" rel="stylesheet">
-<<<<<<< HEAD
+
     <link href="{{ request.static_url('tw:static/css/washing_machine.css') }}" rel="stylesheet">
     <link href="{{ request.static_url('tw:static/css/tv.css') }}" rel="stylesheet">
     <link href="{{ request.static_url('tw:static/css/lights.css') }}" rel="stylesheet">
     <link href="{{ request.static_url('tw:static/css/thermostat.css') }}" rel="stylesheet">
   
-=======
->>>>>>> b3dcc17380472a25bdfe10437c3bdb017731c2f0
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -45,7 +43,7 @@
                         <div ng-repeat="item in menu_items">
                             <li class="menu-item" ng-click="click($index)" ><i class="fa fa-car" aria-hidden="true"></i><span><%item.value%></span></li>
                             <ul ng-hide="!item.show" class="animate-show">
-                                <li class ="submenu-item" ng-repeat="item_submenu in item.submenu"><span ng-click="clickSubMenu($parent.$index, $index)"><%item_submenu%> <span></li>
+                                <li class ="submenu-item" ng-repeat="item_submenu in item.submenu track by $index"><span ng-click="clickSubMenu($parent.$index, $index)"><%item_submenu%> <span></li>
                             </ul>
                         </div>
                     </ul>
