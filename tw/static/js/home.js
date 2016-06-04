@@ -55,6 +55,7 @@ app.controller('left-menu', ['$scope', '$window', 'Camere', function($scope, $wi
             case 'frigider': $window.location.href = "http://" + $window.location.host + "/refrigerator/" + id; break;
             case 'sistem_de_iluminat': $window.location.href = "http://" + $window.location.host + "/lights/" + id; break;
             case 'televizor': $window.location.href = "http://" + $window.location.host + "/tv/" + id; break;
+            case 'cafetiera': $window.location.href = "http://" + $window.location.host + "/coffee_maker/" + id; break;
 
         }
     }

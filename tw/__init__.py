@@ -73,7 +73,7 @@ def main(global_config, **settings):
     config.add_route("refrigerator", '/refrigerator/{id}')
     config.add_route("lights", '/lights/{id}')
 
-    config.add_route("coffee_maker", '/coffee_maker')
+    config.add_route("coffee_maker", '/coffee_maker/{id}')
     config.add_route("thermostat", '/thermostat/{id}')
 
 
