@@ -54,6 +54,17 @@ servicesModule.service('TV',['$http', function($http) {
     }
 }]);
 
+servicesModule.service('Admin',['$http', function($http) {
+
+    this.get_useri = function() {
+        return $http.get('/api/user');
+    }
+    this.get_camere = function() {
+        return $http.get('/api/camera');
+    }
+    
+}]);
+
 servicesModule.service('CoffeeMaker',['$http', function($http) {
 
     this.get_one = function(id) {

@@ -811,3 +811,90 @@ directiveModule.directive('textThermDetails', function() {
         templateUrl: '/static/directivesTemplates/textTherm.html',
     };
 });
+
+directiveModule.directive('adminTable', function() {
+    var controller = function($scope, $timeout, Admin) {
+        $scope.useri = []
+        $scope.drepturi = [];
+        $scope.camere = [];
+        var done = 0;
+
+         //initalizare drepturi
+        var getPozitiiCamere = function(camere) {
+            list_pozitii = []
+            if(camere.length == 0) {
+                return list_pozitii;
+            }
+            for( i = 0; i < camere.length; i++) {
+                for( j = 0; j < $scope.camere.length; j++) {
+                    if(camere[i]['id_camera'] == $scope.camere[j]['id_camera']) {
+                        list_pozitii.push(j);
+                    }
+                }
+            }
+            console.log("list: ",list_pozitii);
+            return list_pozitii;
+        }
+        var initDrepturi = function(){
+            for( i = 0; i < $scope.useri.length; i++) {
+                var item = [];
+                for( j = 0; j < $scope.camere.length; j++){
+                    item[j] = false;
+                }
+                $scope.drepturi.push(item);
+            }
+
+            for( i = 0; i < $scope.useri.length; i++) {
+                list_poz = getPozitiiCamere($scope.useri[i].camere);
+                for( j = 0; j < list_poz.length;j++) {
+                    $scope.drepturi[i][list_poz[j]] = true
+                }
+            }
+            console.log($scope.drepturi);
+        }
+
+        Admin.get_useri()
+        .success(function(result) {
+            for(i=0; i<result.length;i++){
+                delete result[i]['mail']
+                delete result[i]['tip']
+            }
+            $scope.useri = result
+            console.log("useri",result);
+            done++;
+            if(done == 2) {
+                initDrepturi();
+            }
+        });
+
+        Admin.get_camere()
+        .success(function(result) {
+            for(i=0; i<result.length;i++){
+                delete result[i]['dispozitive']
+            }
+            $scope.camere = result
+            console.log("camere",result);
+            done++;
+            if(done == 2) {
+                initDrepturi();
+            }
+        });
+
+       
+
+
+    };
+    return {
+        restrict: 'E',
+        scope: {
+            value: '@',
+            state: '@',
+            id: '@',
+            title: '@',
+            rangeText: '@',
+            edit: '&'
+        },
+        templateUrl: '/static/directivesTemplates/adminTables.html',
+        controller: controller
+    };
+});
