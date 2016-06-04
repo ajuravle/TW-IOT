@@ -340,12 +340,22 @@ directiveModule.directive('textDetails', function() {
 /* directive pentru tv*/
 
 directiveModule.directive('volume', function() {
-    var controller = function($scope, $timeout) {
+    var controller = function($scope, $timeout,TV) {
         $scope.clicked = false;
         $scope.editVolume = function() {
             $scope.clicked = true;
             $scope.success = false;
-            $scope.feedback = "Success";
+
+            details=$scope.edit();
+            TV.put(details['id'],{volum:parseInt($scope.value,10)})
+            .success(function(){
+                $scope.success=true;
+                $scope.feedback="Success";
+            })
+            .error(function(){
+                $scope.success=false;
+                $scope.feedback="Api error";
+            })
 
             $timeout(function() {
                 $scope.clicked = false;
@@ -356,7 +366,20 @@ directiveModule.directive('volume', function() {
         $scope.editStateTV = function() {
             $scope.clicked = true;
             $scope.state = !$scope.state;
-            $scope.feedback = "Set on";
+
+            details=$scope.edit();
+
+            TV.put(details['id'],{stare:$scope.state?1:0})
+            .success(function(res){
+                console.log(res);
+                $scope.success=true;
+                $scope.feedback="Success";
+            })
+            .error(function(){
+                $scope.success=false;
+                $scope.feedback="Api error";
+            })
+
 
             $timeout(function() {
                 $scope.clicked = false;
@@ -368,7 +391,7 @@ directiveModule.directive('volume', function() {
         restrict: 'E',
         scope: {
             value: '@',
-            state: '@',
+            state: '=',
             id: '@',
             title: '@',
             rangeText: '@',
@@ -380,13 +403,23 @@ directiveModule.directive('volume', function() {
 });
 
 directiveModule.directive('brightness', function() {
-    var controller = function($scope, $timeout) {
+    var controller = function($scope, $timeout,TV) {
        // console.log($scope);
          $scope.clicked = false;
         $scope.editBrightness = function() {
             $scope.clicked = true;
             $scope.success = false;
-            $scope.feedback = "Success";
+
+            details=$scope.edit();
+            TV.put(details['id'],{luminozitate:parseInt($scope.value,10)})
+            .success(function(){
+                $scope.success=true;
+                $scope.feedback="Success";
+            })
+            .error(function(){
+                $scope.success=false;
+                $scope.feedback="Api error";
+            })
 
             $timeout(function() {
                 $scope.clicked = false;
@@ -399,7 +432,7 @@ directiveModule.directive('brightness', function() {
         restrict: 'E',
         scope: {
             value: '@',
-            state: '@',
+            state: '=',
             id: '@',
             title: '@',
             rangeText: '@',
@@ -461,14 +494,33 @@ directiveModule.directive('textTvDetails', function() {
 });
 
 directiveModule.directive('channel', function() {
-    var controller = function($scope, $timeout) {
+    var controller = function($scope, $timeout,TV) {
         
+    var get_id_canal=function(){
+        for(i=0;i<$scope.list.length;i++){
+            if ($scope.list[i]["name"]==$scope.item)
+                return $scope.list[i]["value"];
+        }
+    }
+
         //console.log($scope);
         $scope.clicked = false;
         $scope.editChannel = function() {
             $scope.clicked = true;
             $scope.success = false;
-            $scope.feedback = "Success";
+
+             details=$scope.edit();
+            TV.put(details['id'],{id_canal:get_id_canal()})
+            .success(function(){
+                $scope.success=true;
+                $scope.feedback="Success";
+            })
+            .error(function(){
+                $scope.success=false;
+                $scope.feedback="Api error";
+            })
+
+
 
             $timeout(function() {
                 $scope.clicked = false;
@@ -486,7 +538,8 @@ directiveModule.directive('channel', function() {
             id: '@',
             details: '@',
             icon: '@',
-            edit: '&'
+            edit: '&',
+            item: '@'
         },
         templateUrl: '/static/directivesTemplates/channels.html',
         controller: controller

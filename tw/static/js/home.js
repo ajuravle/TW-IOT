@@ -54,6 +54,8 @@ app.controller('left-menu', ['$scope', '$window', 'Camere', function($scope, $wi
             case 'masina_de_spalat': $window.location.href = "http://" + $window.location.host + "/washing_machine/" + id; break;
             case 'frigider': $window.location.href = "http://" + $window.location.host + "/refrigerator/" + id; break;
             case 'sistem_de_iluminat': $window.location.href = "http://" + $window.location.host + "/lights/" + id; break;
+            case 'televizor': $window.location.href = "http://" + $window.location.host + "/tv/" + id; break;
+            case 'cafetiera': $window.location.href = "http://" + $window.location.host + "/coffee_maker/" + id; break;
 
         }
     }
@@ -67,22 +69,7 @@ app.controller('pag', ['$scope', function($scope) {
 
 app.controller('washing-machine',['$scope', '$location', '$interval', 'WashingMachine', function($scope, $location, $interval, WashingMachine) {
     var id = $location.absUrl().split('/')[4];
-    /*var getDiferences = function(result) {
-        console.log($scope.data,result)
-        if($scope.data.length == 0) {
-            $scope.data =  result;
-        }
-        if($scope.data['nr_rotatii'] != result['nr_rotatii']){
-            $scope.data['nr_rotatii'] = result['nr_rotatii'];
-        }
 
-        if($scope.data['temperatura'] != result['temperatura']){
-            $scope.data['temperatura'] = result['temperatura'];
-        }
-        if($scope.data['program'] != result['program']){
-            $scope.data['program'] = result['program'];
-        }
-    }*/
     $scope.data = {}
     $scope.stare = true;
     $scope.list = [{name:'normal', value:'normal'},{name:'matase', value:'matase'}];
@@ -164,6 +151,60 @@ app.controller('lights',['$scope', '$location', '$interval', 'Lights', function(
 
     $scope.changeLights = function() {
         return {tip:"sistem_de_iluminat", id:id};
+    }
+    
+    //console.log()
+}])
+
+app.controller('tv',['$scope', '$location', '$interval', 'TV', function($scope, $location, $interval, TV) {
+    var id = $location.absUrl().split('/')[4];
+    $scope.data = {}
+    $scope.stare = true;
+    $scope.list = [];
+    $scope.chanel="";
+
+
+    TV.get_channels(id)
+        .success(function(result) {
+            for (i=0;i<result.length;i++){
+                var item={}
+                item['name']=result[i]['denumire']
+                item['value']=result[i]['id_canal']
+                $scope.list.push(item);
+            }
+        })
+        .error(function(error) {
+            console.log(error);
+        })
+
+    var getData = function() {
+        console.log("da");    
+        TV.get_one(id)
+        .success(function(result) {
+            console.log(result);
+            $scope.data = result;
+            if(result['stare'] == 0)
+                $scope.stare = false;
+            else
+                $scope.stare = true;
+            TV.get_channel($scope.data["id_canal"])
+                .success(function(result) {
+                    $scope.channel = result["denumire"];
+                })
+                .error(function(error) {
+                    console.log(error);
+                })
+
+        })
+        .error(function(error) {
+            console.log(error);
+        })
+    };
+    getData()
+    $interval(getData,5000);
+    
+    $scope.changeTV = function() {
+        return {tip:"televizor", id:id};
     }
     
     //console.log()
