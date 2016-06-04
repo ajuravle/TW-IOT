@@ -15,7 +15,7 @@ span.term a:hover{
 	font-size: 1.1em;
 	margin: 18px 0px;
 	color: #666666;
-	width:89%;
+	width:30%;
 	cursor: pointer;
 	font-family: 'Oxygen', sans-serif;
 	outline: none;
@@ -38,7 +38,7 @@ span.term a:hover{
 .submit{
 	text-align: center;
 	height: 40px;
-	width: 90%;
+	width: 30%;
 }
 input[type=submit] {
 	padding: 2px ;
