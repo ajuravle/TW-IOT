@@ -95,20 +95,20 @@ servicesModule.service('UserInfo',['$http', function($http) {
 servicesModule.service('ActivitateCafetiera',['$http', function($http) {
 
     this.getInfo = function(id) {
-        return $http.get('/api/activitate_cafetiera/'+id);
+        return $http.get('/api/activitate_cafetiera/'+id+"?ora=true");
     }
 }]);
 
 servicesModule.service('ActivitateTV',['$http', function($http) {
 
     this.getInfo = function(id) {
-        return $http.get('/api//api/activitate_tv/'+id);
+        return $http.get('/api/activitate_tv/'+id+"?ora=true");
     }
 }]);
 
 servicesModule.service('ActivitateSI',['$http', function($http) {
 
     this.getInfo = function(id) {
-        return $http.get('/api//api/activitate_si/'+id);
+        return $http.get('/api/activitate_si/'+id+"?ora=true");
     }
 }]);

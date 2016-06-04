@@ -495,7 +495,18 @@ directiveModule.directive('clockTv', function() {
 
 
 directiveModule.directive('textTvDetails', function() {
-    var controller = function($scope, $timeout) {
+    var controller = function($scope, $timeout,ActivitateTV) {
+        var id_q=$scope.edit();
+        ActivitateTV.getInfo(id_q['id'])
+        .success(function(result){
+                $scope.success=true;
+                $scope.feedback="Success";
+                console.log("<-----",result);
+            })
+            .error(function(result){
+                $scope.success=false;
+                $scope.feedback="Api error";
+            })
     };
     return {
         restrict: 'E',
@@ -508,6 +519,7 @@ directiveModule.directive('textTvDetails', function() {
             edit: '&'
         },
         templateUrl: '/static/directivesTemplates/textTV.html',
+        controller:controller
     };
 });
 
@@ -670,8 +682,18 @@ directiveModule.directive('lightIntensity', function() {
 });
 
 directiveModule.directive('textLightsDetails', function() {
-    var controller = function($scope, $timeout) {
-        console.log($scope);
+    var controller = function($scope, $timeout,ActivitateSI) {
+        var id_q=$scope.edit();
+        ActivitateSI.getInfo(id_q['id'])
+        .success(function(result){
+                $scope.success=true;
+                $scope.feedback="Success";
+                console.log("<-----",result);
+            })
+            .error(function(result){
+                $scope.success=false;
+                $scope.feedback="Api error";
+            })
     };
     return {
         restrict: 'E',
@@ -684,6 +706,7 @@ directiveModule.directive('textLightsDetails', function() {
             edit: '&'
         },
         templateUrl: '/static/directivesTemplates/textLights.html',
+        controller:controller
     };
 });
 
@@ -917,8 +940,18 @@ directiveModule.directive('textRefrigeratorDetails', function() {
 
 directiveModule.directive('textCoffeeDetails', function() {
     var controller = function($scope, $timeout,ActivitateCafetiera) {
-        ActivitateCafetiera.getInfo()
-        console.log(result,"<-----");
+        var id_q=$scope.edit();
+        ActivitateCafetiera.getInfo(id_q['id'])
+        .success(function(result){
+                $scope.success=true;
+                $scope.feedback="Success";
+                console.log("<-----",result);
+            })
+            .error(function(result){
+                $scope.success=false;
+                $scope.feedback="Api error";
+            })
+        
     };
     return {
         restrict: 'E',
@@ -931,5 +964,6 @@ directiveModule.directive('textCoffeeDetails', function() {
             edit: '&'
         },
         templateUrl: '/static/directivesTemplates/textCoffee.html',
+        controller:controller
     };
 });
