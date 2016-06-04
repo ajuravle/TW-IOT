@@ -28,12 +28,14 @@ def main(global_config, **settings):
     config.add_route("login", '/login')
     config.add_route("logout", "/logout")
     config.add_route("home", '/home')
-    config.add_route("washing_machine", '/washing_machine')
+    config.add_route("washing_machine", '/washing_machine/{id}')
 
     config.add_route("tv", '/tv')
 
     config.add_route("register_one", "/register/{id}")
     config.add_route("register", '/register')
+
+    config.add_route("adaugaredispozitiv", '/adaugaredispozitiv')
 
     config.add_route("send_mail_register", "/send_mail_register")
     config.add_route("profile", '/profile')
@@ -68,10 +70,10 @@ def main(global_config, **settings):
     config.add_route("user", "/api/user")
     config.add_route("user_one", "/api/user/{id}")
 
-    
-
     config.add_route("refrigerator", '/refrigerator')
     config.add_route("lights", '/lights')
+
+    config.add_route("coffee_maker", '/coffee_maker')
     config.add_route("thermostat", '/thermostat')
 
 

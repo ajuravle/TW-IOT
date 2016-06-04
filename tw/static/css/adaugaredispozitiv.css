@@ -1,0 +1,232 @@
+body{
+	/*background: url("background.png") no-repeat center center fixed;*/
+	font-family: 'Oxygen', sans-serif;
+}
+
+span.term a{
+	color: #1888A8;
+	font-weight: bold;
+}
+span.term a:hover{
+	color:#fff;
+}
+.lable input[type="text"] {
+	padding: 15px;
+	font-size: 1.1em;
+	margin: 18px 0px;
+	color: #666666;
+	width:89%;
+	cursor: pointer;
+	font-family: 'Oxygen', sans-serif;
+	outline: none;
+	font-weight: 600;
+	margin-left: 3px;
+	background: #FFFFFF;
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	-ms-transition: all 0.3s ease-out;
+	-o-transition: all 0.3s ease-out;
+	border-left: 6px solid #fff;
+	border-bottom: none;
+	border-right: none;
+	border-top: none;
+}
+.lable input[type="text"]:hover,.lable-2 input[type="text"]:hover,#active {
+	color:#DCDCDC;
+	border-left:6px solid#3399FF;
+}
+.submit{
+	text-align: center;
+	height: 40px;
+	width: 90%;
+}
+input[type=submit] {
+	padding: 2px ;
+	color: #fff;
+	float: right;
+	font-family: 'Oxygen', sans-serif;
+	background: #3399FF;
+	border: 1px solid #3399FF;
+	cursor: pointer;
+	font-size: 18px;
+	transition: all 0.3s ease-out;
+    -webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	-ms-transition: all 0.3s ease-out;
+	-o-transition: all 0.3s ease-out;
+	outline:none;
+	-webkit-appearance: none;
+}
+.submit input[type=submit]:hover {
+	 background:#66CCFF;
+	 border:1px solid #66CCFD;
+
+}
+
+
+
+.animate-show {
+  opacity: 1;
+}
+
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+  transition: all linear 0.5s;
+}
+
+.animate-show.ng-hide {
+  opacity: 0;
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+    background-color: white;
+    width: 80%;
+    height:1px;
+}
+input[type=range]:focus {
+  outline: none; 
+}
+
+input[type=range]:hover {
+    height: 3px;
+    -webkit-appearance: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background-color: white;
+    width: 16px;
+    height: 16px;
+    border-radius: 20px;
+}
+
+.item-card {
+    background-color: #3399FF;
+    min-height: 120px;
+    min-width: 100%;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    margin: auto;
+    text-align: left;
+}
+
+.item-card-title {
+    font-size: 20px;
+    padding: 24px;
+    
+}
+
+.item-card-title i {
+    margin-right: 6px;
+}
+
+.details {
+    position: absolute;
+    top:40%;
+    font-size: 16px;
+    padding: 24px;
+    padding-left: 10%;
+    display: block;
+    height: 60% !important;
+    width: 100%;
+    background-color: #33CCFF;
+}
+
+ .program-card-icons {
+    color: white;
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+}
+
+.program-card-icons .program-icons {
+    border-top:1px solid white;
+    padding-left: 60px !important;
+    padding-top: 6px;
+}
+
+.program-card-icons .fa-check {
+    padding-left: 12px !important;
+}
+
+.program-card-icons .fa-check:hover{
+    color: #E53935;
+    cursor: pointer;
+}
+
+
+.dropdown {
+    position: absolute;
+    left: 10%;
+    width: 80%;
+    border-bottom: 2px solid white !important;
+}
+
+.dropdown .btn-default {
+    white-space: normal;
+    width: 100%;
+    color: #333399  !important;
+    border:0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    outline: none !important;
+}
+
+.dropdown-menu {
+    color:black;
+}
+
+
+.dropdown-item {
+    min-width: 250px;
+    color: black;
+    padding: 6px 12px 6px 12px;
+}
+
+.dropdown-item:hover {
+    white-space: normal;
+    min-width: 261px;
+    cursor: pointer;
+    background: #EEEEEE;
+}
+
+
+/*---------------------------------------------------------*/
+
+.text-card {
+    background-color: #66CCFF;
+    min-height: 610px;
+    min-width: 100%;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    margin: auto;
+    text-align: left;
+    top:5px;
+}
+
+.text-card-title {
+    font-size: 20px;
+    padding: 24px;
+    padding-left: 10%;
+}
+
+section {
+    width:650px;
+    float:left;
+}
+
+section .row{
+    width: 700px;
+    padding: 5px;
+}
+
+.row{
+    width: 1050px;
+}
+
+
+
+
+
+
