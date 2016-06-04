@@ -714,3 +714,21 @@ directiveModule.directive('textThermDetails', function() {
         templateUrl: '/static/directivesTemplates/textTherm.html',
     };
 });
+
+directiveModule.directive('adminTable', function() {
+    var controller = function($scope, $timeout) {
+        console.log($scope);
+    };
+    return {
+        restrict: 'E',
+        scope: {
+            value: '@',
+            state: '@',
+            id: '@',
+            title: '@',
+            rangeText: '@',
+            edit: '&'
+        },
+        templateUrl: '/static/directivesTemplates/adminTable.html',
+    };
+});
