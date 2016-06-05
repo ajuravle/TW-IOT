@@ -62,6 +62,15 @@ servicesModule.service('Admin',['$http', function($http) {
     this.get_camere = function() {
         return $http.get('/api/camera');
     }
+    this.get_dispozitive = function() {
+        return $http.get('/api/dispozitive');
+    };
+    this.put = function(id, body) {
+        return $http.put('/api/user/' + id, body);
+    }
+    this.put_camere = function(id, body) {
+    return $http.put('/api/camera/' + id, body);
+    }
     
 }]);
 
@@ -82,5 +91,33 @@ servicesModule.service('Thermostat',['$http', function($http) {
     }
     this.put = function(id, body) {
         return $http.put('/api/termostat/' + id, body);
+    }
+}]);
+
+servicesModule.service('UserInfo',['$http', function($http) {
+
+    this.getIdUser = function() {
+        return $http.get('/user_id');
+    }
+}]);
+
+servicesModule.service('ActivitateCafetiera',['$http', function($http) {
+
+    this.getInfo = function(id) {
+        return $http.get('/api/activitate_cafetiera/'+id+"?ora=true");
+    }
+}]);
+
+servicesModule.service('ActivitateTV',['$http', function($http) {
+
+    this.getInfo = function(id) {
+        return $http.get('/api/activitate_tv/'+id+"?ora=true");
+    }
+}]);
+
+servicesModule.service('ActivitateSI',['$http', function($http) {
+
+    this.getInfo = function(id) {
+        return $http.get('/api/activitate_si/'+id+"?ora=true");
     }
 }]);

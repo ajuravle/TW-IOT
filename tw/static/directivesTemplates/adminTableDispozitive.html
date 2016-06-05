@@ -5,8 +5,8 @@
             <th class="up"></th>
             <th class="up" ng-repeat="camera in camere"><%camera.denumire%></th>
         </tr>
-        <tr ng-repeat="user in useri">
-            <th class="left"><%user.nume%> &nbsp <% user.prenume %></th>
+        <tr ng-repeat="d in dis">
+            <th class="left"><%d.denumire%></th>
             <td ng-repeat="i in camere"><input type="checkbox" ng-model="drepturi[$parent.$index][$index]" ng-click="test($index,$parent.$index)" /></td>
         </tr>
     <tbody>
