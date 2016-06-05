@@ -1,5 +1,9 @@
 <div class="col-md-4 text-refrigerator">
     <div ng-show="state">
         <div class="text-refrigerator-title"><% title %></div>
+         <%data[0][0]%>
+        <canvas id="line" class="chart chart-line" chart-data="data"
+          chart-labels="labels" chart-legend="true" chart-series="series" >
+        </canvas> 
     </div>
 </div>

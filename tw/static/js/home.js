@@ -12,7 +12,6 @@ app.config(['$interpolateProvider', function($interpolateProvider){
 
 app.controller('left-menu', ['$scope', '$window', 'Camere','UserInfo', function($scope, $window, Camere, UserInfo) {
 
-    console.log("menuu");
     $scope.submenu = false;
     var getDispozitive = function(dispozitive) {
         var list = []
@@ -37,11 +36,15 @@ app.controller('left-menu', ['$scope', '$window', 'Camere','UserInfo', function(
     .error(function(error) {
         console.log(error);
     });
-
+    $scope.isAdmin = false;
     UserInfo.getIdUser()
     .success(function(result) {
         $scope.nume = result['nume'];
         $scope.prenume = result['prenume'];
+        if(result['tip'] == 'admin') {
+            $scope.isAdmin = true;
+        }
+        console.log("admin", result);
     })
     .error(function(error) {
         console.log(error);
@@ -69,6 +72,20 @@ app.controller('left-menu', ['$scope', '$window', 'Camere','UserInfo', function(
             case 'termostat': $window.location.href = "http://" + $window.location.host + "/thermostat/" + id; break;
 
         }
+    }
+
+
+    $scope.goToHome = function() {
+        $window.location.href = "http://" + $window.location.host + "/home";
+    }
+    $scope.goToProfile = function() {
+        $window.location.href = "http://" + $window.location.host + "/profile";
+    }
+    $scope.logout = function() {
+        $window.location.href = "http://" + $window.location.host + "/logout";
+    }
+    $scope.goToAdmin = function() {
+        $window.location.href = "http://" + $window.location.host + "/admin";
     }
 }]);
 
@@ -364,6 +381,35 @@ app.controller('admin',['$scope', '$timeout', 'Admin', function($scope, $timeout
             },1000);
         })
     }
+
+    $scope.address = '';
+
+    Admin.get_info()
+    .success(function(res) {
+        console.log("oras", res);
+        if(res['oras'] != null){
+            $scope.address  = res['oras'];
+        }
+    })
+    $scope.addAddress = function() {
+        $scope.noAddress = false;
+        $scope.okAddress = false;
+        if($scope.address == '') {
+            $scope.noAddress= true;
+            $timeout(function(){
+                $scope.noAddress = false;
+            },1000);
+            return;
+        }
+        Admin.put_oras({oras:$scope.address})
+        .success(function() {
+            $scope.okAddress = true;
+            $timeout(function(){
+                $scope.okAddress = false;
+            },1000);
+        })
+    }
+
 
     $scope.userName = '';
     $scope.addUser = function() {

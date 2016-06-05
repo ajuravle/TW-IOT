@@ -26,14 +26,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
     <body>
-        <div ng-app="home">
+        <div ng-app="home" ng-controller="left-menu">
             
             <div class="header" >
-                 <span class="header-text"><i class="fa fa-home" aria-hidden="true"></i> WOHA </span>
-                 <span class="pull-right header-text" ><i class="fa fa-sign-out" aria-hidden="true"></i></span>
-                 <span class="pull-right header-text"><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                 <span class="header-text" ng-click="goToHome()"><i class="fa fa-home" aria-hidden="true"></i> WOHA </span>
+                 <span class="pull-right header-text" ng-click="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+                 <span class="pull-right header-text" ng-click="goToAdmin()" ng-show="isAdmin"><i class="fa fa-cogs" aria-hidden="true" ></i></span>
+                 <span class="pull-right header-text" ng-click="goToProfile()"><i class="fa fa-user" aria-hidden="true"></i></span>
             </div>
-            <div class="left-menu" ng-controller="left-menu">
+            <div class="left-menu" >
                 <div class="menu-avatar">
                     <span><%nume%> <%prenume%></span>
                 </div>
@@ -61,4 +62,5 @@
     <script type="text/javascript" src="{{ request.static_url('tw:static/js/excanvas.js') }}"></script>
     <script type="text/javascript" src="{{ request.static_url('tw:static/js/jquery.knob.min.js') }}"></script>
     <script type="text/javascript" src="{{ request.static_url('tw:static/js/jquery.knob.js') }}"></script>
+
 </html>

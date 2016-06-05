@@ -588,6 +588,7 @@ directiveModule.directive('textTvDetails', function() {
                 $scope.success=false;
                 $scope.feedback="Api error";
             })
+
     };
     return {
         restrict: 'E',
@@ -896,16 +897,25 @@ directiveModule.directive('automat', function() {
 });
 
 directiveModule.directive('textThermDetails', function() {
-    var controller = function($scope, $timeout, Thermostat) {
+    var controller = function($scope, $timeout,$interval, Thermostat, Admin) {
         $scope.meteo = {}
-        Thermostat.get_meteo("Iasi")
-        .success(function(result) {
-            console.log("meteo", result);
-            $scope.meteo = result;
+        var oras = "Iasi"
+        Admin.get_info()
+        .success(function(res) {
+            oras = res['oras'];
         })
-        .error(function(res){
-            console.log("err", res);
-        })
+        var getMeteo = function(){
+            Thermostat.get_meteo(oras)
+            .success(function(result) {
+                console.log("meteo", result);
+                $scope.meteo = result;
+            })
+            .error(function(res){
+                console.log("err", res);
+            })
+        }
+        getMeteo();
+        $interval(getMeteo,5000);
     };
     return {
         restrict: 'E',
@@ -1142,6 +1152,12 @@ directiveModule.directive('adminTableDispozitive', function() {
 directiveModule.directive('textRefrigeratorDetails', function() {
     var controller = function($scope, $timeout) {
         console.log($scope);
+         $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+          $scope.series = ['Series A', 'Series B'];
+          $scope.data = [
+            [65, 59, 80, 81, 56, 55, 40],
+            [28, 48, 40, 19, 86, 27, 90]
+          ];
 
     };
     return {
@@ -1155,6 +1171,7 @@ directiveModule.directive('textRefrigeratorDetails', function() {
             edit: '&'
         },
         templateUrl: '/static/directivesTemplates/textRefrigerator.html',
+        controller: controller
     };
 });
 

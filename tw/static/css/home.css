@@ -8,6 +8,7 @@
 .header-text {
     color: white;
     margin-left: 12px;
+    cursor: pointer;
 }
 .pull-right.header-text:hover {
     color: #E64A19;
@@ -78,13 +79,11 @@ ul {
 
 .container-custom {
 
-    width: 100%;
-    display:inline; 
+    overflow-x: hidden !important;
+    display:inline;
     position:absolute;
     margin: 12px !important;
 }
-
-
 
 .profile-background {
     margin: 0px 24px 6px 16px;
@@ -173,16 +172,6 @@ ul {
     margin-left: 24px;
     font-size: 16px !important;
 }
-
-.container-custom {
-
-    width: 100%;
-    display:inline; 
-    position:absolute;
-    margin: 12px !important;
-}
-
-
 
 .profile-background {
     margin: 0px 24px 6px 16px;

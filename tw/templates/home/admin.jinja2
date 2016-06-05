@@ -11,12 +11,12 @@
         <form>
            <div class="lable">
                 <div class="col_1_of_2 span_1_of_2"><input type="text" ng-model="address" class="text" value="Address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Address';}" />
-                <span class="text-right animate-show" ng-show="noName" style="color:red;">Name is mandatory</span>
+                <span class="text-right animate-show" ng-show="noAddress" style="color:red;">Name is mandatory</span>
                 </div></div>
 
               <div class="submit">
-                <span class="text-right animate-show" ng-show="ok" style="color:red;">Address added</span>
-              <input type="submit" ng-click="addDevice()" value="Change Address" >
+                <span class="text-right animate-show" ng-show="okAddress" style="color:red;">Address added</span>
+              <input type="submit" ng-click="addAddress()" value="Change Address" >
 
            </div>
            <div class="clear"> </div>
