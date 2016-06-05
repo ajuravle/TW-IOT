@@ -14,7 +14,7 @@
     color: #E64A19;
 }
 .left-menu {
-    width: 300px;
+    width: 15%;
     border: 0;
     display: inline-block;
 }
@@ -81,8 +81,9 @@ ul {
 
     overflow-x: hidden !important;
     display:inline;
+    width: 80%;
     position:absolute;
-    margin: 12px !important;
+    padding: 12px !important;
 }
 
 .profile-background {
