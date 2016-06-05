@@ -237,3 +237,26 @@ input[type="checkbox"] {
     height: 18px;
     box-shadow: 0;
 }
+
+input[type=submit] {
+    padding: 2px ;
+    color: #fff;
+    float: right;
+    font-family: 'Oxygen', sans-serif;
+    background: #3399FF;
+    border: 1px solid #3399FF;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.3s ease-out;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    outline:none;
+    -webkit-appearance: none;
+}
+.submit2 input[type=submit]:hover {
+     background:#66CCFF;
+     border:1px solid #66CCFD;
+
+}
