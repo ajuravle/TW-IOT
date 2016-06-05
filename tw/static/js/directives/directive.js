@@ -902,11 +902,15 @@ directiveModule.directive('adminTable', function() {
 
         Admin.get_useri()
         .success(function(result) {
+            $scope.useri = [];
             for(i=0; i<result.length;i++){
+                if(result[i]['tip'] == 'admin') {
+                    continue;
+                }
                 delete result[i]['mail']
                 delete result[i]['tip']
+                $scope.useri.push(result[i]);
             }
-            $scope.useri = result
             done++;
             if(done == 2) {
                 initDrepturi();
