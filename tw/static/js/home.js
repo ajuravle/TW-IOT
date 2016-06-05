@@ -24,7 +24,7 @@ app.controller('left-menu', ['$scope', '$window', 'Camere','UserInfo', function(
     $scope.menu_items = [];
     $scope.camere_dispozitive = [];
     Camere.get_all()
-    .success(function(result) {
+    .success(function(result) {console.log("result", result);
         for(var i=0; i < result.length;i++) {
             one_item = {}
             one_item['value'] = result[i]['denumire'];
@@ -288,6 +288,112 @@ app.controller('add-device',['$scope', function($scope) {
 app.controller('add-device-room',['$scope', function($scope) {
    $scope.list=[{name:'Kitchen',value:'device1'}, {name:'Bedroom',value:'device1'}];
     //console.log()
+}])
+
+app.controller('admin',['$scope', '$timeout', 'Admin', function($scope, $timeout, Admin) {
+   $scope.list=[{name:'CoffeeMaker',value:'CoffeeMaker'},
+                {name:'Refrigerator',value:'Refrigerator'},
+                {name:'TV',value:'TV'},
+                {name:'Lights',value:'Lights'},
+                {name:'Thermostat',value:'Thermostat'},
+                {name:'WashingMachine',value:'WashingMachine'},
+                ];
+    $scope.deviceName = "";
+    $scope.noName = false;
+    $scope.noDevice = false;
+    $scope.ok = false;
+    $scope.noRoom = false;
+    $scope.okRoom = false;
+    $scope.deviceType = "Device";
+    $scope.addDevice = function() {
+        $scope.noName = false;
+        $scope.noDevice = false;
+        if($scope.deviceName == ''){
+            $scope.noName=true;
+            $timeout(function(){
+                $scope.noName = false;
+            },1000);
+            return;
+        }
+        if($scope.deviceType == 'Device') {
+            $scope.noDevice = true;
+            $timeout(function(){
+                $scope.noDevice = false;
+            },1000);
+            return;
+        }
+        /*$timeout(function(){
+            $scope.noName = false;
+            $scope.noDevice = false;
+            },1000);*/
+        var tip = "";
+        switch($scope.deviceType) {
+            case "CoffeeMaker": tip = "cafetiera"; break;
+            case "Refrigerator": tip = "frigider"; break;
+            case "TV": tip = "televizor"; break;
+            case "Lights": tip = "sistem_de_iluminat"; break;
+            case "Thermostat": tip = "termostat"; break;
+            case "WashingMachine": tip = "masina_de_spalat"; break;
+        }
+
+        Admin.add_dispozitive({denumire:$scope.deviceName, tip: tip})
+        .success(function(){
+            $scope.ok = true;
+            $timeout(function(){
+                $scope.ok = false;
+            },1000);
+        })
+    }
+
+    $scope.roomName = '';
+    $scope.addRoom = function() {
+        $scope.noRoom = false;
+        $scope.okRoom = false;
+        if($scope.roomName == '') {
+            $scope.noRoom = true;
+            $timeout(function(){
+                $scope.noRoom = false;
+            },1000);
+            return;
+        }
+        Admin.add_camera({denumire:$scope.roomName})
+        .success(function() {
+            $scope.okRoom = true;
+            $timeout(function(){
+                $scope.okRoom = false;
+            },1000);
+        })
+    }
+
+    $scope.userName = '';
+    $scope.addUser = function() {
+        $scope.noUsername= false;
+        $scope.noMail = false;
+        $scope.okUsername = false;console.log($scope.userName);
+        if($scope.userName == '') {
+            $scope.noUsername = true;
+            $timeout(function(){
+                 $scope.noUsername = false;
+             },1000);
+            return;
+        }
+
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if(!re.test($scope.userName)) {
+            $scope.noMail = true;
+            $timeout(function(){
+                 $scope.noMail = false;
+             },1000);
+            return;
+        }
+        Admin.send_mail({email:$scope.userName})
+        .success(function() {
+            $scope.okUsername = true;
+            $timeout(function(){
+                $scope.okUsername = false;
+            },1000);
+        })
+    }
 }])
 
 

@@ -53,3 +53,38 @@ def get(request):
         list_dispozitive.append(aux)
 
     return list_dispozitive
+
+@view_config(request_method = 'POST', route_name = 'dispozitive', renderer = 'json')
+def post(request):
+    request_body = json.loads(request.body.decode("utf8"))
+
+    if 'tip' not in request_body.keys() or 'denumire' not in request_body.keys():
+        return Response(status = 400, body = "Tip si denumire sunt obligatorii")
+    
+    id = str(uuid.uuid4())[:6]
+    if request_body['tip'] == 'cafetiera':
+        new = Cafetiera(denumire = request_body['denumire'], id_dispozitiv = id)
+        DBSession.add(new)
+
+    if request_body['tip'] == 'frigider':
+        new = Frigider(denumire = request_body['denumire'], id_dispozitiv = id)
+        DBSession.add(new)
+
+    if request_body['tip'] == 'masina_de_spalat':
+        new = MasinaDeSpalat(denumire = request_body['denumire'],id_dispozitiv = id)
+        DBSession.add(new)
+
+    if request_body['tip'] == 'sistem_de_iluminat':
+        new = SistemDeIluminat(denumire = request_body['denumire'], id_dispozitiv = id)
+        DBSession.add(new)
+
+
+    if request_body['tip'] == 'televizor':
+        new = Televizor(denumire = request_body['denumire'], id_dispozitiv = id)
+        DBSession.add(new)
+    
+    if request_body['tip'] == 'termostat':
+        new = Termostat(denumire = request_body['denumire'], id_dispozitiv = id)
+        DBSession.add(new)
+
+    return request_body

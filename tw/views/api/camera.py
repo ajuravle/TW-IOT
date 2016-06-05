@@ -68,8 +68,18 @@ class CameraApi(object):
     @view_config(request_method = 'GET')
     def get(self):
         id = self.request.session['id_user']
+        tip = self.request.session['tip']
         records = DBSession.query(Camera).all()
+
         list_records = []
+
+        if tip == 'admin':
+            for record in records:
+                dis = record.as_dict()
+                dis['dispozitive'] = cauta_dis(dis['id_camera'])
+                list_records.append(dis)
+            return list_records
+
         for record in records:
             dis = record.as_dict()
             my = DBSession.query(UserCamera).filter(UserCamera.id_user == id, UserCamera.id_camera == dis['id_camera']).first()

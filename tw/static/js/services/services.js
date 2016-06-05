@@ -69,9 +69,17 @@ servicesModule.service('Admin',['$http', function($http) {
         return $http.put('/api/user/' + id, body);
     }
     this.put_camere = function(id, body) {
-    return $http.put('/api/camera/' + id, body);
+        return $http.put('/api/camera/' + id, body);
     }
-    
+    this.add_dispozitive = function(body) {
+        return $http.post('/api/dispozitive', body);
+    }
+    this.add_camera = function(body) {
+        return $http.post('/api/camera', body);
+    }
+    this.send_mail = function(body) {
+        return $http.post('/send_mail_register', body);
+    }
 }]);
 
 servicesModule.service('CoffeeMaker',['$http', function($http) {
