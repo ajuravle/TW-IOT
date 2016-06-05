@@ -17,7 +17,7 @@ properties:
         type: integer
         minimum: 200
         maximum: 2000
-    timp_rams:
+    timp_ramas:
         type: integer
 
 
