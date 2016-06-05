@@ -279,7 +279,62 @@ input[type="range"]::-webkit-slider-thumb {
     cursor: pointer;
 }
 
+/*---ceas---*/
+div.box-tv span.clock-labeel-tv {
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    text-align: left;
+    padding: 0px 0px 10px 0px;
+    display: block;
+    
+}
+div.box-tv{
+    width:200px;
+    height: 150px;
+    box-shadow: none;
+    position: relative;
+    display: block;
+    padding-left: 10%;
+    
+}
 
+div.box-tv  input[type="hour"], div.box-tv input[type="minutes"]{
+    box-shadow: none;
+    font-size: 20px;
+    display: inline;
+    width: 30%;
+    height: 40px;
+    text-align: center;
+    top: 30px;
+    border: none;
+    background: rgba(211,197,200,0.5);   
+}
+div.box-tv  input[type="hour"]:focus,div.box-tv input[type="minutes"]:focus{
+    outline: none;
+}
+
+div.box2-tv {
+    position: absolute;
+    top: 35%;
+    left: 14%;
+    height: 100px;
+    width: 250px;
+}
+
+div.box2-tv  input[type="hour"], div.box2-tv input[type="minutes"]{
+    box-shadow: none;
+    font-size: 30px;
+    display: inline;
+    width: 40%;
+    height: 90px;
+    text-align: center;
+    top: 30px;
+    border: none;
+    background: rgba(211,197,200,0.5);   
+}
+div.box2-tv  input[type="hour"]:focus, div.box2-tv input[type="minutes"]:focus{
+    outline: none;
+}
 
 /*------------------------------------------------*/
 
