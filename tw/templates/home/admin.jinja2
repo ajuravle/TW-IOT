@@ -6,49 +6,54 @@
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <link href='http://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
 
-<body>
-<div class="main" >
+<div class="main" ng-controller="admin">
       <h2>Add a Device</h2>
-		<form>
-		   <div class="lable">
-		        <div class="col_1_of_2 span_1_of_2"><input type="text" class="text" value="Device name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Device name';}" ></div></div>
-				
-	
-           <div class="row" ng-controller='add-device'>
+        <form>
+           <div class="lable">
+                <div class="col_1_of_2 span_1_of_2"><input type="text" ng-model="deviceName" class="text" value="Device name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Device name';}" />
+                <span class="text-right animate-show" ng-show="noName" style="color:red;">Name is mandatory</span>
+                </div></div>
+           <div class="row" >
             <div class="col-md-6"> 
-               <item-card2  title="DeviceType" id='id' state='true' edit='edit()' list="list" item = "Buna" icon="fa-bars"></item-card>
-            </div></div><p></p>
+               <item-card2  title="DeviceType" id='id' state='true' edit='edit()' list="list" item = "deviceType" icon="fa-bars"></item-card>
+               
+            </div></div><p><span class="text-right animate-show" ng-show="noDevice" style="color:red;">Device is mandatory</span></p>
 
-		   <div class="submit">
-			  <input type="submit" onclick="myFunction()" value="Add Device" >
-		   </div>
-		   <div class="clear"> </div>
-		</form>
+           <div class="submit">
+                <span class="text-right animate-show" ng-show="ok" style="color:red;">Device added</span>
+              <input type="submit" ng-click="addDevice()" value="Add Device" >
+
+           </div>
+           <div class="clear"> </div>
+        </form>
 
 
-		 <h2>Add a Room</h2>
-		<form>
-		   <div class="lable">
-		        <div class="col_1_of_2 span_1_of_2"><input type="text" class="text" value="Room name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Room name';}" ></div></div>
+         <h2>Add a Room</h2>
+        <form>
+           <div class="lable">
+                <div class="col_1_of_2 span_1_of_2"><input type="text" class="text" ng-model="roomName" value="Room name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Room name';}" ></div></div>
 
-		   <div class="submit">
-			  <input type="submit" onclick="myFunction()" value="Add Room" >
-		   </div>
-		   <div class="clear"> </div>
-		</form>
+           <div class="submit">
+                <span class="text-right animate-show" ng-show="noRoom" style="color:red;">Room name is mandatory</span>
+                <span class="text-right animate-show" ng-show="okRoom" style="color:red;">Room added</span>
+              <input type="submit" ng-click="addRoom()" value="Add Room" >
+           </div>
+           <div class="clear"> </div>
+        </form>
 
          <h2>Add an User</h2>
-		<form>
-		   <div class="lable">
-		        <div class="col_1_of_2 span_1_of_2"><input type="text" class="text" value="user@mailaddress.com" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = user@mailaddress.com';}" ></div></div>
-				
+        <form>
+           <div class="lable">
+                <div class="col_1_of_2 span_1_of_2"><input type="text" ng-model="userName" class="text" value="user@mailaddress.com" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'user@mailaddress.com';}" ></div></div>
+           <div class="submit">
+                <span class="text-right animate-show" ng-show="noUsername" style="color:red;">Email is mandatory</span>
+                <span class="text-right animate-show" ng-show="okUsername" style="color:red;">User added</span>
+                <span class="text-right animate-show" ng-show="noMail" style="color:red;">Invalid email</span>
+                <input type="submit"  ng-click="addUser()" value="Add User" />
+           </div>
+           <div class="clear"> </div>
+        </form>
 
-
-		   <div class="submit">
-			  <input type="submit" onclick="myFunction()" value="Add User" >
-		   </div>
-		   <div class="clear"> </div>
-		</form>
 
 		
 		<div class="row">
@@ -63,5 +68,4 @@
 		</div>
 </div>
 
-</body>
 {% endblock %}

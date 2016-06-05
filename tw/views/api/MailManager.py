@@ -16,6 +16,6 @@ def send_email(recipient, subject, body):
         server.login("woha.project@gmail.com", "proiecttw")
         server.sendmail(FROM, TO, message)
         server.close()
-        print 'successfully sent the mail'
+        print 'successfully sent the mail-----------------------------------------------------------------'
     except Exception as e:
         print ("failed " + str(e))
