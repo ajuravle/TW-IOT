@@ -1,5 +1,14 @@
 <div class="col-md-4 text-therm">
     <div ng-show="state">
         <div class="text-therm-title"><% title %></div>
+        <div class="text-therm-details">
+        	<span class="text-therm-info">Descriprion: <% meteo.weather[0].description %></span>
+        	<span class="text-therm-info">Temperature: <% meteo.main.temp %> C</span>
+        	<span class="text-therm-info">Pressure: <% meteo.main.pressure %> atm</span>
+        	<span class="text-therm-info">Humidity: <% meteo.main.humidity %> %</span>
+        	<span class="text-therm-info">Wind speed: <% meteo.wind.speed %> km/h</span>
+        	<span class="text-therm-info">Cloud rate: <% meteo.clouds.all %> %</span>
+        </div>
     </div>
 </div>
+

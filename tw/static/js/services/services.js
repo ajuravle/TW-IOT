@@ -80,6 +80,12 @@ servicesModule.service('Admin',['$http', function($http) {
     this.send_mail = function(body) {
         return $http.post('/send_mail_register', body);
     }
+    this.get_info = function() {
+        return $http.get('/api/info');
+    } 
+    this.put_oras = function(body) {
+        return $http.put('/api/info', body);
+    }
 }]);
 
 servicesModule.service('CoffeeMaker',['$http', function($http) {
@@ -99,6 +105,9 @@ servicesModule.service('Thermostat',['$http', function($http) {
     }
     this.put = function(id, body) {
         return $http.put('/api/termostat/' + id, body);
+    }
+    this.get_meteo = function(oras) {
+        return $http.get('http://api.openweathermap.org/data/2.5/weather?q=' + oras + '&units=metric&APPID=ab86b21e315e69d1331608e7e80488e3');
     }
 }]);
 

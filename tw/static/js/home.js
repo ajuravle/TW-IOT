@@ -255,8 +255,7 @@ app.controller('thermostat',['$scope', '$location', '$interval', 'Thermostat', f
     var id = $location.absUrl().split('/')[4];
     $scope.data = {}
     $scope.stare = true;
-    var getData = function() {
-        console.log("da");    
+    var getData = function() {   
         Thermostat.get_one(id)
         .success(function(result) {
             $scope.data = result;
@@ -264,11 +263,12 @@ app.controller('thermostat',['$scope', '$location', '$interval', 'Thermostat', f
                 $scope.stare = false;
             else
                 $scope.stare = true;
-            console.log($scope.data);
+
         })
         .error(function(error) {
             console.log(error);
-        })
+        });
+
     };
     getData()
     $interval(getData,5000);

@@ -846,7 +846,16 @@ directiveModule.directive('automat', function() {
 });
 
 directiveModule.directive('textThermDetails', function() {
-    var controller = function($scope, $timeout) {
+    var controller = function($scope, $timeout, Thermostat) {
+        $scope.meteo = {}
+        Thermostat.get_meteo("Iasi")
+        .success(function(result) {
+            console.log("meteo", result);
+            $scope.meteo = result;
+        })
+        .error(function(res){
+            console.log("err", res);
+        })
     };
     return {
         restrict: 'E',
@@ -859,6 +868,7 @@ directiveModule.directive('textThermDetails', function() {
             edit: '&'
         },
         templateUrl: '/static/directivesTemplates/textTherm.html',
+        controller: controller
     };
 });
 
