@@ -388,13 +388,16 @@ div.box2  input[type="hour"]:focus, div.box2 input[type="minutes"]:focus{
 }
 
 .titlee {
-    font-size: 14px;
+    position: absolute;
+    top: 35%;
+    left: 15%;
+    font-size: 18px;
     font-family: 'Roboto', sans-serif;
     text-align: left;
     height: 50px;
     display: block;
-    
 }
+
 /*---------------------------------------------------------*/
 
 .text-card {

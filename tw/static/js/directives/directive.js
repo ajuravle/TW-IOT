@@ -311,16 +311,21 @@ directiveModule.directive('clock', function() {
             $scope.afisSetTime = false;
             $scope.feedback="Success";
             
-            $interval(function() { 
+            var inter=$interval(function() { 
                 if($scope.minn > 0) {
                     $scope.minn -=1;
                 } else {
                     if($scope.minn <= 1) {
                         if($scope.hour == 0) {
                             console.log("a");
-                            $interval.cancel();
+                            $interval.cancel(inter);
+                            $scope.minn = " ";
+                            $scope.hour = " ";
                             $scope.afisFinal = true;
                             $scope.afisSetTime = true;
+                            $timeout(function() {
+                                $scope.afisFinal = false;
+                            },2000);
                             
                         } else {
 
@@ -494,17 +499,58 @@ directiveModule.directive('brightness', function() {
 });
 
 directiveModule.directive('clockTv', function() {
-    var controller = function($scope, $timeout) {
+        var controller = function($scope, $timeout, $interval, TV) {
         $scope.clicked = false;
+        $scope.afisSetTime = true;
+      
         $scope.editClockTV = function() {
-            $scope.clicked = true;
-            $scope.success = false;
-            $scope.feedback = "Success";
+        $scope.clicked = true;  
+        
+        $scope.minn = parseInt($scope.minn, 10);
+        $scope.hour = parseInt($scope.hour, 10);
+        
+            $scope.success=true;
+            $scope.afisSetTime = false;
+            $scope.feedback="Success";
+            
+            var inter = $interval(function() { 
+                if($scope.minn > 0) {
+                    $scope.minn -=1;
+                } else {
+                    if($scope.minn <= 1) {
+                        if($scope.hour == 0) {
+                            
+                            $interval.cancel(inter);
+                            console.log("mergeee");
+                            $scope.state = false;
+                            details=$scope.edit();
 
-            $timeout(function() {
-                $scope.clicked = false;
+                            TV.put(details['id'],{stare:$scope.state?1:0})
+                            .success(function(res){
+                               $scope.afisSetTime = true;
+                               $scope.minn = " ";
+                               $scope.hour = " ";
+                               $interval.cancel();
+                            })
+                            .error(function(){
+                                $scope.success=false;
+                                $scope.feedback="Api error";
+                            });
+                            
+                        } else {
+
+                            $scope.hour -= 1;
+                            $scope.minn = 59;
+                        }
+                    }
+                }
 
             },1000);
+
+        $timeout(function() {
+            $scope.clicked = false;
+
+        },1000);
         };
     };
 
@@ -514,6 +560,10 @@ directiveModule.directive('clockTv', function() {
             state: '=',
             list: '=',
             title: '@',
+            rangeText: '@',
+            titleFin: '@',
+            hour: '@',
+            minn: '@',
             id: '@',
             details: '@',
             icon: '@',
@@ -846,7 +896,16 @@ directiveModule.directive('automat', function() {
 });
 
 directiveModule.directive('textThermDetails', function() {
-    var controller = function($scope, $timeout) {
+    var controller = function($scope, $timeout, Thermostat) {
+        $scope.meteo = {}
+        Thermostat.get_meteo("Iasi")
+        .success(function(result) {
+            console.log("meteo", result);
+            $scope.meteo = result;
+        })
+        .error(function(res){
+            console.log("err", res);
+        })
     };
     return {
         restrict: 'E',
@@ -859,6 +918,7 @@ directiveModule.directive('textThermDetails', function() {
             edit: '&'
         },
         templateUrl: '/static/directivesTemplates/textTherm.html',
+        controller: controller
     };
 });
 

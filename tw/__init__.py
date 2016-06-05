@@ -80,6 +80,8 @@ def main(global_config, **settings):
 
     config.add_route("user_id", "/user_id")
 
+    config.add_route("info", "/api/info")
+
 
     config.scan()
     return config.make_wsgi_app()
