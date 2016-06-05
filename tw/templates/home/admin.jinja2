@@ -7,6 +7,22 @@
 <link href='http://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
 
 <div class="main" ng-controller="admin">
+      <h2>Address</h2>
+        <form>
+           <div class="lable">
+                <div class="col_1_of_2 span_1_of_2"><input type="text" ng-model="address" class="text" value="Address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Address';}" />
+                <span class="text-right animate-show" ng-show="noName" style="color:red;">Name is mandatory</span>
+                </div></div>
+
+              <div class="submit">
+                <span class="text-right animate-show" ng-show="ok" style="color:red;">Address added</span>
+              <input type="submit" ng-click="addDevice()" value="Change Address" >
+
+           </div>
+           <div class="clear"> </div>
+        </form>
+
+
       <h2>Add a Device</h2>
         <form>
            <div class="lable">
