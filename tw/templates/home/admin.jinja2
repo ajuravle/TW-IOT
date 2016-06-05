@@ -42,8 +42,6 @@
 		   <div class="lable">
 		        <div class="col_1_of_2 span_1_of_2"><input type="text" class="text" value="user@mailaddress.com" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = user@mailaddress.com';}" ></div></div>
 				
-
-
 		   <div class="submit">
 			  <input type="submit" onclick="myFunction()" value="Add User" >
 		   </div>
@@ -51,9 +49,17 @@
 		</form>
 
 <admin-table></admin-table>
-<div class = "row">
+  <div class="submit">
+      <input type="submit" ng-click="save()" value="Update rights" >
+   </div>
+    <div class="clear"> </div>
+
 <admin-table-dispozitive></admin-table-dispozitive>
-</div>
+  <div class="submit">
+      <input type="submit" ng-click="save()" value="Update rights" >
+   </div>
+    <div class="clear"> </div>
+
 </div>
 
 </body>
