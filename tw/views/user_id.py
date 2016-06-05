@@ -13,4 +13,5 @@ def getIdUser(request):
     info["tip"]=request.session["tip"]
     info["nume"]=request.session["nume"]
     info["prenume"]=request.session["prenume"]
+    info["email"]=request.session["email"]
     return info

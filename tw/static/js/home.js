@@ -396,5 +396,95 @@ app.controller('admin',['$scope', '$timeout', 'Admin', function($scope, $timeout
     }
 }])
 
+app.controller('profile',['$scope', '$timeout', 'Profile', function($scope, $timeout, Profile) {
+    $scope.lastName = '';
+    $scope.firstName = '';
+    $scope.email = '';
 
+   Profile.getInfo()
+        .success(function(rez) {
+            $scope.lastName = rez['nume'];
+            $scope.firstName = rez['prenume'];
+            $scope.email = rez['email'];
+            
+        })
+
+    $scope.changeLastName = function() {
+        $scope.invalidLastName = false;
+        $scope.ok = false;
+        if($scope.lastName == '') {
+            $scope.invalidLastName = true;
+            $timeout(function(){
+                $scope.invalidLastName = false;
+            },1000);
+            return;
+        }
+        Profile.putInfo({nume:$scope.lastName})
+        .success(function(rez) {
+            $scope.ok = true;
+            $timeout(function(){
+                $scope.ok = false;
+            },1000);
+        })
+    }
+
+    $scope.changeFirstName = function() {
+        $scope.invalidFirstName = false;
+        $scope.okName = false;
+        if($scope.firstName == '') {
+            $scope.invalidFirstName = true;
+            $timeout(function(){
+                $scope.invalidFirstName = false;
+            },1000);
+            return;
+        }
+        Profile.putInfo({prenume:$scope.firstName})
+        .success(function(rez) {
+            $scope.okName = true;
+            $timeout(function(){
+                $scope.okName = false;
+            },1000);
+        })
+    }
+
+
+    $scope.changeEmail = function() {
+        $scope.invalidEmail = false;
+        $scope.okEmail = false;
+        if($scope.email == '') {
+            $scope.invalidEmail = true;
+            $timeout(function(){
+                $scope.invalidEmail = false;
+            },1000);
+            return;
+        }
+        Profile.putInfo({mail:$scope.email})
+        .success(function(rez) {
+            $scope.okEmail = true;
+            $timeout(function(){
+                $scope.okEmail = false;
+            },1000);
+        })
+    }
+
+$scope.password = '';
+    $scope.changePassword = function() {
+        $scope.invalidPassword = false;
+        $scope.okPassword = false;
+        if($scope.password == '') {
+            $scope.invalidPassword = true;
+            $timeout(function(){
+                $scope.invalidPassword = false;
+            },1000);
+            return;
+        }
+        Profile.putInfo({parola:$scope.password})
+        .success(function(rez) {
+            $scope.okPassword = true;
+            $timeout(function(){
+                $scope.okPassword = false;
+            },1000);
+        })
+    }
+}])
 

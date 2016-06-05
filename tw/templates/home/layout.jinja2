@@ -40,7 +40,7 @@
                 <div>
                     <ul>
                         <div ng-repeat="item in menu_items">
-                            <li class="menu-item" ng-click="click($index)" ><i class="fa fa-car" aria-hidden="true"></i><span><%item.value%></span></li>
+                            <li class="menu-item" ng-click="click($index)" ><i class="fa fa-home" aria-hidden="true"></i><span><%item.value%></span></li>
                             <ul ng-hide="!item.show" class="animate-show">
                                 <li class ="submenu-item" ng-repeat="item_submenu in item.submenu track by $index"><span ng-click="clickSubMenu($parent.$index, $index)"><%item_submenu%> <span></li>
                             </ul>

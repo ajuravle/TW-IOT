@@ -27,7 +27,7 @@ class ActivitateCafetieraa(object):
         if not rez is None:
             lista = []
             for i in rez:
-                lista.append(i)
+                lista.append(i[0])
             result["ora_start"] = lista
         else:
              result["ora_start"] = "null"

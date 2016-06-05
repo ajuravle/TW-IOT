@@ -10,7 +10,7 @@ span.term a{
 span.term a:hover{
 	color:#fff;
 }
-.lable input[type="text"] {
+.lable input[type="text"],.lable input[type="password"] {
 	padding: 15px;
 	font-size: 1.1em;
 	margin: 18px 0px;
@@ -34,6 +34,11 @@ span.term a:hover{
 .lable input[type="text"]:hover,.lable-2 input[type="text"]:hover,#active {
 	color:#DCDCDC;
 	border-left:6px solid#3399FF;
+}
+
+.lable input[type="password"]:hover,.lable-2 input[type="password"]:hover,#active {
+    color:#DCDCDC;
+    border-left:6px solid#3399FF;
 }
 .submit{
 	text-align: center;
