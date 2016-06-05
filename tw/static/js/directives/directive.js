@@ -294,17 +294,57 @@ directiveModule.directive('dropdown', function() {
 });
 
 directiveModule.directive('clock', function() {
-    var controller = function($scope, $timeout) {
+    var controller = function($scope, $timeout, $interval, WashingMachine) {
         $scope.clicked = false;
+        $scope.afisSetTime = true;
+        $scope.afisFinal = false;
+        console.log($scope);
         $scope.editClock = function() {
-            $scope.clicked = true;
-            $scope.success = false;
-            $scope.feedback = "Success";
+        $scope.clicked = true;  
+        id_m=$scope.edit()
+        console.log(id_m)
+        $scope.minn = parseInt($scope.minn, 10);
+        $scope.hour = parseInt($scope.hour, 10);
+        WashingMachine.put(id_m['id'],{timp_ramas:$scope.minn+$scope.hour*60})
+        .success(function(){
+            $scope.success=true;
+            $scope.afisSetTime = false;
+            $scope.feedback="Success";
+            
+            $interval(function() { 
+                if($scope.minn > 0) {
+                    $scope.minn -=1;
+                } else {
+                    if($scope.minn <= 1) {
+                        if($scope.hour == 0) {
+                            console.log("a");
+                            $interval.cancel();
+                            $scope.afisFinal = true;
+                            $scope.afisSetTime = true;
+                            
+                        } else {
 
-            $timeout(function() {
-                $scope.clicked = false;
+                            $scope.hour -= 1;
+                            $scope.minn = 59;
+                        }
+                    }
+                }
 
             },1000);
+        })
+            .error(function(){
+                $scope.success=false;
+                $scope.feedback="Api error";
+                $scope.afisSetTime = true;
+            })
+
+        
+    
+
+        $timeout(function() {
+            $scope.clicked = false;
+
+        },1000);
         };
     };
 
@@ -315,6 +355,7 @@ directiveModule.directive('clock', function() {
             list: '=',
             title: '@',
             rangeText: '@',
+            titleFin: '@',
             hour: '@',
             minn: '@',
             id: '@',

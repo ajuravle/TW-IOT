@@ -55,7 +55,7 @@ input[type="range"]::-webkit-slider-thumb {
     right: 12px;
 }
 
-.therm-card-icons .lights-icons {
+.therm-card-icons .therm-icons {
     border-top:1px solid white;
     padding-left: 60px !important;
     padding-top: 6px;
