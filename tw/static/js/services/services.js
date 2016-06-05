@@ -130,11 +130,25 @@ servicesModule.service('ActivitateTV',['$http', function($http) {
     this.getInfo = function(id) {
         return $http.get('/api/activitate_tv/'+id+"?ora=true");
     }
+    this.getChannel = function(id) {
+        return $http.get('/api/canal/'+id);
+    }
 }]);
 
 servicesModule.service('ActivitateSI',['$http', function($http) {
 
     this.getInfo = function(id) {
         return $http.get('/api/activitate_si/'+id+"?ora=true");
+    }
+}]);
+
+servicesModule.service('Profile',['$http', function($http) {
+
+    this.getInfo = function() {
+        return $http.get('/user_id');
+    }
+
+    this.putInfo = function(body) {
+        return $http.put('/api/user',body);
     }
 }]);

@@ -1,61 +1,72 @@
 {% extends "tw:templates/home/layout.jinja2" %}
 {% block content %}
- <link href="{{ request.static_url('tw:static/css/profile.css') }}" rel="stylesheet">
-<h2>Profile</h2>
-<form>
-<table width="650px">
-</tr>
+<link href="{{ request.static_url('tw:static/css/admin.css') }}" rel="stylesheet">
 
-<tr class=main>
- <td valign="top">
-  <label for="first_name" class="name">First Name </label>
- </td>
- <td valign="top">
-  <input  type="text" name="first_name" maxlength="50" size="30" class="write">
- </td>
- <td colspan="2" style="text-align:center">
-  <input type="submit" value="Change" class="exchange">
- </td>
-</tr>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href='http://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
 
+<div class="main" ng-controller="profile">
+      <h2>Last Name</h2>
+        <form>
+           <div class="lable">
+                <div class="col_1_of_2 span_1_of_2"><input type="text" ng-model="lastName" class="text" value="Last Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Last Name';}" />
+                <span class="text-right animate-show" ng-show="invalidLastName" style="color:red;">Please complete Last Name field</span>
+                </div></div>
 
- 
-<tr class=main>
- <td valign="top">
-  <label for="last_name" class="name">Last Name </label>
- </td>
- <td valign="top">
-  <input  type="text" name="last_name" maxlength="50" size="30" class="write">
- </td>
- <td colspan="2" style="text-align:center">
-  <input type="submit" value="Change" class="exchange" size="15">
- </td>
-</tr>
+              <div class="submit">
+                <span class="text-right animate-show" ng-show="ok" style="color:red;">Last Name changed</span>
+              <input type="submit" ng-click="changeLastName()" value="Change Last Name" >
 
-<tr class=main>
-<td valign="top">
-  <label for="email" class="name">Email Address </label>
- </td>
- <td valign="top">
-  <input  type="text" name="email" maxlength="80" size="30" class="write">
- </td>
-  <td colspan="2" style="text-align:center">
-  <input type="submit" value="Change" class="exchange">
- </td>
-</tr>
-<tr class=main>
- <td valign="top">
-  <label for="password" class="name">Password</label>
- </td>
- <td valign="top">
-  <input  type="password" name="password" maxlength="30" size="30" class="write">
- </td>
- <td colspan="2" style="text-align:center">
-  <input type="submit" value="Change" class="exchange">
- </td>
-</tr>
+           </div>
+           <div class="clear"> </div>
+        </form>
 
-</table>
-</form>
+        <h2>First Name</h2>
+        <form>
+           <div class="lable">
+                <div class="col_1_of_2 span_1_of_2"><input type="text" ng-model="firstName" class="text" value="First Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'First Name';}" />
+                <span class="text-right animate-show" ng-show="invalidFirstName" style="color:red;">Please complete First Name field</span>
+                </div></div>
+
+              <div class="submit">
+                <span class="text-right animate-show" ng-show="okName" style="color:red;">First Name changed</span>
+              <input type="submit" ng-click="changeFirstName()" value="Change First Name" >
+
+           </div>
+           <div class="clear"> </div>
+        </form>
+
+        <h2>Email</h2>
+        <form>
+           <div class="lable">
+                <div class="col_1_of_2 span_1_of_2"><input type="text" ng-model="email" class="text" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" />
+                <span class="text-right animate-show" ng-show="invalidEmail" style="color:red;">Please complete Email field</span>
+                </div></div>
+
+              <div class="submit">
+                <span class="text-right animate-show" ng-show="okEmail" style="color:red;">Email changed</span>
+              <input type="submit" ng-click="changeEmail()" value="Change Email" >
+
+           </div>
+           <div class="clear"> </div>
+        </form>
+
+        <h2>Password</h2>
+        <form>
+           <div class="lable">
+                <div class="col_1_of_2 span_1_of_2"><input type="password" ng-model="password" class="text" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" />
+                <span class="text-right animate-show" ng-show="invalidPassword" style="color:red;">Please complete Password field</span>
+                </div></div>
+
+              <div class="submit">
+                <span class="text-right animate-show" ng-show="okPassword" style="color:red;">Password ghanged</span>
+              <input type="submit" ng-click="changePassword()" value="Change Password" >
+
+           </div>
+           <div class="clear"> </div>
+        </form>
+
+</div>
 
 {% endblock %}

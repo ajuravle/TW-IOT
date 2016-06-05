@@ -578,16 +578,19 @@ directiveModule.directive('clockTv', function() {
 directiveModule.directive('textTvDetails', function() {
     var controller = function($scope, $timeout,ActivitateTV) {
         var id_q=$scope.edit();
+        $scope.detaliiTV = {}
         ActivitateTV.getInfo(id_q['id'])
-        .success(function(result){
-                $scope.success=true;
-                $scope.feedback="Success";
-                console.log("<-----",result);
+        .success(function(result) {
+            $scope.detaliiTV = result;
+            ActivitateTV.getChannel(result['id_canal'])
+            .success(function(result1) {
+                $scope.detaliiTV.numeCanal = result1['denumire'];
+                
             })
-            .error(function(result){
-                $scope.success=false;
-                $scope.feedback="Api error";
-            })
+        })
+        .error(function(){
+            $scope.feedback="error";
+        })
 
     };
     return {
@@ -764,15 +767,13 @@ directiveModule.directive('lightIntensity', function() {
 directiveModule.directive('textLightsDetails', function() {
     var controller = function($scope, $timeout,ActivitateSI) {
         var id_q=$scope.edit();
+        $scope.detaliiSI = {}
         ActivitateSI.getInfo(id_q['id'])
-        .success(function(result){
-                $scope.success=true;
-                $scope.feedback="Success";
-                console.log("<-----",result);
-            })
-            .error(function(result){
-                $scope.success=false;
-                $scope.feedback="Api error";
+        .success(function(result) {
+            $scope.detaliiSI = result;
+        })
+        .error(function(){
+                $scope.feedback="error";
             })
     };
     return {
@@ -1178,16 +1179,18 @@ directiveModule.directive('textRefrigeratorDetails', function() {
 directiveModule.directive('textCoffeeDetails', function() {
     var controller = function($scope, $timeout,ActivitateCafetiera) {
         var id_q=$scope.edit();
+        $scope.detaliiCafetiera = {}
         ActivitateCafetiera.getInfo(id_q['id'])
-        .success(function(result){
-                $scope.success=true;
-                $scope.feedback="Success";
-                console.log("<-----",result);
-            })
-            .error(function(result){
-                $scope.success=false;
-                $scope.feedback="Api error";
-            })
+        .success(function(result) {
+            $scope.detaliiCafetiera = result;
+            $scope.detaliiCafetiera.ore="";
+            for (i=0;i<result.ora_start.length;i++)
+                $scope.detaliiCafetiera.ore=$scope.detaliiCafetiera.ore+result.ora_start[i]+", ";
+            $scope.detaliiCafetiera.ore=$scope.detaliiCafetiera.ore.slice(0 ,-2);
+        })
+        .error(function(res){
+            console.log("err", res);
+        })
         
     };
     return {
