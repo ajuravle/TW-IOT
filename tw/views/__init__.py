@@ -18,12 +18,10 @@ def api_session_validation(request):
         return True
 
 
-def api_session_validation_admin(func):
-    def api_view_session_validation_admin(request):	
+def api_session_validation_admin(request):	
         session = request.session
-        if not 'email' in session.keys():
-            return Response(status=401, body="Unauthorized for this api.Must be an admin")
-        api_return_callable_admin = func(request)
-        return api_return_callable_admin
-
-    return api_view_session_validation_admin 
+        if not 'tip' in session.keys():
+            return False
+        if session['tip'] != 'admin':
+        	return False
+        return True
