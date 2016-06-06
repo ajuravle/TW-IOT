@@ -15,6 +15,7 @@ import yaml
 import uuid
 from jsonschema import validate, FormatChecker,ValidationError
 import datetime
+from .. import api_session_validation
 
 @view_defaults(route_name = 'televizor', renderer = 'json')
 class TelevizorApi(object):
@@ -24,6 +25,10 @@ class TelevizorApi(object):
 
     @view_config(request_method = 'POST')
     def post(self):
+        verify = api_session_validation(self.request)
+        if not verify:
+            return Response(status=401, body="Unauthorized for this api. Please login")
+         
         request_body = json.loads(self.request.body.decode("utf8"))
         schema = yaml.safe_load( pkgutil.get_data("tw", "schemas/televizor.yaml") )
         try:
@@ -58,6 +63,10 @@ class TelevizorOneApi(object):
            
     @view_config(request_method = 'GET') 
     def get(self):
+        verify = api_session_validation(self.request)
+        if not verify:
+            return Response(status=401, body="Unauthorized for this api. Please login")
+         
         record = self.esteIdCorect()
         if record is None:
             return Response(status = 404, body = "Incorrect id")
@@ -65,6 +74,10 @@ class TelevizorOneApi(object):
 
     @view_config(request_method = 'PUT')
     def put(self):
+        verify = api_session_validation(self.request)
+        if not verify:
+            return Response(status=401, body="Unauthorized for this api. Please login")
+         
         if self.esteIdCorect() is None:
             return Response(status = 404, body = "Incorrect id")
         request_body = json.loads(self.request.body.decode("utf8"))
@@ -113,6 +126,10 @@ class TelevizorOneApi(object):
 
     @view_config(request_method = 'DELETE')
     def delete(self):
+        verify = api_session_validation(self.request)
+        if not verify:
+            return Response(status=401, body="Unauthorized for this api. Please login")
+         
         id = self.esteIdCorect()
         if id is None:
             return Response(status = 400, body = "Incorrect id")

@@ -46,6 +46,10 @@ class Userr(object):
         
     @view_config(request_method = 'GET')
     def get(self):
+        verify = api_session_validation_admin(self.request)
+        if not verify:
+            return Response(status=401, body="Unauthorized for this api. You are not an admin")
+        
         records = DBSession.query(User).all()
         list_records = []
         for i in records:
@@ -67,6 +71,9 @@ class Userr(object):
 
     @view_config(request_method = 'PUT')
     def put(self):
+        verify = api_session_validation_admin(self.request)
+        if not verify:
+            return Response(status=401, body="Unauthorized for this api. You are not an admin")
         
         request_body = json.loads(self.request.body.decode("utf8"))
         schema = yaml.safe_load( pkgutil.get_data("tw","schemas/user_update.yaml") )
@@ -130,6 +137,10 @@ class UserOne(object):
            
     @view_config(request_method = 'GET') 
     def get(self):
+        verify = api_session_validation_admin(self.request)
+        if not verify:
+            return Response(status=401, body="Unauthorized for this api. You are not an admin")
+        
         record = self.esteIdCorect()
         if record is None:
             return Response(status = 404, body = "Incorrect id")
@@ -151,6 +162,10 @@ class UserOne(object):
 
     @view_config(request_method = 'PUT')
     def put_one(self):
+        verify = api_session_validation_admin(self.request)
+        if not verify:
+            return Response(status=401, body="Unauthorized for this api. You are not an admin")
+        
         id = self.request.matchdict['id']
         user = DBSession.query(User).filter(User.id_user == id).first()
         if user is None:
@@ -201,6 +216,10 @@ class UserOne(object):
 
     @view_config(request_method = 'DELETE')
     def delete(self):
+        verify = api_session_validation_admin(self.request)
+        if not verify:
+            return Response(status=401, body="Unauthorized for this api. You are not an admin")
+        
         id = self.esteIdCorect()
         if id is None:
             return Response(status = 404, body = "Incorrect id")

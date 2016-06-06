@@ -12,9 +12,14 @@ import json
 from sqlalchemy.orm import load_only
 from sqlalchemy import update
 import uuid
+from .. import api_session_validation_admin
 
 @view_config(request_method = 'GET', route_name = 'dispozitive', renderer = 'json')
 def get(request):
+    verify = api_session_validation_admin(self.request)
+    if not verify:
+        return Response(status=401, body="Unauthorized for this api. You are not an admin")
+        
     list_dispozitive = []
     records = DBSession.query(Cafetiera).all()
     for record in records:
@@ -56,6 +61,10 @@ def get(request):
 
 @view_config(request_method = 'POST', route_name = 'dispozitive', renderer = 'json')
 def post(request):
+    verify = api_session_validation_admin(self.request)
+    if not verify:
+        return Response(status=401, body="Unauthorized for this api. You are not an admin")
+        
     request_body = json.loads(request.body.decode("utf8"))
 
     if 'tip' not in request_body.keys() or 'denumire' not in request_body.keys():
