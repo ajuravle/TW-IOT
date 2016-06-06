@@ -24,7 +24,7 @@ def post(request):
     row = InregistrareToken(id=str(uuid.uuid4())[:6], token = token, email = email)
     DBSession.add(row)
     subject = 'Inregistrare WOHA'
-    body = 'Pentru inregistrare accesati: http://192.168.0.94:6543/register/' + token
+    body = 'Pentru inregistrare accesati: http://192.168.0.241:6543/register/' + token
     send_email(email, subject, body)
     return Response(status = 200, body = "OK")
 
@@ -42,6 +42,7 @@ def postRegister(request):
     token = request.matchdict["id"]
     request_body = json.loads(request.body.decode("utf8"))
     email = request_body['email']
+    print ("----------------->",email,token)
     record = DBSession.query(InregistrareToken).filter(InregistrareToken.token == token, InregistrareToken.email == email).first()
     if record is None:
         return Response(status = 400, body = "Incorect token")

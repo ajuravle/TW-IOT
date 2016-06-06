@@ -27,7 +27,7 @@ class ActivitateCafetieraa(object):
         if record == None:
             return Response(status=400,body='id incorect')
         
-        rez = DBSession.query(ActivitateCafetiera.ora).filter(ActivitateCafetiera.stare == 1).group_by(ActivitateCafetiera.ora).having(func.count(ActivitateCafetiera.ora)>5).order_by(func.count(ActivitateCafetiera.ora).desc())[:3]
+        rez = DBSession.query(ActivitateCafetiera.ora).filter(ActivitateCafetiera.stare == 1,ActivitateCafetiera.id_dispozitiv==id).group_by(ActivitateCafetiera.ora).having(func.count(ActivitateCafetiera.ora)>5).order_by(func.count(ActivitateCafetiera.ora).desc())[:3]
         result = {}
         if not rez is None:
             lista = []
@@ -39,13 +39,13 @@ class ActivitateCafetieraa(object):
 
         if "ora" in params.keys() and params["ora"] == "true":
             ora_curenta = datetime.datetime.now().hour
-            rez = DBSession.query(Cafetiera.tip).filter(ActivitateCafetiera.ora == ora_curenta).group_by(ActivitateCafetiera.tip).order_by(func.count(ActivitateCafetiera.tip).desc()).first()
+            rez = DBSession.query(Cafetiera.tip).filter(ActivitateCafetiera.ora == ora_curenta,ActivitateCafetiera.id_dispozitiv==id).group_by(ActivitateCafetiera.tip).order_by(func.count(ActivitateCafetiera.tip).desc()).first()
             if not rez is None:
                 result["tip"] = rez[0]
             else:
                  result["tip"] = "null"
             
-            rez = DBSession.query(Cafetiera.zahar).filter(ActivitateCafetiera.ora == ora_curenta).group_by(ActivitateCafetiera.zahar).order_by(func.count(ActivitateCafetiera.zahar).desc()).first()
+            rez = DBSession.query(Cafetiera.zahar).filter(ActivitateCafetiera.ora == ora_curenta,ActivitateCafetiera.id_dispozitiv==id).group_by(ActivitateCafetiera.zahar).order_by(func.count(ActivitateCafetiera.zahar).desc()).first()
             if not rez is None:
                 result["zahar"] = rez[0]
             else:
