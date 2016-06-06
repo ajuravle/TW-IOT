@@ -39,21 +39,21 @@ def get(request):
 
 @view_config(route_name="register_one", request_method = "POST")
 def postRegister(request):
-    print("da ----------------------")
     token = request.matchdict["id"]
-    email = request.params['email']
+    request_body = json.loads(request.body.decode("utf8"))
+    email = request_body['email']
     record = DBSession.query(InregistrareToken).filter(InregistrareToken.token == token, InregistrareToken.email == email).first()
     if record is None:
-        return Response(status = 400, body = "Incorect token-adress")
+        return Response(status = 400, body = "Incorect token")
 
     DBSession.delete(record)
     
     id = str(uuid.uuid4())[:6]
     insert_row = {}
-    insert_row['nume'] = request.params['nume']
-    insert_row['prenume'] = request.params['prenume']
-    insert_row['parola'] = request.params['parola']
-    insert_row['mail'] = request.params['email']
+    insert_row['nume'] = request_body['nume']
+    insert_row['prenume'] = request_body['prenume']
+    insert_row['parola'] = sha256_crypt.encrypt(request_body['parola']);
+    insert_row['mail'] = request_body['email']
     insert_row['id_user'] = id
     record = User(**insert_row)
     DBSession.add(record)

@@ -82,6 +82,8 @@ def main(global_config, **settings):
 
     config.add_route("info", "/api/info")
 
+    config.add_route("not_found", "/not_found")
+
 
     config.scan()
     return config.make_wsgi_app()
