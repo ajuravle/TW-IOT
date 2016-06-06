@@ -10,7 +10,7 @@ from .. import api_session_validation_admin
 
 @view_config(request_method = 'PUT', route_name = 'info', renderer = 'json')
 def put(request):
-    verify = api_session_validation_admin(self.request)
+    verify = api_session_validation_admin(request)
     if not verify:
         return Response(status=401, body="Unauthorized for this api. You are not an admin")
         
@@ -26,7 +26,7 @@ def put(request):
 
 @view_config(request_method = 'GET', route_name = 'info', renderer = 'json')
 def get(request):
-    verify = api_session_validation_admin(self.request)
+    verify = api_session_validation_admin(request)
     if not verify:
         return Response(status=401, body="Unauthorized for this api. You are not an admin")
         

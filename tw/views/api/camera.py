@@ -20,7 +20,7 @@ import pkgutil
 import yaml
 import uuid
 from jsonschema import validate, FormatChecker,ValidationError
-from .. import api_session_validation_admin
+from .. import api_session_validation
 
 def cauta_dis(id_camera):
     dispozitive = DBSession.query(CameraDispozitiv).filter(CameraDispozitiv.id_camera == id_camera).all()
@@ -72,7 +72,7 @@ class CameraApi(object):
 
     @view_config(request_method = 'GET')
     def get(self):
-        verify = api_session_validation_admin(self.request)
+        verify = api_session_validation(self.request)
         if not verify:
             return Response(status=401, body="Unauthorized for this api. You are not an admin")
         
