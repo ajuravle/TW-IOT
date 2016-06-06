@@ -6,6 +6,7 @@ from ...models.cafetiera import Cafetiera
 from pyramid.response import Response
 import json
 import datetime
+from .. import api_session_validation
 from sqlalchemy import func,desc
 
 @view_defaults(route_name = 'activitate_cafetiera', renderer = 'json')
@@ -16,6 +17,10 @@ class ActivitateCafetieraa(object):
 
     @view_config(request_method = 'GET')
     def get(self):
+        verify = api_session_validation(self.request)
+        if not verify:
+            return Response(status=401, body="Unauthorized for this api. Please login")
+            
         params = self.request.GET
         id = self.request.matchdict['id']
         record = DBSession.query(Cafetiera).filter(Cafetiera.id_dispozitiv == id).first()
