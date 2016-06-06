@@ -21,26 +21,32 @@ class Login(object):
     def postLoginPage(self):
         user = {'email': self.request.params['email'], 'password': self.request.params['password']}
         credentials_db = {}
-        enc_pass = sha256_crypt.encrypt(user['password'])
+      
         
-        try:
-            credentials_db = DBSession.query(User).filter(User.mail == user['email'], User.parola == enc_pass).first().as_dict()
-            print(credentials_db)
-        except AttributeError:
-            error = {"email_required": False, "password_required": False, "incorrect_credentials": False}
+
+        credentials_db = DBSession.query(User).filter(User.mail == user['email']).first()
+        error = {"email_required": False, "password_required": False, "incorrect_credentials": False}
+
+        if credentials_db is None:
             if len(user['email']) == 0:
                 error['email_required'] = True
+            else:
+                error['incorrect_credentials'] = True
+            return render_to_response('templates/login.jinja2', error, request = self.request)
+
+        if not sha256_crypt.verify(user['password'],credentials_db.as_dict()['parola']):
             if len(user['password']) == 0:
                 error['password_required'] = True
             if (len(user['email']) > 0) and (len(user['password']) > 0):
                 error['incorrect_credentials'] = True
             return render_to_response('templates/login.jinja2', error, request = self.request)
         
+        credentials=credentials_db.as_dict()
         self.request.session['email'] = user['email']
-        self.request.session['tip'] = credentials_db['tip']
-        self.request.session['nume'] = credentials_db['nume']
-        self.request.session['prenume'] = credentials_db['prenume']
-        self.request.session['id_user'] = credentials_db['id_user']
+        self.request.session['tip'] = credentials['tip']
+        self.request.session['nume'] = credentials['nume']
+        self.request.session['prenume'] = credentials['prenume']
+        self.request.session['id_user'] = credentials['id_user']
         token = sha256_crypt.encrypt(self.request.session.get_csrf_token())
         response = HTTPFound(location = self.request.route_url('home'))
         response.set_cookie('XSRF-TOKEN', value=token)
