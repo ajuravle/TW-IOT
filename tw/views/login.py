@@ -21,8 +21,10 @@ class Login(object):
     def postLoginPage(self):
         user = {'email': self.request.params['email'], 'password': self.request.params['password']}
         credentials_db = {}
+        enc_pass = sha256_crypt.encrypt(user['password'])
+        
         try:
-            credentials_db = DBSession.query(User).filter(User.mail == user['email'], User.parola == user['password']).first().as_dict()
+            credentials_db = DBSession.query(User).filter(User.mail == user['email'], User.parola == enc_pass).first().as_dict()
             print(credentials_db)
         except AttributeError:
             error = {"email_required": False, "password_required": False, "incorrect_credentials": False}

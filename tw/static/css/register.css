@@ -96,5 +96,8 @@ input[type=submit] {
 	 background:#F4511E;
 	 border:1px solid #F4511E;
 }
+.disabled {
+	background: red;
+}
 
 

@@ -533,4 +533,67 @@ $scope.password = '';
         })
     }
 }])
+var appR = angular.module('register',[], function($locationProvider) {
+    $locationProvider.html5Mode({
+      enabled: true,
+      requireBase: false
+    });
+});
 
+appR.config(['$interpolateProvider', function($interpolateProvider){
+    $interpolateProvider.startSymbol('<%');
+    $interpolateProvider.endSymbol('%>');
+}]);
+
+appR.controller('registerC',['$scope','$http','$window', function($scope, $http, $window) {
+    $scope.errorMandatory = false;
+    $scope.errorPass = false;
+    $scope.nume = "Firstname";
+    $scope.prenume = "Lastname";
+    $scope.email= "Email";
+    $scope.pass = '';
+    $scope.repass = '';
+
+    $scope.submit = function() {
+        $scope.errorMandatory = false;
+        $scope.errorPass = false;
+        $scope.invEmail = false;
+        if($scope.nume == 'Firstname' || $scope.nume == '') {
+            $scope.errorMandatory = true;
+        }
+        if($scope.prenume == 'Lastname' || $scope.prenume == '') {
+            $scope.errorMandatory = true;
+        }
+        if($scope.email == 'Email' || $scope.email == '') {
+            $scope.errorMandatory = true;
+        } else {
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if(!re.test($scope.email)) {
+                $scope.invEmail = true;
+            }
+        }
+        if($scope.pass == '' || $scope.repass == '') {
+            $scope.errorMandatory = true;
+        } else {
+            if($scope.pass != $scope.repass) {
+                $scope.errorPass = true;
+            }
+        }
+        if($scope.errorPass || $scope.errorMandatory || $scope.invEmail) {
+            return;
+        } 
+        var data = {}
+        data['nume'] = $scope.nume;
+        data['prenume'] = $scope.prenume;
+        data['email'] = $scope.email;
+        data['parola'] = $scope.pass;
+        $http.post($window.location.pathname, data)
+        .success(function(res) {
+            $window.location.href = "http://" + $window.location.host + "/login"
+        })
+        .error(function(re) {
+            $window.location.href = "http://" + $window.location.host + "/not_found"
+        })
+    }
+    
+}])
