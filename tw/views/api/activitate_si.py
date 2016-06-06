@@ -22,14 +22,14 @@ class ActivitateSII(object):
         if record == None:
             return Response(status=400,body='id incorect')
         
-        rez = DBSession.query(ActivitateSI.ora).filter(ActivitateSI.stare == 1).group_by(ActivitateSI.ora).order_by(func.count(ActivitateSI.ora).desc()).first()
+        rez = DBSession.query(ActivitateSI.ora).filter(ActivitateSI.stare == 1,ActivitateSI.id_dispozitiv==id).group_by(ActivitateSI.ora).order_by(func.count(ActivitateSI.ora).desc()).first()
         result = {}
         if not rez is None:
             result["ora_start"] = rez[0]
         else:
              result["ora_start"] = "null"
 
-        rez = DBSession.query(ActivitateSI.ora).filter(ActivitateSI.stare == 0).group_by(ActivitateSI.ora).order_by(func.count(ActivitateSI.ora).desc()).first()
+        rez = DBSession.query(ActivitateSI.ora).filter(ActivitateSI.stare == 0,ActivitateSI.id_dispozitiv==id).group_by(ActivitateSI.ora).order_by(func.count(ActivitateSI.ora).desc()).first()
         if not rez is None:
             result["ora_stop"] = rez[0]
         else:
@@ -37,13 +37,13 @@ class ActivitateSII(object):
 
         if "ora" in params.keys() and params["ora"] == "true":
             ora_curenta = datetime.datetime.now().hour
-            rez = DBSession.query(ActivitateSI.intensitate).filter(ActivitateSI.ora == ora_curenta).group_by(ActivitateSI.intensitate).order_by(func.count(ActivitateSI.intensitate).desc()).first()
+            rez = DBSession.query(ActivitateSI.intensitate).filter(ActivitateSI.ora == ora_curenta,ActivitateSI.id_dispozitiv==id).group_by(ActivitateSI.intensitate).order_by(func.count(ActivitateSI.intensitate).desc()).first()
             if not rez is None:
                 result["intensitate"] = rez[0]
             else:
                  result["intensitate"] = "null"
             
-            rez = DBSession.query(ActivitateSI.nr_becuri_aprinse).filter(ActivitateSI.ora == ora_curenta).group_by(ActivitateSI.nr_becuri_aprinse).order_by(func.count(ActivitateSI.nr_becuri_aprinse).desc()).first()
+            rez = DBSession.query(ActivitateSI.nr_becuri_aprinse).filter(ActivitateSI.ora == ora_curenta,ActivitateSI.id_dispozitiv==id).group_by(ActivitateSI.nr_becuri_aprinse).order_by(func.count(ActivitateSI.nr_becuri_aprinse).desc()).first()
             if not rez is None:
                 result["nr_becuri_aprinse"] = rez[0]
             else:

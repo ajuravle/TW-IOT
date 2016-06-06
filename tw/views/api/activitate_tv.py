@@ -22,14 +22,14 @@ class ActivitateTVV(object):
         if record == None:
             return Response(status=400,body='id incorect')
         
-        rez = DBSession.query(ActivitateTV.ora).filter(ActivitateTV.stare == 1).group_by(ActivitateTV.ora).order_by(func.count(ActivitateTV.ora).desc()).first()
+        rez = DBSession.query(ActivitateTV.ora).filter(ActivitateTV.stare == 1,ActivitateTV.id_dispozitiv==id).group_by(ActivitateTV.ora).order_by(func.count(ActivitateTV.ora).desc()).first()
         result = {}
         if not rez is None:
             result["ora_start"] = rez[0]
         else:
              result["ora_start"] = "null"
 
-        rez = DBSession.query(ActivitateTV.ora).filter(ActivitateTV.stare == 0).group_by(ActivitateTV.ora).order_by(func.count(ActivitateTV.ora).desc()).first()
+        rez = DBSession.query(ActivitateTV.ora).filter(ActivitateTV.stare == 0,ActivitateTV.id_dispozitiv==id).group_by(ActivitateTV.ora).order_by(func.count(ActivitateTV.ora).desc()).first()
         if not rez is None:
             result["ora_stop"] = rez[0]
         else:
@@ -37,13 +37,13 @@ class ActivitateTVV(object):
 
         if "ora" in params.keys() and params["ora"] == "true":
             ora_curenta = datetime.datetime.now().hour
-            rez = DBSession.query(ActivitateTV.volum).filter(ActivitateTV.ora == ora_curenta).group_by(ActivitateTV.volum).order_by(func.count(ActivitateTV.volum).desc()).first()
+            rez = DBSession.query(ActivitateTV.volum).filter(ActivitateTV.ora == ora_curenta,ActivitateTV.id_dispozitiv==id).group_by(ActivitateTV.volum).order_by(func.count(ActivitateTV.volum).desc()).first()
             if not rez is None:
                 result["volum"] = rez[0]
             else:
                  result["volum"] = "null"
             
-            rez = DBSession.query(ActivitateTV.id_canal).filter(ActivitateTV.ora == ora_curenta).group_by(ActivitateTV.id_canal).order_by(func.count(ActivitateTV.id_canal).desc()).first()
+            rez = DBSession.query(ActivitateTV.id_canal).filter(ActivitateTV.ora == ora_curenta,ActivitateTV.id_dispozitiv==id).group_by(ActivitateTV.id_canal).order_by(func.count(ActivitateTV.id_canal).desc()).first()
             if not rez is None:
                 result["id_canal"] = rez[0]
             else:
