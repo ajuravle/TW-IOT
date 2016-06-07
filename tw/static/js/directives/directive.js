@@ -79,7 +79,7 @@ directiveModule.directive('temperature', function() {
     return {
         restrict: 'E',
         scope: {
-            value: '@',
+            value: '=',
             state: '=',
             id: '@',
             title: '@',
@@ -184,7 +184,7 @@ directiveModule.directive('itemCard', function() {
             id: '@',
             details: '@',
             icon: '@',
-            item: '@',
+            item: '=',
             edit: '&'
         },
         templateUrl: '/static/directivesTemplates/itemcarddropdown.html',
@@ -582,6 +582,7 @@ directiveModule.directive('textTvDetails', function() {
         ActivitateTV.getInfo(id_q['id'])
         .success(function(result) {
             $scope.detaliiTV = result;
+            $scope.info = result;
             ActivitateTV.getChannel(result['id_canal'])
             .success(function(result1) {
                 $scope.detaliiTV.numeCanal = result1['denumire'];
@@ -592,6 +593,10 @@ directiveModule.directive('textTvDetails', function() {
             $scope.feedback="error";
         })
 
+        $scope.editInvatareAutomata = function() {
+            $scope.stateInvatare = !$scope.stateInvatare;
+        }
+
     };
     return {
         restrict: 'E',
@@ -601,6 +606,8 @@ directiveModule.directive('textTvDetails', function() {
             id: '@',
             title: '@',
             rangeText: '@',
+            info: '=',
+            stateInvatare: '=',
             edit: '&'
         },
         templateUrl: '/static/directivesTemplates/textTV.html',
@@ -618,28 +625,26 @@ directiveModule.directive('channel', function() {
         }
     }
 
-        $scope.clicked = false;
-        $scope.editChannel = function() {
-            $scope.clicked = true;
-            $scope.success = false;
+    $scope.clicked = false;
+    $scope.editChannel = function() {
+        $scope.clicked = true;
+        $scope.success = false;
 
-             details=$scope.edit();
-            TV.put(details['id'],{id_canal:get_id_canal()})
-            .success(function(){
-                $scope.success=true;
-                $scope.feedback="Success";
-            })
-            .error(function(){
-                $scope.success=false;
-                $scope.feedback="Api error";
-            })
+        details=$scope.edit();
+        TV.put(details['id'],{id_canal:get_id_canal()})
+        .success(function(){
+            $scope.success=true;
+            $scope.feedback="Success";
+        })
+        .error(function(){
+            $scope.success=false;
+            $scope.feedback="Api error";
+        })
 
+        $timeout(function() {
+            $scope.clicked = false;
 
-
-            $timeout(function() {
-                $scope.clicked = false;
-
-            },1000);
+        },1000);
         };
     };
 
@@ -653,7 +658,7 @@ directiveModule.directive('channel', function() {
             details: '@',
             icon: '@',
             edit: '&',
-            item: '@'
+            item: '=',
         },
         templateUrl: '/static/directivesTemplates/channels.html',
         controller: controller
@@ -713,7 +718,7 @@ directiveModule.directive('nrBulbs', function() {
     return {
         restrict: 'E',
         scope: {
-            value: '@',
+            value: '=',
             state: '=',
             id: '@',
             title: '@',
@@ -752,7 +757,7 @@ directiveModule.directive('lightIntensity', function() {
     return {
         restrict: 'E',
         scope: {
-            value: '@',
+            value: '=',
             state: '=',
             id: '@',
             title: '@',
@@ -771,10 +776,14 @@ directiveModule.directive('textLightsDetails', function() {
         ActivitateSI.getInfo(id_q['id'])
         .success(function(result) {
             $scope.detaliiSI = result;
+            $scope.info = result;
         })
         .error(function(){
                 $scope.feedback="error";
             })
+        $scope.editInvatareAutomata = function() {
+            $scope.stateInvatare = !$scope.stateInvatare;
+        }
     };
     return {
         restrict: 'E',
@@ -784,6 +793,8 @@ directiveModule.directive('textLightsDetails', function() {
             id: '@',
             title: '@',
             rangeText: '@',
+            stateInvatare: '=',
+            info: '=',
             edit: '&'
         },
         templateUrl: '/static/directivesTemplates/textLights.html',
@@ -1183,15 +1194,21 @@ directiveModule.directive('textCoffeeDetails', function() {
         ActivitateCafetiera.getInfo(id_q['id'])
         .success(function(result) {
             $scope.detaliiCafetiera = result;
+            $scope.info = result;
             $scope.detaliiCafetiera.ore="";
             for (i=0;i<result.ora_start.length;i++)
                 $scope.detaliiCafetiera.ore=$scope.detaliiCafetiera.ore+result.ora_start[i]+", ";
             $scope.detaliiCafetiera.ore=$scope.detaliiCafetiera.ore.slice(0 ,-2);
+
+            console.log("activitareeee", $scope.info);
         })
         .error(function(res){
             console.log("err", res);
         })
         
+        $scope.editInvatareAutomata = function() {
+            $scope.stateInvatare = !$scope.stateInvatare;
+        }
     };
     return {
         restrict: 'E',
@@ -1201,6 +1218,8 @@ directiveModule.directive('textCoffeeDetails', function() {
             id: '@',
             title: '@',
             rangeText: '@',
+            stateInvatare: '=',
+            info: '=',
             edit: '&'
         },
         templateUrl: '/static/directivesTemplates/textCoffee.html',

@@ -6,5 +6,11 @@
         	<span class="text-therm-info">Sugar: <% detaliiCafetiera.zahar %></span>
         	<span class="text-therm-info">Coffee type: <% detaliiCafetiera.tip %></span>
         </div>
-    </div>
+        <span ng-show="!stateInvatare" style="position:absolute;bottom:50px;">Auto learning is deactivated</span>
+        <span ng-show="stateInvatare" style="position:absolute;bottom:50px;">Auto learning is activated</span>
+        <div class="coffe-card-icons">
+	        <div class="coffe-icons">
+	            <i class="fa fa-check  fa-lg" aria-hidden="true" ng-click="editInvatareAutomata()" ></i>
+	        </div>
+        </div>
 </div>

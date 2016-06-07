@@ -23,7 +23,7 @@ app.controller('left-menu', ['$scope', '$window', 'Camere','UserInfo', function(
     $scope.menu_items = [];
     $scope.camere_dispozitive = [];
     Camere.get_all()
-    .success(function(result) {console.log("result", result);
+    .success(function(result) {
         for(var i=0; i < result.length;i++) {
             one_item = {}
             one_item['value'] = result[i]['denumire'];
@@ -44,7 +44,6 @@ app.controller('left-menu', ['$scope', '$window', 'Camere','UserInfo', function(
         if(result['tip'] == 'admin') {
             $scope.isAdmin = true;
         }
-        console.log("admin", result);
     })
     .error(function(error) {
         console.log(error);
@@ -109,7 +108,6 @@ app.controller('washing-machine',['$scope', '$location', '$interval', 'WashingMa
                 $scope.stare = false;
             else
                 $scope.stare = true;
-            console.log(result['stare']);
         })
         .error(function(error) {
             console.log(error);
@@ -129,7 +127,6 @@ app.controller('refrigerator',['$scope', '$location', '$interval', 'Refrigerator
     $scope.data = {}
     $scope.stare = true;
     var getData = function() {
-        console.log("da");    
         Refrigerator.get_one(id)
         .success(function(result) {
             $scope.data = result;
@@ -137,7 +134,6 @@ app.controller('refrigerator',['$scope', '$location', '$interval', 'Refrigerator
                 $scope.stare = false;
             else
                 $scope.stare = true;
-            console.log($scope.data);
         })
         .error(function(error) {
             console.log(error);
@@ -159,8 +155,21 @@ app.controller('lights',['$scope', '$location', '$interval', 'Lights', function(
     var id = $location.absUrl().split('/')[4];
     $scope.data = {}
     $scope.stare = true;
+    $scope.info = {}
+    $scope.stateInvatare = false;
     var getData = function() {
-        console.log("da");    
+        if($scope.stateInvatare) {
+
+            var d = new Date();
+            var n = d.getHours();
+            console.log(n); 
+            if(n == $scope.info['ora_start']) {
+                Lights.put(id,{stare:1});
+            }
+            if(n == $scope.info['ora_stop']) {
+                Lights.put(id,{stare:0})
+            }
+        }
         Lights.get_one(id)
         .success(function(result) {
             $scope.data = result;
@@ -168,7 +177,6 @@ app.controller('lights',['$scope', '$location', '$interval', 'Lights', function(
                 $scope.stare = false;
             else
                 $scope.stare = true;
-            console.log($scope.data);
         })
         .error(function(error) {
             console.log(error);
@@ -176,6 +184,20 @@ app.controller('lights',['$scope', '$location', '$interval', 'Lights', function(
     };
     getData()
     $interval(getData,5000);
+
+    $scope.$watch('stateInvatare', function(value) {
+        if(value) {
+            console.log("vol",$scope.info);
+            if($scope.info['nr_becuri_aprinse'] != 'null' && !angular.isUndefined($scope.info['nr_becuri_aprinse']) && $scope.info['nr_becuri_aprinse'] != null) {
+                $scope.data['nr_becuri_aprinse'] = $scope.info['nr_becuri_aprinse'];
+                Lights.put(id,{nr_becuri_aprinse:$scope.info['nr_becuri_aprinse']});
+            }
+            if($scope.info['intensitate'] != 'null' && !angular.isUndefined($scope.info['intensitate']) && $scope.info['nr_becuri_aprinse'] != null) {
+                $scope.data['intensitate'] = $scope.info['intensitate'];
+                Lights.put(id,{intensitate:$scope.info['intensitate']});
+            }
+        }
+    })
 
     $scope.changeLights = function() {
         return {tip:"sistem_de_iluminat", id:id};
@@ -186,18 +208,22 @@ app.controller('lights',['$scope', '$location', '$interval', 'Lights', function(
 
 app.controller('tv',['$scope', '$location', '$interval', 'TV', function($scope, $location, $interval, TV) {
     var id = $location.absUrl().split('/')[4];
-    $scope.data = {}
+    $scope.data = {};
+    $scope.stateInvatare = false;
+    $scope.info = {};
     $scope.stare = true;
     $scope.list = [];
     $scope.chanel="";
+    $scope.oraOn = null;
+    $scope.oraOff = null;
 
 
     TV.get_channels(id)
         .success(function(result) {
             for (i=0;i<result.length;i++){
-                var item={}
-                item['name']=result[i]['denumire']
-                item['value']=result[i]['id_canal']
+                var item={};
+                item['name']=result[i]['denumire'];
+                item['value']=result[i]['id_canal'];
                 $scope.list.push(item);
             }
         })
@@ -206,10 +232,20 @@ app.controller('tv',['$scope', '$location', '$interval', 'TV', function($scope, 
         })
 
     var getData = function() {
-        console.log("da");    
+        if($scope.stateInvatare) {
+
+            var d = new Date();
+            var n = d.getHours();
+            console.log(n); 
+            if(n == $scope.info['ora_start']) {
+                TV.put(id,{stare:1});
+            }
+            if(n == $scope.info['ora_stop']) {
+                TV.put(id,{stare:0})
+            }
+        }
         TV.get_one(id)
         .success(function(result) {
-            console.log(result);
             $scope.data = result;
             if(result['stare'] == 0)
                 $scope.stare = false;
@@ -231,6 +267,29 @@ app.controller('tv',['$scope', '$location', '$interval', 'TV', function($scope, 
     getData()
     $interval(getData,5000);
     
+     $scope.$watch('stateInvatare', function(value) {
+        if(value) {
+            console.log("vol",$scope.info)
+            if($scope.info['volum'] != 'null' && !angular.isUndefined($scope.info['volum']) && $scope.info['volum'] != null) {
+                $scope.data['volum'] = $scope.info['volum'];
+                TV.put(id,{volum:$scope.info['volum']});
+            }
+            if($scope.info['numeCanal'] != 'null' && !angular.isUndefined($scope.info['numeCanal']) && $scope.info['volum'] != null) {
+                denumire_canal = $scope.info['numeCanal'];
+                id_can = "";
+                for(i = 0; i < $scope.list.length; i++) {
+                    if($scope.list[i]['name'] == denumire_canal) {
+                        id_can = $scope.list[i]['value'];
+                        break;
+                    }
+                }
+                TV.put(id,{id_canal:id_can});
+                $scope.channel = denumire_canal;
+            }
+        }
+
+    })
+
     $scope.changeTV = function() {
         return {tip:"televizor", id:id};
     }
@@ -242,9 +301,24 @@ app.controller('coffee-maker',['$scope', '$location', '$interval', 'CoffeeMaker'
     var id = $location.absUrl().split('/')[4];
     $scope.data = {}
     $scope.stare = true;
+    $scope.stateInvatare = false;
+    $scope.info = {}
+    console.log("bldsakfdjsl");
     $scope.list = [{name:'normal', value:'normal'},{name:'cappuccino', value:'cappuccino'}];
     var getData = function() {
-        console.log("da");    
+        if($scope.stateInvatare) {
+            console.log("oreee",$scope.info);
+            var d = new Date();
+            var n = d.getHours();
+            console.log(n); 
+            if($scope.info['ora_start'].length > 0) {
+                for(i = 0; i < $scope.info['ora_start'].length; i++) {
+                    if(n == $scope.info['ora_start'][i]) {
+                        CoffeeMaker.put(id,{stare:1})
+                    }
+                }
+            }
+        }
         CoffeeMaker.get_one(id)
         .success(function(result) {
             $scope.data = result;
@@ -252,7 +326,6 @@ app.controller('coffee-maker',['$scope', '$location', '$interval', 'CoffeeMaker'
                 $scope.stare = false;
             else
                 $scope.stare = true;
-            console.log($scope.data);
         })
         .error(function(error) {
             console.log(error);
@@ -260,7 +333,21 @@ app.controller('coffee-maker',['$scope', '$location', '$interval', 'CoffeeMaker'
     };
     getData()
     $interval(getData,5000);
+    console.log("a");
+    $scope.$watch('stateInvatare', function(value) {
+        if(value) {
+            console.log("blabla",$scope.info);
+            if($scope.info['tip'] != 'null' && !angular.isUndefined($scope.info['tip']) && $scope.info['tip'] != null) {
+                $scope.data['tip'] = $scope.info['tip'];
+                CoffeeMaker.put(id,{tip:$scope.info['tip']});
+            }
+            if($scope.info['zahar'] != 'null' && !angular.isUndefined($scope.info['zahar']) && $scope.info['zahar'] != null) {
+                CoffeeMaker.put(id,{zahar:$scope.info['zahar']});
+                $scope.data['zahar'] = $scope.info['zahar'];
+            }
+        }
 
+    })
     $scope.changeCoffeeMaker = function() {
         return {tip:"cafetiera", id:id, field:'coffee_maker'};
     }
@@ -386,7 +473,6 @@ app.controller('admin',['$scope', '$timeout', 'Admin', function($scope, $timeout
 
     Admin.get_info()
     .success(function(res) {
-        console.log("oras", res);
         if(res['oras'] != null){
             $scope.address  = res['oras'];
         }
@@ -415,7 +501,7 @@ app.controller('admin',['$scope', '$timeout', 'Admin', function($scope, $timeout
     $scope.addUser = function() {
         $scope.noUsername= false;
         $scope.noMail = false;
-        $scope.okUsername = false;console.log($scope.userName);
+        $scope.okUsername = false;
         if($scope.userName == '') {
             $scope.noUsername = true;
             $timeout(function(){
@@ -516,7 +602,6 @@ app.controller('admin',['$scope', '$timeout', 'Admin', function($scope, $timeout
     $scope.itemDispozitive = 'Please choose a device';
     Admin.get_dispozitive()
     .success(function(rez) {
-        console.log("length", rez)
         for(i = 0; i < rez.length; i++) {
             $scope.listDispozitive.push({name:rez[i]['denumire'], value:rez[i]['id_dispozitiv'], tip:rez[i]['tip'] })
         }
