@@ -14,6 +14,7 @@ import yaml
 import uuid
 import datetime
 from jsonschema import validate, FormatChecker,ValidationError
+from .. import api_session_validation
 
 @view_defaults(route_name = 'sistem_de_iluminat', renderer = 'json')
 class SistemDeIluminatt(object):
@@ -23,6 +24,10 @@ class SistemDeIluminatt(object):
 
     @view_config(request_method = 'POST', renderer = 'json')
     def post(self):
+        verify = api_session_validation(self.request)
+        if not verify:
+            return Response(status=401, body="Unauthorized for this api. Please login")
+         
     	request_body = json.loads(self.request.body.decode("utf8"))
         schema = yaml.safe_load( pkgutil.get_data("tw", "schemas/sistem_de_iluminat.yaml") )
         try:
@@ -53,6 +58,10 @@ class SistemDeIluminatOne(object):
            
     @view_config(request_method = 'GET') 
     def get(self):
+        verify = api_session_validation(self.request)
+        if not verify:
+            return Response(status=401, body="Unauthorized for this api. Please login")
+         
         record = self.esteIdCorect()
         if record is None:
             return Response(status = 404, body = "Incorrect id")
@@ -60,6 +69,10 @@ class SistemDeIluminatOne(object):
 
     @view_config(request_method = 'PUT')
     def put(self):
+        verify = api_session_validation(self.request)
+        if not verify:
+            return Response(status=401, body="Unauthorized for this api. Please login")
+         
         if self.esteIdCorect() is None:
             return Response(status = 404, body = "Incorrect id")
         request_body = json.loads(self.request.body.decode("utf8"))
@@ -100,6 +113,10 @@ class SistemDeIluminatOne(object):
 
     @view_config(request_method = 'DELETE')
     def delete(self):
+        verify = api_session_validation(self.request)
+        if not verify:
+            return Response(status=401, body="Unauthorized for this api. Please login")
+         
         id = self.esteIdCorect()
         if id is None:
             return Response(status = 404, body = "Incorrect id")

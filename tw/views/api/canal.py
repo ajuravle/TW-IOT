@@ -6,6 +6,7 @@ import json
 from sqlalchemy.orm import load_only
 from sqlalchemy import update
 import uuid
+from .. import api_session_validation
 
 @view_defaults(route_name = 'canal', renderer = 'json')
 class CanalApi(object):
@@ -15,6 +16,10 @@ class CanalApi(object):
 
     @view_config(request_method = 'GET')
     def get(self):
+        verify = api_session_validation(self.request)
+        if not verify:
+            return Response(status=401, body="Unauthorized for this api. Please login")
+         
         records = DBSession.query(Canal).all()
         list_records = []
         for record in records:
@@ -23,6 +28,10 @@ class CanalApi(object):
 
     @view_config(request_method = 'POST')
     def post(self):
+        verify = api_session_validation(self.request)
+        if not verify:
+            return Response(status=401, body="Unauthorized for this api. Please login")
+         
         request_body = json.loads(self.request.body.decode("utf8"))
         if not 'denumire' in request_body.keys():
             return Response(status = 400, body = "Campul denumire este obligatoriu")
@@ -51,6 +60,10 @@ class CanalOneApi(object):
            
     @view_config(request_method = 'GET') 
     def get(self):
+        verify = api_session_validation(self.request)
+        if not verify:
+            return Response(status=401, body="Unauthorized for this api. Please login")
+         
         record = self.esteIdCorect()
         if record is None:
             return Response(status = 404, body = "Incorrect id")
@@ -58,6 +71,10 @@ class CanalOneApi(object):
 
     @view_config(request_method = 'PUT')
     def put(self):
+        verify = api_session_validation(self.request)
+        if not verify:
+            return Response(status=401, body="Unauthorized for this api. Please login")
+         
         if self.esteIdCorect() is None:
             return Response(status = 404, body = "Incorrect id")
         request_body = json.loads(self.request.body.decode("utf8"))
@@ -73,6 +90,10 @@ class CanalOneApi(object):
 
     @view_config(request_method = 'DELETE')
     def delete(self):
+        verify = api_session_validation(self.request)
+        if not verify:
+            return Response(status=401, body="Unauthorized for this api. Please login")
+         
         id = self.esteIdCorect()
         if id is None:
             return Response(status = 400, body = "Incorrect id")

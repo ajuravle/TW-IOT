@@ -20,6 +20,7 @@ import pkgutil
 import yaml
 import uuid
 from jsonschema import validate, FormatChecker,ValidationError
+from .. import api_session_validation
 
 def cauta_dis(id_camera):
     dispozitive = DBSession.query(CameraDispozitiv).filter(CameraDispozitiv.id_camera == id_camera).all()
@@ -52,6 +53,10 @@ class CameraApi(object):
 
     @view_config(request_method = 'POST', renderer = 'json')
     def post(self):
+        verify = api_session_validation_admin(self.request)
+        if not verify:
+            return Response(status=401, body="Unauthorized for this api. You are not an admin")
+        
         request_body = json.loads(self.request.body.decode("utf8"))
         if not 'denumire' in request_body.keys():
             return Response(status = 400, body = "Campul denumire este obligatoriu")
@@ -67,6 +72,10 @@ class CameraApi(object):
 
     @view_config(request_method = 'GET')
     def get(self):
+        verify = api_session_validation(self.request)
+        if not verify:
+            return Response(status=401, body="Unauthorized for this api. You are not an admin")
+        
         id = self.request.session['id_user']
         tip = self.request.session['tip']
         records = DBSession.query(Camera).all()
@@ -104,6 +113,10 @@ class CameraOneApi(object):
            
     @view_config(request_method = 'GET') 
     def get(self):
+        verify = api_session_validation_admin(self.request)
+        if not verify:
+            return Response(status=401, body="Unauthorized for this api. You are not an admin")
+        
         record = self.esteIdCorect()
         if record is None:
             return Response(status = 404, body = "Incorrect id")
@@ -112,6 +125,10 @@ class CameraOneApi(object):
 
     @view_config(request_method = 'PUT')
     def put(self):
+        verify = api_session_validation_admin(self.request)
+        if not verify:
+            return Response(status=401, body="Unauthorized for this api. You are not an admin")
+        
         if self.esteIdCorect() is None:
             return Response(status = 404, body = "Incorrect id")
         request_body = json.loads(self.request.body.decode("utf8"))
@@ -158,6 +175,10 @@ class CameraOneApi(object):
 
     @view_config(request_method = 'DELETE')
     def delete(self):
+        verify = api_session_validation_admin(self.request)
+        if not verify:
+            return Response(status=401, body="Unauthorized for this api. You are not an admin")
+        
         id = self.esteIdCorect()
         if id is None:
             return Response(status = 404, body = "Incorrect id")

@@ -7,6 +7,7 @@ from pyramid.response import Response
 import json
 import datetime
 from sqlalchemy import func,desc
+from .. import api_session_validation
 
 @view_defaults(route_name = 'activitate_tv', renderer = 'json')
 class ActivitateTVV(object):
@@ -16,6 +17,10 @@ class ActivitateTVV(object):
 
     @view_config(request_method = 'GET')
     def get(self):
+        verify = api_session_validation(self.request)
+        if not verify:
+            return Response(status=401, body="Unauthorized for this api. Please login")
+          
         params = self.request.GET
         id = self.request.matchdict['id']
         record = DBSession.query(Televizor).filter(Televizor.id_dispozitiv == id).first()
