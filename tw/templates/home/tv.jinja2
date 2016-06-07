@@ -25,7 +25,7 @@
     
         <div class="row">
             <div class="col-md-6"> 
-               <channel rotations='10' title="TV channel" id='idd' state="stare" edit='changeTV()' list="list" item="<%channel%>" channelMenu="ChannelTV" icon="fa-bars"></channel>
+               <channel rotations='10' title="TV channel" id='idd' state="stare" edit='changeTV()' list="list" item="channel" channelMenu="ChannelTV" icon="fa-bars"></channel>
             </div>
             
             <div class="col-md-6">
@@ -37,7 +37,7 @@
     </div>
    
     <div class="col-md-4">
-        <text-tv-details value="100" edit='changeTV()' id="ru" state="true" title="TV details"</text-tv-details>
+        <text-tv-details value="100" state-invatare="stateInvatare", info="info" edit='changeTV()' id="ru" state="true" title="TV details"</text-tv-details>
     </div>
 </div>
 {% endblock %}

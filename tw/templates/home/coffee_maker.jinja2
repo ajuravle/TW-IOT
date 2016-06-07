@@ -8,7 +8,7 @@
         <div class="row">
         
             <div class="col-md-12">
-               <temperature value="<%data.zahar%>" id="buna" state="stare" edit="changeCoffeeMaker()" title="Sugar" range-text="Sugar: 0 to 10" min=0 max=10></temperature>
+               <temperature value="data.zahar" id="buna" state="stare" edit="changeCoffeeMaker()" title="Sugar" range-text="Sugar: 0 to 10" min=0 max=10></temperature>
             </div>
     
         </div> 
@@ -16,7 +16,7 @@
         <div class="row">
         
             <div class="col-md-12"> 
-               <item-card title="Coffee type" id='id' state='stare' edit="changeCoffeeMaker()" item = "<%data.tip %> "list="list" programMenu="TipuriCafea" icon="fa-bars"></item-card>
+               <item-card title="Coffee type" id='id' state='stare' edit="changeCoffeeMaker()" item = "data.tip" list="list" programMenu="TipuriCafea" icon="fa-bars"></item-card>
             </div>
     
         </div> 
@@ -25,7 +25,7 @@
     </div>
    
     <div class="col-md-4">
-        <text-coffee-details value="100" id="bu" state="true" title="Coffee maker details" edit="changeCoffeeMaker()"</text-details>
+        <text-coffee-details value="100" id="bu" state-invatare="stateInvatare" info="info" state="true" title="Coffee maker details" edit="changeCoffeeMaker()"</text-details>
     </div>
 </div>
 {% endblock %}
