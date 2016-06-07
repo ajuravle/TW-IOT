@@ -7,6 +7,7 @@ from ...models.sistem_de_iluminat import SistemDeIluminat
 from ...models.user_camera import UserCamera
 from ...models.televizor import Televizor
 from ...models.termostat import Termostat
+from ...models.camera_dispozitiv import CameraDispozitiv
 from pyramid.response import Response
 import json
 from sqlalchemy.orm import load_only
@@ -88,3 +89,37 @@ def post(request):
         DBSession.add(new)
 
     return request_body
+
+@view_config(request_method = 'DELETE', route_name = 'dispozitive_one', renderer = 'json')
+def delete_dis(request):
+    id = request.matchdict['id']
+    tip = request.matchdict['tip']
+
+    if tip == 'cafetiera':
+        record = DBSession.query(Cafetiera).filter(Cafetiera.id_dispozitiv == id).first()
+        DBSession.delete(record)
+    
+    if tip == 'frigider':
+        record = DBSession.query(Frigider).filter(Frigider.id_dispozitiv == id).first()
+        DBSession.delete(record)
+
+    if tip == 'masina_de_spalat':
+        record = DBSession.query(MasinaDeSpalat).filter(MasinaDeSpalat.id_dispozitiv == id).first()
+        DBSession.delete(record)
+
+    if tip == 'sistem_de_iluminat':
+        record = DBSession.query(SistemDeIluminat).filter(SistemDeIluminat.id_dispozitiv == id).first()
+        DBSession.delete(record)
+    
+    if tip == 'televizor':
+        record = DBSession.query(Televizor).filter(Televizor.id_dispozitiv == id).first()
+        DBSession.delete(record)
+
+    if tip == 'termostat':
+        record = DBSession.query(Termostat).filter(Termostat.id_dispozitiv == id).first()
+        DBSession.delete(record)
+
+    rec = DBSession.query(CameraDispozitiv).filter(CameraDispozitiv.id_dispozitiv == id).all()
+    for i in rec:
+        DBSession.delete(i)
+    return Response(status = 201)

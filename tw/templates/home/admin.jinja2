@@ -82,6 +82,39 @@
 			<h2>Management rooms - devices</h2>
 			<admin-table-dispozitive></admin-table-dispozitive>
 		</div>
+
+    <div class="row" >
+      <div class="col-md-6"> 
+         <item-card2  title="Choose User" id='id' state='true' list="listUsers" item = "itemDeleteUser" icon="fa-bars"></item-card> 
+      </div>
+    </div><p><span class="text-right animate-show" ng-show="noUser" style="color:red;">Please select an user</span></p>
+    <div class="submit">
+      <span class="text-right animate-show" ng-show="okUser" style="color:red;">Deleted</span>
+      <input type="submit"  ng-click="deleteUser()" value="Delete user" />
+    </div>
+
+     <div class="row" >
+      <div class="col-md-6"> 
+         <item-card2  title="Delete Room" id='id' state='true' list="listRooms" item = "itemRoom" icon="fa-bars"></item-card> 
+      </div>
+    </div><p><span class="text-right animate-show" ng-show="noDeleteRoom" style="color:red;">Please select a room</span></p>
+    <div class="submit">
+      <span class="text-right animate-show" ng-show="okDeleteRoom" style="color:red;">Deleted</span>
+      <input type="submit"  ng-click="deleteRoom()" value="Delete room" />
+    </div>
+
+     <div class="row" >
+      <div class="col-md-6"> 
+         <item-card2  title="DeviceType" id='id' state='true' list="listDispozitive" item = "itemDispozitive" icon="fa-bars"></item-card> 
+      </div>
+    </div><p><span class="text-right animate-show" ng-show="noDeleteDispozitive" style="color:red;">Please select a device</span></p>
+        <div class="submit">
+        <span class="text-right animate-show" ng-show="okDeleteDispozitive" style="color:red;">Deleted</span>
+      <input type="submit"  ng-click="deleteDispozitive()" value="Delete device" />
+    </div>
+
+
+    <div style="height:300px"></div>
 </div>
 
 {% endblock %}

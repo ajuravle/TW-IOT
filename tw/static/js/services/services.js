@@ -58,34 +58,43 @@ servicesModule.service('Admin',['$http', function($http) {
 
     this.get_useri = function() {
         return $http.get('/api/user');
-    }
+    };
+    this.delete_user = function(id) {
+        return $http.delete('/api/user/' + id)
+    };
     this.get_camere = function() {
         return $http.get('/api/camera');
-    }
+    };
+    this.delete_camera = function(id) {
+        return $http.delete('/api/camera/' + id);
+    };
     this.get_dispozitive = function() {
         return $http.get('/api/dispozitive');
     };
+    this.delete_dispozitive = function(id, tip) {
+        return $http.delete('/api/dispozitive/' + id + '/' + tip);
+    };
     this.put = function(id, body) {
         return $http.put('/api/user/' + id, body);
-    }
+    };
     this.put_camere = function(id, body) {
         return $http.put('/api/camera/' + id, body);
-    }
+    };
     this.add_dispozitive = function(body) {
         return $http.post('/api/dispozitive', body);
-    }
+    };
     this.add_camera = function(body) {
         return $http.post('/api/camera', body);
-    }
+    };
     this.send_mail = function(body) {
         return $http.post('/send_mail_register', body);
-    }
+    };
     this.get_info = function() {
         return $http.get('/api/info');
-    } 
+    }; 
     this.put_oras = function(body) {
         return $http.put('/api/info', body);
-    }
+    };
 }]);
 
 servicesModule.service('CoffeeMaker',['$http', function($http) {

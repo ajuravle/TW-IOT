@@ -440,6 +440,114 @@ app.controller('admin',['$scope', '$timeout', 'Admin', function($scope, $timeout
             },1000);
         })
     }
+
+    $scope.listUsers = [];
+    $scope.itemDeleteUser = 'Please choose an user';
+    Admin.get_useri()
+    .success(function(rez) {
+        for(i = 0; i < rez.length; i++) {
+            if(rez[i]['tip'] == 'admin') {
+                    continue;
+                }
+            $scope.listUsers.push({name:rez[i]['nume'] + rez[i]['prenume'], value:rez[i]['id_user']})
+        }
+    })
+    $scope.deleteUser = function() {
+        $scope.noUser = false;
+        $scope.okUser = false;
+        if($scope.itemDeleteUser == 'Please choose an user') {
+            $scope.noUser = true;
+            $timeout(function(){
+                $scope.noUser = false;
+            },1000);
+            return;
+        }
+        var id = "";
+        for(i = 0; i < $scope.listUsers.length; i++) {
+            if($scope.itemDeleteUser == $scope.listUsers[i]['name']){
+                id = $scope.listUsers[i]['value'];
+                break;
+            }
+        }
+        Admin.delete_user(id)
+        .success(function() {
+            $scope.okUser = true;
+            $timeout(function(){
+                $scope.okUser = false;
+            },1000);
+        })
+    }
+
+    $scope.listRooms = [];
+    $scope.itemRoom = 'Please choose a room';
+    Admin.get_camere()
+    .success(function(rez) {
+        for(i = 0; i < rez.length; i++) {
+            $scope.listRooms.push({name:rez[i]['denumire'], value:rez[i]['id_camera']})
+        }
+    })
+    $scope.deleteRoom = function() {
+        $scope.noDeleteRoom = false;
+        $scope.okDeleteRoom = false;
+        if($scope.itemRoom == 'Please choose a room') {
+            $scope.noDeleteRoom = true;
+            $timeout(function(){
+                $scope.noDeleteRoom = false;
+            },1000);
+            return;
+        }
+        var id = "";
+        for(i = 0; i < $scope.listRooms.length; i++) {
+            if($scope.itemRoom == $scope.listRooms[i]['name']){
+                id = $scope.listRooms[i]['value'];
+                break;
+            }
+        }
+        Admin.delete_camera(id)
+        .success(function() {
+            $scope.okDeleteRoom = true;
+            $timeout(function(){
+                $scope.okDeleteRoom = false;
+            },1000);
+        })
+    }
+
+    $scope.listDispozitive = [];
+    $scope.itemDispozitive = 'Please choose a device';
+    Admin.get_dispozitive()
+    .success(function(rez) {
+        console.log("length", rez)
+        for(i = 0; i < rez.length; i++) {
+            $scope.listDispozitive.push({name:rez[i]['denumire'], value:rez[i]['id_dispozitiv'], tip:rez[i]['tip'] })
+        }
+    })
+    $scope.deleteDispozitive= function() {
+        $scope.noDeleteDispozitive = false;
+        $scope.okDeleteDispozitive = false;
+        if($scope.itemDispozitive == 'Please choose a device') {
+            $scope.noDeleteDispozitive = true;
+            $timeout(function(){
+                $scope.noDeleteDispozitive = false;
+            },1000);
+            return;
+        }
+        var id = "";
+        var tip = ""
+        for(i = 0; i < $scope.listDispozitive.length; i++) {
+            if($scope.itemDispozitive == $scope.listDispozitive[i]['name']){
+                id = $scope.listDispozitive[i]['value'];
+                tip = $scope.listDispozitive[i]['tip'];
+                break;
+            }
+        }
+        Admin.delete_dispozitive(id,tip)
+        .success(function() {
+            $scope.okDeleteDispozitive = true;
+            $timeout(function(){
+                $scope.okDeleteDispozitive = false;
+            },1000);
+        })
+    }
 }])
 
 app.controller('profile',['$scope', '$timeout', 'Profile', function($scope, $timeout, Profile) {
@@ -513,7 +621,7 @@ app.controller('profile',['$scope', '$timeout', 'Profile', function($scope, $tim
         })
     }
 
-$scope.password = '';
+    $scope.password = '';
     $scope.changePassword = function() {
         $scope.invalidPassword = false;
         $scope.okPassword = false;
@@ -532,6 +640,8 @@ $scope.password = '';
             },1000);
         })
     }
+
+
 }])
 var appR = angular.module('register',[], function($locationProvider) {
     $locationProvider.html5Mode({

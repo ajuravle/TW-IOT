@@ -77,6 +77,7 @@ def main(global_config, **settings):
     config.add_route("thermostat", '/thermostat/{id}')
 
     config.add_route("dispozitive", "/api/dispozitive")
+    config.add_route("dispozitive_one", "/api/dispozitive/{id}/{tip}")
 
     config.add_route("user_id", "/user_id")
 
