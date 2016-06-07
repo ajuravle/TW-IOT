@@ -21,6 +21,7 @@ import yaml
 import uuid
 from jsonschema import validate, FormatChecker,ValidationError
 from .. import api_session_validation
+from .. import api_session_validation_admin
 
 def cauta_dis(id_camera):
     dispozitive = DBSession.query(CameraDispozitiv).filter(CameraDispozitiv.id_camera == id_camera).all()

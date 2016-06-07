@@ -271,6 +271,8 @@ app.controller('coffee-maker',['$scope', '$location', '$interval', 'CoffeeMaker'
 app.controller('thermostat',['$scope', '$location', '$interval', 'Thermostat', function($scope, $location, $interval, Thermostat) {
     var id = $location.absUrl().split('/')[4];
     $scope.data = {}
+    $scope.sa=false;
+    $scope.tempInvatat=20;
     $scope.stare = true;
     var getData = function() {   
         Thermostat.get_one(id)
@@ -288,7 +290,12 @@ app.controller('thermostat',['$scope', '$location', '$interval', 'Thermostat', f
 
     };
     getData()
-    $interval(getData,5000);
+    var inter = $interval(getData,5000);
+    $scope.$watch('sa',function(value){
+        if (value)  $scope.data['temperatura']=$scope.tempInvatat;
+        Thermostat.put(id,{temperatura:$scope.tempInvatat})
+    })
+
 
     $scope.changeThermostat = function() {
         return {tip:"termostat", id:id, field:'thermostat'};

@@ -14,11 +14,17 @@ class Login(object):
 
     @view_config(request_method = 'GET', renderer = 'templates/login.jinja2')
     def getLoginPage(self):
+
+        if "email" in self.request.session.keys():
+            return HTTPFound(location=self.request.route_url('home'))
+
         error = {"email_required": False, "password_required": False, "incorrect_credentials": False}
         return error
 
     @view_config(request_method = 'POST', renderer = 'json')
     def postLoginPage(self):
+        
+
         user = {'email': self.request.params['email'], 'password': self.request.params['password']}
         credentials_db = {}
         credentials_db = DBSession.query(User).filter(User.mail == user['email']).first()

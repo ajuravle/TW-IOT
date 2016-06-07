@@ -1,13 +1,17 @@
 <div class="col-md-12 automat-card">
     <div class="automat-card-title"><% title %></div>
     <div ng-show="state">
-        <div class="automat-slider">
+        <div ng-show="!stateAutomat" class="automat-slider">
             <span class="automat-label"><% rangeText %></span>
+        </div>
+
+        <div ng-show="stateAutomat" class="offf-state">
+            <div class="ceva">Automat settings are now activated</div>
         </div>
     </div>
    
     <div ng-show="!state" class="offf-state">
-        <div class="ceva">Automat settings are now activated</div>
+        <div class="ceva"></div>
     </div>
 
         <div class="automat-card-icons">

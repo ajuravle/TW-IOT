@@ -857,23 +857,28 @@ directiveModule.directive('temp', function() {
 });
 
 directiveModule.directive('automat', function() {
-    var controller = function($scope, $timeout) {
+    var controller = function($scope, $timeout,Thermostat,Admin) {
 
-       /* $scope.clicked = false;
-        $scope.editThermostat = function() {
-            $scope.clicked = true;
-            $scope.success = false;
-            $scope.feedback = "Success";
-
-            $timeout(function() {
-                $scope.clicked = false;
-
-            },1000);
-        };*/
 
         $scope.editStAutomat = function() {
             $scope.clicked = true;
-            $scope.state = !$scope.state;
+            $scope.stateAutomat = !$scope.stateAutomat;
+
+            if ($scope.stateAutomat){
+                var oras='Iasi';
+                Admin.get_info()
+                .success(function(rez){
+                    oras = rez['oras'];    
+                })
+
+                Thermostat.get_meteo(oras)
+                .success(function(rez){
+                    $scope.temperature=rez.main.temp;
+                    if ($scope.temperature>25) $scope.temperature=20;
+                    else $scope.temperature=25;
+                })
+            }
+
             $scope.feedback = "Set on";
 
             $timeout(function() {
@@ -886,10 +891,12 @@ directiveModule.directive('automat', function() {
         restrict: 'E',
         scope: {
             value: '@',
-            state: '@',
+            state: '=',
             id: '@',
             title: '@',
+            temperature: '=',
             rangeText: '@',
+            stateAutomat: '=',
             edit: '&'
         },
         templateUrl: '/static/directivesTemplates/automat.html',
@@ -1153,12 +1160,7 @@ directiveModule.directive('adminTableDispozitive', function() {
 directiveModule.directive('textRefrigeratorDetails', function() {
     var controller = function($scope, $timeout) {
         console.log($scope);
-         $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-          $scope.series = ['Series A', 'Series B'];
-          $scope.data = [
-            [65, 59, 80, 81, 56, 55, 40],
-            [28, 48, 40, 19, 86, 27, 90]
-          ];
+          
 
     };
     return {
