@@ -4,24 +4,16 @@
 <div class="row" ng-controller="coffee-maker">
     
     <div class="col-md-8">
-     <section>  
-        <div class="row">
-        
+    
             <div class="col-md-12">
                <temperature value="data.zahar" id="buna" state="stare" edit="changeCoffeeMaker()" title="Sugar" range-text="Sugar: 0 to 10" min=0 max=10></temperature>
             </div>
     
-        </div> 
-
-        <div class="row">
         
             <div class="col-md-12"> 
                <item-card title="Coffee type" id='id' state='stare' edit="changeCoffeeMaker()" item = "data.tip" list="list" programMenu="TipuriCafea" icon="fa-bars"></item-card>
             </div>
     
-        </div> 
-
-     </section>
     </div>
    
     <div class="col-md-4">

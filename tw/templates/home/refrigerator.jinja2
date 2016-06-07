@@ -5,24 +5,17 @@
 <div class="row" ng-controller="refrigerator">
     
     <div class="col-md-8">
-     <section>  
-        <div class="row">
+
         
             <div class="col-md-12">
-               <temperature value="<% data.temperatura_frigider %>" id="buna" edit="changeRefrigerator()" state="stare" title="Refrigerator temperature" range-text="Temperature: -30 to 0" min=-30 max=0></temperature>
+               <temperature value="data.temperatura_frigider" id="buna" edit="changeRefrigerator()" state="stare" title="Refrigerator temperature" range-text="Temperature: -30 to 0" min=-30 max=0></temperature>
             </div>
     
-        </div> 
-
-        <div class="row">
+        
         
             <div class="col-md-12">
-               <temperature value="<% data.temperatura_congelator %>" edit="changeFreezer()" change-state="true" id="buna" state="stare" title="Freezer temperature" range-text="Temperature: -50 to 0" min=-30 max=0></temperature>
+               <temperature value="data.temperatura_congelator " edit="changeFreezer()" change-state="true" id="buna" state="stare" title="Freezer temperature" range-text="Temperature: -50 to 0" min=-30 max=0></temperature>
             </div>
-    
-        </div> 
-
-     </section>
     </div>
    
     <div class="col-md-4">

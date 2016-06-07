@@ -190,17 +190,20 @@ input[type="range"]::-webkit-slider-thumb {
 .lightsI-slider  input[type="number"]:focus {
     outline: none;
 }
+
+.col-md-12{
+margin-bottom: 7px;
+}
 /*-------------------------------------------------------------------*/
 .text-lights {
     background-color: #66CCFF;
-    min-height: 610px;
+    min-height: 600px;
     min-width: 100%;
     color: white;
     font-family: 'Roboto', sans-serif;
     position: relative;
     margin: auto;
     text-align: left;
-    top:5px;
 }
 
 .text-lights-title {

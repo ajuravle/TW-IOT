@@ -4,30 +4,24 @@
 <div class="row" ng-controller="washing-machine">
     
     <div class="col-md-8">
-     <section>  
-        <div class="row" >
         
             <div class="col-md-6">
-               <temperature value="<% data.temperatura %>" id="buna" state="stare" title="Temperature" 
+               <temperature value=" data.temperatura " id="buna" state="stare" title="Temperature" 
                min="20" max="90" range-text="Temperature: 20 to 90" edit="change()"></temperature>
             </div>
 
             <div class="col-md-6"> 
                <rotations value="<% data.nr_rotatii %>" id="bunaa"  state="stare" title="Rotations" range-text="Rotations: 600 to 1600 rpm" edit="change()"></rotations>
             </div>
-        </div> 
+      
     
-        <div class="row" >
             <div class="col-md-6"> 
-               <item-card  title="Program" id='id' state='stare' edit='change()' list="list" item = "<%data.program %>" icon="fa-bars"></item-card>
+               <item-card  title="Program" id='id' state='stare' edit='change()' list="list" item = "data.program " icon="fa-bars"></item-card>
             </div>
             
             <div class="col-md-6">
                 <clock hour=" "  minn=" " id="bunaaa" state="stare" title="Remaining time" title-fin="Time over!" range-text="Set time" edit='change()'</clock> 
             </div>
-        
-        </div> 
-     </section>
     </div>
    
     <div class="col-md-4">

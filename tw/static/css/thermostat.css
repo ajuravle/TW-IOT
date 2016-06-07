@@ -193,7 +193,6 @@ input[type="range"]::-webkit-slider-thumb {
     position: relative;
     margin: auto;
     text-align: left;
-    top:5px;
 }
 
 .text-therm-title {
@@ -218,14 +217,14 @@ input[type="range"]::-webkit-slider-thumb {
 
 .text-refrigerator {
     background-color: #4DB6AC;
-    min-height: 610px;
+    min-height: 600px;
     min-width: 100%;
     color: white;
     font-family: 'Roboto', sans-serif;
     position: relative;
     margin: auto;
     text-align: left;
-    top:5px;
+    
 }
 
 .text-refrigerator-title {
@@ -243,7 +242,7 @@ input[type="range"]::-webkit-slider-thumb {
     position: relative;
     margin: auto;
     text-align: left;
-    top:5px;
+    
 }
 
 .text-coffee-title {

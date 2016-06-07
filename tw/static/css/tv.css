@@ -347,7 +347,6 @@ div.box2-tv  input[type="hour"]:focus, div.box2-tv input[type="minutes"]:focus{
     position: relative;
     margin: auto;
     text-align: left;
-    top:5px;
 }
 
 .text-tv-title {

@@ -956,6 +956,7 @@ directiveModule.directive('adminTable', function() {
         $scope.useri = []
         $scope.drepturi = [];
         $scope.camere = [];
+        $scope.correct = false;
         var done = 0;
 
          //initalizare drepturi
@@ -1036,12 +1037,17 @@ directiveModule.directive('adminTable', function() {
             $scope.updated.push(item_update);
         }
         $scope.save = function() {
+            $scope.correct = false;
             for( i = 0; i < $scope.updated.length; i++) {
                 ac = {}
                 ac['actiune'] = $scope.updated[i]['actiune'];
                 ac['id_camera'] = $scope.updated[i]['id_camera']
                 Admin.put($scope.updated[i]['id_user'],ac)
                 .success(function(res) {
+                    $scope.correct = true;
+                    $timeout(function(){
+                        $scope.correct = false;
+                    },1000);
                 })
                 .error(function(res) {
                     console.log(res);
@@ -1141,12 +1147,19 @@ directiveModule.directive('adminTableDispozitive', function() {
             $scope.updated.push(item_update);
         }
         $scope.save = function() {
+            $scope.correct = false;
             for( i = 0; i < $scope.updated.length; i++) {
                 ac = {}
                 ac['actiune'] = $scope.updated[i]['actiune'];
                 ac['id_dispozitiv'] = $scope.updated[i]['id_dispozitiv']
                 ac['tip'] = $scope.updated[i]['tip'];
                 Admin.put_camere($scope.updated[i]['id_camera'],ac)
+                .success(function(){
+                    $scope.correct = true;
+                    $timeout(function(){
+                        $scope.correct = false;
+                    },1000);
+                })
 
             }
             $scope.updated = [];

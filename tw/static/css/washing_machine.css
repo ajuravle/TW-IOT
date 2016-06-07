@@ -398,6 +398,23 @@ div.box2  input[type="hour"]:focus, div.box2 input[type="minutes"]:focus{
     display: block;
 }
 
+.col-md-8
+ {
+
+ padding-left: 0px;
+ padding-right: 0px;
+ }
+
+ .col-md-6{
+  margin-bottom: 5px;
+ }
+
+
+ .col-md-4{
+  height: 610px;
+  min-height: 350px;
+ }
+
 /*---------------------------------------------------------*/
 
 .text-card {
@@ -409,7 +426,6 @@ div.box2  input[type="hour"]:focus, div.box2 input[type="minutes"]:focus{
     position: relative;
     margin: auto;
     text-align: left;
-    top:5px;
 }
 
 .text-card-title {
